@@ -1,9 +1,9 @@
 <RCC>
-  <qresource prefix="Buttons">
-    <file>log-in.svg</file>
-  </qresource>
+  <qresource prefix="Buttons"/>
   <qresource prefix="Main">
     <file>lock.svg</file>
+    <file>alert-circle.svg</file>
+    <file>vertical_background.jpg</file>
     <file>user.svg</file>
   </qresource>
 </RCC>

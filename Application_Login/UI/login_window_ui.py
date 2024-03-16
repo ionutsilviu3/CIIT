@@ -15,88 +15,235 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFormLayout, QGridLayout, QGroupBox,
+from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QSpacerItem, QWidget)
+    QVBoxLayout, QWidget)
+import icons_rc
 import icons_rc
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        if not Form.objectName():
-            Form.setObjectName(u"Form")
-        Form.resize(625, 352)
+class Ui_Parent(object):
+    def setupUi(self, Parent):
+        if not Parent.objectName():
+            Parent.setObjectName(u"Parent")
+        Parent.resize(960, 540)
+        Parent.setMinimumSize(QSize(960, 540))
         font = QFont()
         font.setPointSize(12)
-        Form.setFont(font)
-        self.gridLayout = QGridLayout(Form)
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.pb_Cancel = QPushButton(Form)
-        self.pb_Cancel.setObjectName(u"pb_Cancel")
+        Parent.setFont(font)
+        Parent.setStyleSheet(u"QWidget#Parent {background-color: rgba(29, 38, 30, 255)}\n"
+"")
+        self.horizontalLayout = QHBoxLayout(Parent)
+        self.horizontalLayout.setSpacing(8)
+        self.horizontalLayout.setContentsMargins(26, 26, 26, 26)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(8, 8, 8, 8)
+        self.lb_background = QLabel(Parent)
+        self.lb_background.setObjectName(u"lb_background")
+        self.lb_background.setMinimumSize(QSize(480, 0))
+        font1 = QFont()
+        font1.setFamilies([u"Roboto"])
+        font1.setPointSize(8)
+        self.lb_background.setFont(font1)
+        self.lb_background.setStyleSheet(u"border-image: url(:/Main/vertical_background.jpg);")
 
-        self.gridLayout.addWidget(self.pb_Cancel, 2, 1, 1, 1)
+        self.horizontalLayout.addWidget(self.lb_background)
 
-        self.groupBox = QGroupBox(Form)
-        self.groupBox.setObjectName(u"groupBox")
-        self.groupBox.setAlignment(Qt.AlignCenter)
-        self.formLayout = QFormLayout(self.groupBox)
+        self.Form = QWidget(Parent)
+        self.Form.setObjectName(u"Form")
+        self.Form.setMinimumSize(QSize(480, 0))
+        font2 = QFont()
+        font2.setFamilies([u"Roboto"])
+        font2.setPointSize(16)
+        self.Form.setFont(font2)
+        self.Form.setStyleSheet(u"QPushButton {\n"
+"border-radius: 12px;\n"
+"}")
+        self.verticalLayout_3 = QVBoxLayout(self.Form)
+        self.verticalLayout_3.setSpacing(16)
+        self.verticalLayout_3.setContentsMargins(26, 26, 26, 26)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(8, 8, 8, 8)
+        self.lb_login_title = QLabel(self.Form)
+        self.lb_login_title.setObjectName(u"lb_login_title")
+        font3 = QFont()
+        font3.setFamilies([u"Roboto"])
+        font3.setPointSize(26)
+        font3.setBold(True)
+        self.lb_login_title.setFont(font3)
+        self.lb_login_title.setStyleSheet(u"color: rgb(226, 220, 220);")
+        self.lb_login_title.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_3.addWidget(self.lb_login_title)
+
+        self.widget = QWidget(self.Form)
+        self.widget.setObjectName(u"widget")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
+        self.widget.setSizePolicy(sizePolicy)
+        self.widget.setFont(font2)
+        self.widget.setStyleSheet(u"QLineEdit {\n"
+"    border-radius: 12px;\n"
+"}\n"
+"")
+        self.formLayout = QFormLayout(self.widget)
+        self.formLayout.setSpacing(12)
+        self.formLayout.setContentsMargins(26, 26, 26, 26)
         self.formLayout.setObjectName(u"formLayout")
-        self.label = QLabel(self.groupBox)
-        self.label.setObjectName(u"label")
+        self.formLayout.setLabelAlignment(Qt.AlignCenter)
+        self.formLayout.setFormAlignment(Qt.AlignCenter)
+        self.formLayout.setHorizontalSpacing(8)
+        self.formLayout.setVerticalSpacing(16)
+        self.formLayout.setContentsMargins(8, 8, 8, 8)
+        self.lb_user = QLabel(self.widget)
+        self.lb_user.setObjectName(u"lb_user")
+        self.lb_user.setEnabled(True)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.lb_user.sizePolicy().hasHeightForWidth())
+        self.lb_user.setSizePolicy(sizePolicy1)
+        self.lb_user.setMinimumSize(QSize(16, 16))
+        self.lb_user.setFont(font2)
+        self.lb_user.setPixmap(QPixmap(u":/Main/user.svg"))
+        self.lb_user.setScaledContents(False)
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label)
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.lb_user)
 
-        self.le_UserID = QLineEdit(self.groupBox)
-        self.le_UserID.setObjectName(u"le_UserID")
+        self.le_user = QLineEdit(self.widget)
+        self.le_user.setObjectName(u"le_user")
+        sizePolicy1.setHeightForWidth(self.le_user.sizePolicy().hasHeightForWidth())
+        self.le_user.setSizePolicy(sizePolicy1)
+        self.le_user.setMinimumSize(QSize(192, 48))
+        self.le_user.setMaximumSize(QSize(192, 16777215))
+        font4 = QFont()
+        font4.setFamilies([u"Roboto"])
+        font4.setPointSize(12)
+        self.le_user.setFont(font4)
+        self.le_user.setToolTipDuration(-1)
+        self.le_user.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.le_UserID)
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.le_user)
 
-        self.label_2 = QLabel(self.groupBox)
-        self.label_2.setObjectName(u"label_2")
+        self.lb_password = QLabel(self.widget)
+        self.lb_password.setObjectName(u"lb_password")
+        self.lb_password.setPixmap(QPixmap(u":/Main/lock.svg"))
 
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_2)
+        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.lb_password)
 
-        self.le_Password = QLineEdit(self.groupBox)
-        self.le_Password.setObjectName(u"le_Password")
-        self.le_Password.setEchoMode(QLineEdit.Password)
+        self.le_password = QLineEdit(self.widget)
+        self.le_password.setObjectName(u"le_password")
+        sizePolicy1.setHeightForWidth(self.le_password.sizePolicy().hasHeightForWidth())
+        self.le_password.setSizePolicy(sizePolicy1)
+        self.le_password.setMinimumSize(QSize(192, 48))
+        self.le_password.setMaximumSize(QSize(192, 16777215))
+        self.le_password.setFont(font4)
+        self.le_password.setToolTipDuration(-1)
+        self.le_password.setEchoMode(QLineEdit.Password)
+        self.le_password.setAlignment(Qt.AlignCenter)
+        self.le_password.setClearButtonEnabled(False)
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.le_Password)
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.le_password)
+
+        self.lb_warning_icon = QLabel(self.widget)
+        self.lb_warning_icon.setObjectName(u"lb_warning_icon")
+        sizePolicy1.setHeightForWidth(self.lb_warning_icon.sizePolicy().hasHeightForWidth())
+        self.lb_warning_icon.setSizePolicy(sizePolicy1)
+        self.lb_warning_icon.setMinimumSize(QSize(32, 32))
+        font5 = QFont()
+        font5.setFamilies([u"Roboto"])
+        font5.setPointSize(16)
+        font5.setBold(False)
+        self.lb_warning_icon.setFont(font5)
+        self.lb_warning_icon.setPixmap(QPixmap(u":/Main/alert-circle.svg"))
+
+        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.lb_warning_icon)
+
+        self.lb_warning_message = QLabel(self.widget)
+        self.lb_warning_message.setObjectName(u"lb_warning_message")
+        self.lb_warning_message.setEnabled(True)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy2.setHorizontalStretch(5)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.lb_warning_message.sizePolicy().hasHeightForWidth())
+        self.lb_warning_message.setSizePolicy(sizePolicy2)
+        font6 = QFont()
+        font6.setFamilies([u"Roboto"])
+        font6.setPointSize(12)
+        font6.setBold(True)
+        self.lb_warning_message.setFont(font6)
+        self.lb_warning_message.setStyleSheet(u"color: rgb(173, 101, 85);")
+        self.lb_warning_message.setFrameShape(QFrame.NoFrame)
+        self.lb_warning_message.setFrameShadow(QFrame.Plain)
+        self.lb_warning_message.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.lb_warning_message)
 
 
-        self.gridLayout.addWidget(self.groupBox, 0, 0, 1, 2)
+        self.verticalLayout_3.addWidget(self.widget, 0, Qt.AlignHCenter|Qt.AlignVCenter)
 
-        self.lb_Message = QLabel(Form)
-        self.lb_Message.setObjectName(u"lb_Message")
+        self.pb_log_in = QPushButton(self.Form)
+        self.pb_log_in.setObjectName(u"pb_log_in")
+        sizePolicy1.setHeightForWidth(self.pb_log_in.sizePolicy().hasHeightForWidth())
+        self.pb_log_in.setSizePolicy(sizePolicy1)
+        self.pb_log_in.setMinimumSize(QSize(0, 0))
+        font7 = QFont()
+        font7.setFamilies([u"Roboto"])
+        font7.setPointSize(16)
+        font7.setBold(False)
+        font7.setItalic(False)
+        font7.setUnderline(False)
+        font7.setKerning(True)
+        self.pb_log_in.setFont(font7)
+#if QT_CONFIG(tooltip)
+        self.pb_log_in.setToolTip(u"")
+#endif // QT_CONFIG(tooltip)
+        self.pb_log_in.setToolTipDuration(-1)
+        self.pb_log_in.setStyleSheet(u"background-color: rgb(80, 118, 70);\n"
+"color: rgb(193, 196, 201);\n"
+"padding-left: 32px;\n"
+"padding-right: 32px;\n"
+"padding-top: 18px;\n"
+"padding-bottom: 18px;")
 
-        self.gridLayout.addWidget(self.lb_Message, 3, 0, 1, 2)
+        self.verticalLayout_3.addWidget(self.pb_log_in, 0, Qt.AlignHCenter|Qt.AlignTop)
 
-        self.pb_OK = QPushButton(Form)
-        self.pb_OK.setObjectName(u"pb_OK")
-        icon = QIcon()
-        icon.addFile(u":/Buttons/log-in.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.pb_OK.setIcon(icon)
 
-        self.gridLayout.addWidget(self.pb_OK, 2, 0, 1, 1)
+        self.horizontalLayout.addWidget(self.Form)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout.addItem(self.verticalSpacer, 1, 0, 1, 2)
+        self.retranslateUi(Parent)
 
-        QWidget.setTabOrder(self.le_UserID, self.le_Password)
-        QWidget.setTabOrder(self.le_Password, self.pb_OK)
-        QWidget.setTabOrder(self.pb_OK, self.pb_Cancel)
-
-        self.retranslateUi(Form)
-
-        QMetaObject.connectSlotsByName(Form)
+        QMetaObject.connectSlotsByName(Parent)
     # setupUi
 
-    def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Login", None))
-        self.pb_Cancel.setText(QCoreApplication.translate("Form", u"Cancel", None))
-        self.groupBox.setTitle(QCoreApplication.translate("Form", u"Welcome! Please login", None))
-        self.label.setText(QCoreApplication.translate("Form", u"User ID:", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"Password:", None))
-        self.lb_Message.setText(QCoreApplication.translate("Form", u"Message", None))
-        self.pb_OK.setText(QCoreApplication.translate("Form", u"OK", None))
+    def retranslateUi(self, Parent):
+        Parent.setWindowTitle(QCoreApplication.translate("Parent", u"Login", None))
+        self.lb_background.setText("")
+        self.lb_login_title.setText(QCoreApplication.translate("Parent", u"Log In", None))
+        self.lb_user.setText("")
+#if QT_CONFIG(tooltip)
+        self.le_user.setToolTip("")
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(statustip)
+        self.le_user.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+#if QT_CONFIG(whatsthis)
+        self.le_user.setWhatsThis("")
+#endif // QT_CONFIG(whatsthis)
+        self.le_user.setText("")
+        self.le_user.setPlaceholderText(QCoreApplication.translate("Parent", u"ex. user@company.com", None))
+        self.lb_password.setText("")
+#if QT_CONFIG(tooltip)
+        self.le_password.setToolTip(QCoreApplication.translate("Parent", u"This is your usual work password.", None))
+#endif // QT_CONFIG(tooltip)
+        self.le_password.setPlaceholderText(QCoreApplication.translate("Parent", u"Your secret password", None))
+#if QT_CONFIG(accessibility)
+        self.lb_warning_icon.setAccessibleName("")
+#endif // QT_CONFIG(accessibility)
+        self.lb_warning_icon.setText("")
+        self.lb_warning_message.setText(QCoreApplication.translate("Parent", u"Credentials are not correct!", None))
+        self.pb_log_in.setText(QCoreApplication.translate("Parent", u"Log in", None))
     # retranslateUi
 
