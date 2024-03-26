@@ -1,0 +1,9 @@
+<RCC target = "resources.py">
+  <qresource prefix="Main">
+    <file>icons/alert-circle.svg</file>
+    <file>icons/lock.svg</file>
+    <file>icons/log-in.svg</file>
+    <file>icons/user.svg</file>
+    <file>icons/vertical_background.jpg</file>
+  </qresource>
+</RCC>

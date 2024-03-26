@@ -18,8 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QSizePolicy,
     QVBoxLayout, QWidget)
-import icons_rc
-import icons_rc
+import resources.icons_rc
 
 class Ui_Parent(object):
     def setupUi(self, Parent):
@@ -44,7 +43,7 @@ class Ui_Parent(object):
         font1.setFamilies([u"Roboto"])
         font1.setPointSize(8)
         self.lb_background.setFont(font1)
-        self.lb_background.setStyleSheet(u"border-image: url(:/Main/vertical_background.jpg);")
+        self.lb_background.setStyleSheet(u"border-image: url(:/Main/icons/vertical_background.jpg);")
 
         self.horizontalLayout.addWidget(self.lb_background)
 
@@ -106,7 +105,7 @@ class Ui_Parent(object):
         self.lb_user.setSizePolicy(sizePolicy1)
         self.lb_user.setMinimumSize(QSize(16, 16))
         self.lb_user.setFont(font2)
-        self.lb_user.setPixmap(QPixmap(u":/Main/user.svg"))
+        self.lb_user.setPixmap(QPixmap(u":/Main/icons/user.svg"))
         self.lb_user.setScaledContents(False)
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.lb_user)
@@ -128,7 +127,7 @@ class Ui_Parent(object):
 
         self.lb_password = QLabel(self.widget)
         self.lb_password.setObjectName(u"lb_password")
-        self.lb_password.setPixmap(QPixmap(u":/Main/lock.svg"))
+        self.lb_password.setPixmap(QPixmap(u":/Main/icons/lock.svg"))
 
         self.formLayout.setWidget(3, QFormLayout.LabelRole, self.lb_password)
 
@@ -148,6 +147,7 @@ class Ui_Parent(object):
 
         self.lb_warning_icon = QLabel(self.widget)
         self.lb_warning_icon.setObjectName(u"lb_warning_icon")
+        self.lb_warning_icon.setEnabled(False)
         sizePolicy1.setHeightForWidth(self.lb_warning_icon.sizePolicy().hasHeightForWidth())
         self.lb_warning_icon.setSizePolicy(sizePolicy1)
         self.lb_warning_icon.setMinimumSize(QSize(32, 32))
@@ -156,13 +156,23 @@ class Ui_Parent(object):
         font5.setPointSize(16)
         font5.setBold(False)
         self.lb_warning_icon.setFont(font5)
-        self.lb_warning_icon.setPixmap(QPixmap(u":/Main/alert-circle.svg"))
+        self.lb_warning_icon.setStyleSheet(u"QLabel#lb_warning_icon:disabled\n"
+"{\n"
+"	border-image: none;\n"
+"}\n"
+"\n"
+"QLabel#lb_warning_icon:enabled\n"
+"{\n"
+"	border-image: url(:/Main/icons/alert-circle.svg);\n"
+"}\n"
+"\n"
+"")
 
         self.formLayout.setWidget(5, QFormLayout.LabelRole, self.lb_warning_icon)
 
         self.lb_warning_message = QLabel(self.widget)
         self.lb_warning_message.setObjectName(u"lb_warning_message")
-        self.lb_warning_message.setEnabled(True)
+        self.lb_warning_message.setEnabled(False)
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy2.setHorizontalStretch(5)
         sizePolicy2.setVerticalStretch(0)
@@ -173,7 +183,14 @@ class Ui_Parent(object):
         font6.setPointSize(12)
         font6.setBold(True)
         self.lb_warning_message.setFont(font6)
-        self.lb_warning_message.setStyleSheet(u"color: rgb(173, 101, 85);")
+        self.lb_warning_message.setStyleSheet(u"QLabel\n"
+"{\n"
+"color: rgb(173, 101, 85);\n"
+"}\n"
+"QLabel:disabled\n"
+"{\n"
+"	color: rgba(0, 0, 0, 0);\n"
+"}")
         self.lb_warning_message.setFrameShape(QFrame.NoFrame)
         self.lb_warning_message.setFrameShadow(QFrame.Plain)
         self.lb_warning_message.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
@@ -200,12 +217,20 @@ class Ui_Parent(object):
         self.pb_log_in.setToolTip(u"")
 #endif // QT_CONFIG(tooltip)
         self.pb_log_in.setToolTipDuration(-1)
-        self.pb_log_in.setStyleSheet(u"background-color: rgb(80, 118, 70);\n"
+        self.pb_log_in.setStyleSheet(u"QPushButton\n"
+"{\n"
+"background-color: rgb(80, 118, 70);\n"
 "color: rgb(193, 196, 201);\n"
 "padding-left: 32px;\n"
 "padding-right: 32px;\n"
 "padding-top: 18px;\n"
-"padding-bottom: 18px;")
+"padding-bottom: 18px;\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"	background-color: rgb(53, 78, 40);\n"
+"}")
 
         self.verticalLayout_3.addWidget(self.pb_log_in, 0, Qt.AlignHCenter|Qt.AlignTop)
 

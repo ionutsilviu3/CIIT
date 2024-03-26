@@ -59,7 +59,7 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image: url(:/Main/vertical_background.jpg);</string>
+      <string notr="true">border-image: url(:/Main/icons/vertical_background.jpg);</string>
      </property>
      <property name="text">
       <string/>
@@ -193,7 +193,7 @@ border-radius: 12px;
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../Icons/icons.qrc">:/Main/user.svg</pixmap>
+            <pixmap resource="icons.qrc">:/Main/icons/user.svg</pixmap>
            </property>
            <property name="scaledContents">
             <bool>false</bool>
@@ -255,7 +255,7 @@ border-radius: 12px;
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="../../Icons/icons.qrc">:/Main/lock.svg</pixmap>
+            <pixmap resource="icons.qrc">:/Main/icons/lock.svg</pixmap>
            </property>
           </widget>
          </item>
@@ -307,6 +307,9 @@ border-radius: 12px;
          </item>
          <item row="5" column="0">
           <widget class="QLabel" name="lb_warning_icon">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -329,18 +332,28 @@ border-radius: 12px;
            <property name="accessibleName">
             <string extracomment="Segoe UI,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"/>
            </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel#lb_warning_icon:disabled
+{
+	border-image: none;
+}
+
+QLabel#lb_warning_icon:enabled
+{
+	border-image: url(:/Main/icons/alert-circle.svg);
+}
+
+</string>
+           </property>
            <property name="text">
             <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap resource="../../Icons/icons.qrc">:/Main/alert-circle.svg</pixmap>
            </property>
           </widget>
          </item>
          <item row="5" column="1">
           <widget class="QLabel" name="lb_warning_message">
            <property name="enabled">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -356,7 +369,14 @@ border-radius: 12px;
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">color: rgb(173, 101, 85);</string>
+            <string notr="true">QLabel
+{
+color: rgb(173, 101, 85);
+}
+QLabel:disabled
+{
+	color: rgba(0, 0, 0, 0);
+}</string>
            </property>
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
@@ -406,12 +426,20 @@ border-radius: 12px;
          <number>-1</number>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(80, 118, 70);
+         <string notr="true">QPushButton
+{
+background-color: rgb(80, 118, 70);
 color: rgb(193, 196, 201);
 padding-left: 32px;
 padding-right: 32px;
 padding-top: 18px;
-padding-bottom: 18px;</string>
+padding-bottom: 18px;
+}
+
+QPushButton:hover
+{
+	background-color: rgb(53, 78, 40);
+}</string>
         </property>
         <property name="text">
          <string>Log in</string>
@@ -425,8 +453,7 @@ padding-bottom: 18px;</string>
  </widget>
  <layoutdefault spacing="12" margin="26"/>
  <resources>
-  <include location="../../Icons/icons.qrc"/>
-  <include location="../../../../Icons/icons.qrc"/>
+  <include location="icons.qrc"/>
  </resources>
  <connections/>
  <designerdata>
