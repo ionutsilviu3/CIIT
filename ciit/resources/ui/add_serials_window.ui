@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Boanc Ionut-Silviu</author>
+ <class>add_serials_window</class>
+ <widget class="QWidget" name="add_serials_window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>960</width>
+    <height>540</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>960</width>
+    <height>540</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Vitesco</family>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>CIIT</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+QPushButton {
+border-radius: 12px;
+padding-left: 16px;
+padding-right: 16px;
+padding-top: 8 px;
+padding-bottom: 8 px;
+}
+
+QWidget#add_serials_window {background-color: rgb(34, 48, 56);}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
+   <property name="spacing">
+    <number>8</number>
+   </property>
+   <item row="10" column="1">
+    <layout class="QVBoxLayout" name="vl_bottom">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <item alignment="Qt::AlignBottom">
+      <widget class="QLabel" name="lb_error">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>Vitesco</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel
+{
+color: rgba(227, 45, 0, 255);
+}
+QLabel:disabled
+{
+color: rgba(227, 45, 0, 0);
+}</string>
+       </property>
+       <property name="text">
+        <string>The serial entered is not valid! Please try another!</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignVCenter">
+      <widget class="QLineEdit" name="le_serials">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>128</width>
+         <height>34</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>512</width>
+         <height>34</height>
+        </size>
+       </property>
+       <property name="sizeIncrement">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Vitesco</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: black;
+background-color: #A1ACB1;
+border-radius: 12px;
+padding: 8px 32px;
+</string>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>Write serials here</string>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+      <widget class="QPushButton" name="pb_continue">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>64</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>128</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Vitesco</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background-color: rgb(20, 175, 100);
+    }
+
+    QPushButton:disabled {
+	background-color: rgba(20, 175, 100, 150);
+	color: black;
+    }
+    QPushButton:hover {
+	background-color: rgb(19, 165, 87);
+    }
+
+    QPushButton:pressed {
+	background-color: rgb(15, 132, 70);
+    }</string>
+       </property>
+       <property name="text">
+        <string>Continue</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0" colspan="3" alignment="Qt::AlignHCenter">
+    <widget class="QLabel" name="lb_title">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Vitesco</family>
+       <pointsize>32</pointsize>
+       <bold>true</bold>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #E6E6E6;</string>
+     </property>
+     <property name="text">
+      <string>Add serials</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <layout class="QVBoxLayout" name="vl_center">
+     <property name="spacing">
+      <number>16</number>
+     </property>
+     <item>
+      <widget class="QListWidget" name="lw_serials">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>256</width>
+         <height>256</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>512</width>
+         <height>256</height>
+        </size>
+       </property>
+       <property name="sizeIncrement">
+        <size>
+         <width>2</width>
+         <height>2</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Vitesco</family>
+         <pointsize>14</pointsize>
+         <strikeout>false</strikeout>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QListWidget
+{
+    background-color: #344955; 
+    border-radius: 30px;
+    outline: 0px;
+    color: rgb(230, 230, 230);
+}
+
+QListWidget::item {
+    margin: 8px;
+    border-radius: 8px;
+}
+
+QListWidget::item::hover {
+    color: rgb(197, 197, 197);
+    font: bold;
+}
+
+QListWidget::item::selected {
+    color: rgb(212, 39, 0);
+}
+
+QScrollBar:vertical {
+    background-color: rgba(0, 0, 0, 0);
+    width: 20px;
+    margin: 10px 10px 10px 0px;  /* top right bottom left */
+	border-radius: 15px;
+}
+
+QScrollBar::handle:vertical {
+	background-color: rgb(44, 62, 72);
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+   
+	background-color: rgb(42, 59, 68);
+}
+
+QScrollBar::handle:vertical:pressed {
+   background-color: rgb(34, 48, 56)
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    background-color: rgba(0, 0, 0, 0);
+    height: 10px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    
+	background-color: rgba(0, 0, 0, 0);
+}
+
+
+
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>false</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::MultiSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectItems</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="hl_center">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <item alignment="Qt::AlignTop">
+        <widget class="QPushButton" name="pb_delete">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>2</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>256</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Vitesco</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+color: white;
+	background-color: rgb(212, 39, 0);
+    }
+QPushButton:disabled {
+	background-color: rgba(170, 35, 0, 150);
+    }
+    QPushButton:hover {
+	background-color: rgb(193, 35, 0);
+    }
+
+    QPushButton:pressed {
+	background-color: rgb(129, 24, 0);
+    }</string>
+         </property>
+         <property name="text">
+          <string>Delete selected</string>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignTop">
+        <widget class="QPushButton" name="pb_clear">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>192</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Vitesco</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	background-color: rgb(161, 172, 177);
+	color: rgb(43, 43, 43);
+    }
+QPushButton:disabled {
+	background-color: rgba(161, 172, 177, 50);
+	color: rgb(43, 43, 43);
+    }
+
+QPushButton:hover {
+	background-color: rgb(145, 155, 159);
+    }
+
+QPushButton:pressed {
+	background-color: rgb(115, 123, 126);
+    }</string>
+         </property>
+         <property name="text">
+          <string>Clear list</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lw_serials</tabstop>
+  <tabstop>le_serials</tabstop>
+  <tabstop>pb_continue</tabstop>
+  <tabstop>pb_delete</tabstop>
+  <tabstop>pb_clear</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>8</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>8</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>

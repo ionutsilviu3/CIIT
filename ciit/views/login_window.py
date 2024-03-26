@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget
 from PySide6 import QtCore
-from resources.login_window_ui import Ui_Parent
+from resources.ui.login_window_ui import Ui_Parent
 
 
 class LoginWindow(QWidget, Ui_Parent):

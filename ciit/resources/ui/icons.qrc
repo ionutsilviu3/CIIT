@@ -1,4 +1,4 @@
-<RCC target = "resources.py">
+<RCC target = "resources.ui.py">
   <qresource prefix="Main">
     <file>icons/alert-circle.svg</file>
     <file>icons/lock.svg</file>
