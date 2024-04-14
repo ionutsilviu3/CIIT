@@ -193,7 +193,7 @@ border-radius: 12px;
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="icons.qrc">:/Main/icons/user.svg</pixmap>
+            <pixmap>:/Main/icons/user.svg</pixmap>
            </property>
            <property name="scaledContents">
             <bool>false</bool>
@@ -255,7 +255,7 @@ border-radius: 12px;
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="icons.qrc">:/Main/icons/lock.svg</pixmap>
+            <pixmap>:/Main/icons/lock.svg</pixmap>
            </property>
           </widget>
          </item>
@@ -452,6 +452,11 @@ QPushButton:hover
   </layout>
  </widget>
  <layoutdefault spacing="12" margin="26"/>
+ <tabstops>
+  <tabstop>pb_log_in</tabstop>
+  <tabstop>le_user</tabstop>
+  <tabstop>le_password</tabstop>
+ </tabstops>
  <resources>
   <include location="icons.qrc"/>
  </resources>

@@ -13,6 +13,8 @@ class LoginWindow(QWidget, Ui_Parent):
         self.pb_log_in.clicked.connect(self.validate_login_signal)
         self.le_user.textChanged.connect(self.hide_credentials_error)
         self.le_password.textChanged.connect(self.hide_credentials_error)
+        self.le_user.returnPressed.connect(self.validate_login_signal)
+        self.le_password.returnPressed.connect(self.validate_login_signal)
     
     def get_input_credentials(self):
         return {'mail':self.le_user.text(), 'password':self.le_password.text()}
