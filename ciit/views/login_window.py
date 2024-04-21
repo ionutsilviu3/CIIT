@@ -17,7 +17,7 @@ class LoginWindow(QWidget, Ui_Parent):
         self.le_password.returnPressed.connect(self.validate_login_signal)
     
     def get_input_credentials(self):
-        return {'mail':self.le_user.text(), 'password':self.le_password.text()}
+        return {'email':self.le_user.text(), 'password':self.le_password.text()}
 
     def hide_credentials_error(self):
         self.switch_widget_state(

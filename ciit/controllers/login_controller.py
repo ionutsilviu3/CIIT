@@ -12,6 +12,7 @@ class LoginController:
         input_credentials = self.view.get_input_credentials()
         if self.model.is_valid(input_credentials) == True:
             self.model.set_credentials(input_credentials)
+            print("logged in")
             return True
         else:
             self.view.switch_error(True)

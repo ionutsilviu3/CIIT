@@ -4,3 +4,4 @@ from ciit.controllers.login_controller import LoginController
 class MainController:
     def __init__(self):
         self.login_controller = LoginController()
+    

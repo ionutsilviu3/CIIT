@@ -237,8 +237,8 @@ class Ui_Parent(object):
 
         self.horizontalLayout.addWidget(self.Form)
 
+        QWidget.setTabOrder(self.pb_log_in, self.le_user)
         QWidget.setTabOrder(self.le_user, self.le_password)
-        QWidget.setTabOrder(self.le_password, self.pb_log_in)
 
         self.retranslateUi(Parent)
 
