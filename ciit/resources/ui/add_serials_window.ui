@@ -39,16 +39,13 @@
    <string>CIIT</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-QPushButton {
+   <string notr="true">QPushButton {
 border-radius: 12px;
 padding-left: 16px;
 padding-right: 16px;
 padding-top: 8 px;
 padding-bottom: 8 px;
-}
-
-QWidget#add_serials_window {background-color: rgb(34, 48, 56);}</string>
+}</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -74,7 +71,7 @@ QWidget#add_serials_window {background-color: rgb(34, 48, 56);}</string>
      <property name="topMargin">
       <number>0</number>
      </property>
-     <item alignment="Qt::AlignBottom">
+     <item alignment="Qt::AlignmentFlag::AlignBottom">
       <widget class="QLabel" name="lb_error">
        <property name="enabled">
         <bool>false</bool>
@@ -99,14 +96,14 @@ color: rgba(227, 45, 0, 0);
         <string>The serial entered is not valid! Please try another!</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item alignment="Qt::AlignVCenter">
+     <item alignment="Qt::AlignmentFlag::AlignVCenter">
       <widget class="QLineEdit" name="le_serials">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -152,14 +149,14 @@ padding: 8px 32px;
         <string/>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
        <property name="placeholderText">
         <string>Write serials here</string>
        </property>
       </widget>
      </item>
-     <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+     <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop">
       <widget class="QPushButton" name="pb_continue">
        <property name="enabled">
         <bool>false</bool>
@@ -190,19 +187,21 @@ padding: 8px 32px;
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-	background-color: rgb(20, 175, 100);
-    }
-
-    QPushButton:disabled {
-	background-color: rgba(20, 175, 100, 150);
-	color: black;
-    }
-    QPushButton:hover {
 	background-color: rgb(19, 165, 87);
     }
 
+    QPushButton:disabled {
+	background-color: rgb(48, 88, 68);
+	color: black;
+    }
+    QPushButton:hover {
+	
+	background-color: rgb(103, 211, 112);
+    }
+
     QPushButton:pressed {
-	background-color: rgb(15, 132, 70);
+	
+	background-color: rgb(40, 149, 77);
     }</string>
        </property>
        <property name="text">
@@ -212,7 +211,7 @@ padding: 8px 32px;
      </item>
     </layout>
    </item>
-   <item row="0" column="0" colspan="3" alignment="Qt::AlignHCenter">
+   <item row="0" column="0" colspan="3" alignment="Qt::AlignmentFlag::AlignHCenter">
     <widget class="QLabel" name="lb_title">
      <property name="maximumSize">
       <size>
@@ -229,13 +228,17 @@ padding: 8px 32px;
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: #E6E6E6;</string>
+      <string notr="true">QLabel
+{
+	
+	color: rgb(190, 190, 190);
+}</string>
      </property>
      <property name="text">
       <string>Add serials</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
    </item>
@@ -340,22 +343,22 @@ QScrollBar::sub-page:vertical {
 </string>
        </property>
        <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
+        <enum>QFrame::Shape::StyledPanel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
+        <enum>QFrame::Shadow::Raised</enum>
        </property>
        <property name="editTriggers">
-        <set>QAbstractItemView::NoEditTriggers</set>
+        <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
        </property>
        <property name="alternatingRowColors">
         <bool>false</bool>
        </property>
        <property name="selectionMode">
-        <enum>QAbstractItemView::MultiSelection</enum>
+        <enum>QAbstractItemView::SelectionMode::MultiSelection</enum>
        </property>
        <property name="selectionBehavior">
-        <enum>QAbstractItemView::SelectItems</enum>
+        <enum>QAbstractItemView::SelectionBehavior::SelectItems</enum>
        </property>
       </widget>
      </item>
@@ -364,7 +367,7 @@ QScrollBar::sub-page:vertical {
        <property name="spacing">
         <number>8</number>
        </property>
-       <item alignment="Qt::AlignTop">
+       <item alignment="Qt::AlignmentFlag::AlignTop">
         <widget class="QPushButton" name="pb_delete">
          <property name="enabled">
           <bool>false</bool>
@@ -390,7 +393,7 @@ QScrollBar::sub-page:vertical {
          <property name="styleSheet">
           <string notr="true">QPushButton {
 color: white;
-	background-color: rgb(212, 39, 0);
+	background-color: rgb(215,0,75)
     }
 QPushButton:disabled {
 	background-color: rgba(170, 35, 0, 150);
@@ -408,7 +411,7 @@ QPushButton:disabled {
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignTop">
+       <item alignment="Qt::AlignmentFlag::AlignTop">
         <widget class="QPushButton" name="pb_clear">
          <property name="enabled">
           <bool>false</bool>
@@ -434,7 +437,7 @@ QPushButton:disabled {
          <property name="styleSheet">
           <string notr="true">QPushButton {
 	background-color: rgb(161, 172, 177);
-	color: rgb(43, 43, 43);
+	color: rgb(75,75,70)
     }
 QPushButton:disabled {
 	background-color: rgba(161, 172, 177, 50);

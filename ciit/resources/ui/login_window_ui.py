@@ -83,7 +83,7 @@ class Ui_Parent(object):
         self.widget.setSizePolicy(sizePolicy)
         self.widget.setFont(font2)
         self.widget.setStyleSheet(u"QLineEdit {\n"
-"    border-radius: 12px;\n"
+"    border-radius: 8px;\n"
 "}\n"
 "")
         self.formLayout = QFormLayout(self.widget)
@@ -237,8 +237,8 @@ class Ui_Parent(object):
 
         self.horizontalLayout.addWidget(self.Form)
 
+        QWidget.setTabOrder(self.pb_log_in, self.le_user)
         QWidget.setTabOrder(self.le_user, self.le_password)
-        QWidget.setTabOrder(self.le_password, self.pb_log_in)
 
         self.retranslateUi(Parent)
 

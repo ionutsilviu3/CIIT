@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session, sessionmaker
 import pandas as pd
@@ -7,33 +8,33 @@ from models.query_master import QueryMaster
 
 
 class SQLClient:
-    def __init__(self, url, port, db, user, password):
+    def __init__(self, end_point, port, db, user, password):
         """
         Initializes a SQLClient object.
 
         Args:
-            url (str): The URL of the SQL server.
+            end_point (str): The end_point of the AWS RDS.
             port (int): The port number of the SQL server.
             db (str): The name of the database.
-            user (str): The mail for authentication.
+            user (str): The user for authentication.
             password (str): The password for authentication.
         """
-        self.url = url
+        self.end_point = end_point
         self.port = port
         self.db = db
         self.user = user
         self.password = password
         self.engine = None
         self.session = None
-        self.query_master = QueryMaster()
 
     # Connection function
     def connect(self):
         try:
-            connection_string = f"postgresql://{self.user}:{self.password}@{self.url}:{self.port}/{self.db}"
+            connection_string = f"postgresql://{self.user}:{self.password}@{self.end_point}:{self.port}/{self.db}"
             self.engine = create_engine(connection_string)
             Session = sessionmaker(bind=self.engine)
             self.session = Session()
+            
             print("Connected to the database!")
         except Exception as e:
             print(f"Error connecting to the database: {e}")
@@ -48,27 +49,39 @@ class SQLClient:
             print("Disconnected from the database.")
         except Exception as e:
             print(f"Error disconnecting from the database: {e}")
-
-    def isUserExisting(self, mail, password):
+        
+    #TODO remove, used for temp inserts
+    def execute_query_t(self, df, update=False, batch_size=1000):
         try:
-            # Define the SQL query with placeholders
-            query = text(self.query_master.get_user_credentials_query())
-            # Execute the query with parameters
-            result = self.execute_query(query, params={"mail": mail, "password": password})
-            if result is not None and not result.empty:
-                return True
+            if update:
+                # Update the database in batches
+                with self.engine.connect() as connection:
+                    with connection.begin():
+                        total_records = len(df)
+                        for chunk_start in range(0, total_records, batch_size):
+                            chunk_end = min(chunk_start + batch_size, total_records)
+                            chunk_df = df.iloc[chunk_start:chunk_end]
+                            # Construct the UPDATE query
+                            update_query = "UPDATE results SET event_id = :event_id WHERE id = :id"
+                            # Execute the UPDATE query for the current chunk
+                            for index, row in chunk_df.iterrows():
+                                connection.execute(text(update_query), {"event_id": row['event_id'], "id": row['id']})
+                            print(f"Updated {chunk_end} records out of {total_records}")
+                print("Database table updated successfully!")
             else:
-                return False
-
+                # Execute the SELECT query
+                query = "SELECT * FROM results"
+                result_df = pd.read_sql(query, self.engine)
+                return result_df
         except Exception as e:
-            print(f"Error during login: {e}")
-            return False
-    
-    # Query execution function
+            print(f"SQL query execution error: {e}")
+        return None
+
+
 
     def execute_query(self, query, params=None):
         try:
-            df = pd.read_sql(query, self.engine, params=params)
+            df = pd.read_sql(text(query), self.engine, params=params)
             return df
         except Exception as e:
             print(f"SQL query execution error: {e}")
@@ -81,3 +94,10 @@ class SQLClient:
         except Exception as e:
             print(f"SQL query execution error: {e}")
         return None
+
+
+
+
+
+
+

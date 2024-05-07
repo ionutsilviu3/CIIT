@@ -9,6 +9,7 @@ class AddSerialWindow(QWidget, Ui_add_serials_window):
     validate_signal = QtCore.Signal()
     delete_serials_signal = QtCore.Signal()
     clear_list_signal = QtCore.Signal()
+    continue_signal = QtCore.Signal()
 
     #
     # Initializing the window for adding serials into the app
@@ -17,7 +18,6 @@ class AddSerialWindow(QWidget, Ui_add_serials_window):
         super().__init__()
         self.setupUi(self)
         self.app = app
-
         self.lw_serials.setItemAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
 
         # When the user presses Return, clean the input, validate it and add it to the list
@@ -33,8 +33,7 @@ class AddSerialWindow(QWidget, Ui_add_serials_window):
 
         self.le_serials.textEdited.connect(self.disable_error_message_slot)
 
-        # TODO go to a new window
-        # self.pb_continue.clicked.connect(self.go_to_main_window)
+        self.pb_continue.clicked.connect(self.continue_signal)
 
     def get_input_from_user(self):
         return self.le_serials.text()
