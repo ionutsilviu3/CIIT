@@ -36,16 +36,13 @@ class Ui_add_serials_window(object):
         font.setFamilies([u"Vitesco"])
         font.setPointSize(12)
         add_serials_window.setFont(font)
-        add_serials_window.setStyleSheet(u"\n"
-"QPushButton {\n"
+        add_serials_window.setStyleSheet(u"QPushButton {\n"
 "border-radius: 12px;\n"
 "padding-left: 16px;\n"
 "padding-right: 16px;\n"
 "padding-top: 8 px;\n"
 "padding-bottom: 8 px;\n"
-"}\n"
-"\n"
-"QWidget#add_serials_window {background-color: rgb(34, 48, 56);}")
+"}")
         self.gridLayout = QGridLayout(add_serials_window)
         self.gridLayout.setSpacing(8)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -66,10 +63,10 @@ class Ui_add_serials_window(object):
 "{\n"
 "color: rgba(227, 45, 0, 0);\n"
 "}")
-        self.lb_error.setAlignment(Qt.AlignCenter)
+        self.lb_error.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lb_error.setWordWrap(True)
 
-        self.vl_bottom.addWidget(self.lb_error, 0, Qt.AlignBottom)
+        self.vl_bottom.addWidget(self.lb_error, 0, Qt.AlignmentFlag.AlignBottom)
 
         self.le_serials = QLineEdit(add_serials_window)
         self.le_serials.setObjectName(u"le_serials")
@@ -88,9 +85,9 @@ class Ui_add_serials_window(object):
 "padding: 8px 32px;\n"
 "")
         self.le_serials.setInputMask(u"")
-        self.le_serials.setAlignment(Qt.AlignCenter)
+        self.le_serials.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.vl_bottom.addWidget(self.le_serials, 0, Qt.AlignVCenter)
+        self.vl_bottom.addWidget(self.le_serials, 0, Qt.AlignmentFlag.AlignVCenter)
 
         self.pb_continue = QPushButton(add_serials_window)
         self.pb_continue.setObjectName(u"pb_continue")
@@ -101,22 +98,24 @@ class Ui_add_serials_window(object):
         self.pb_continue.setMaximumSize(QSize(128, 16777215))
         self.pb_continue.setFont(font)
         self.pb_continue.setStyleSheet(u"QPushButton {\n"
-"	background-color: rgb(20, 175, 100);\n"
-"    }\n"
-"\n"
-"    QPushButton:disabled {\n"
-"	background-color: rgba(20, 175, 100, 150);\n"
-"	color: black;\n"
-"    }\n"
-"    QPushButton:hover {\n"
 "	background-color: rgb(19, 165, 87);\n"
 "    }\n"
 "\n"
+"    QPushButton:disabled {\n"
+"	background-color: rgb(48, 88, 68);\n"
+"	color: black;\n"
+"    }\n"
+"    QPushButton:hover {\n"
+"	\n"
+"	background-color: rgb(103, 211, 112);\n"
+"    }\n"
+"\n"
 "    QPushButton:pressed {\n"
-"	background-color: rgb(15, 132, 70);\n"
+"	\n"
+"	background-color: rgb(40, 149, 77);\n"
 "    }")
 
-        self.vl_bottom.addWidget(self.pb_continue, 0, Qt.AlignHCenter|Qt.AlignTop)
+        self.vl_bottom.addWidget(self.pb_continue, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
 
 
         self.gridLayout.addLayout(self.vl_bottom, 10, 1, 1, 1)
@@ -130,10 +129,14 @@ class Ui_add_serials_window(object):
         font1.setBold(True)
         font1.setStrikeOut(False)
         self.lb_title.setFont(font1)
-        self.lb_title.setStyleSheet(u"color: #E6E6E6;")
-        self.lb_title.setAlignment(Qt.AlignCenter)
+        self.lb_title.setStyleSheet(u"QLabel\n"
+"{\n"
+"	\n"
+"	color: rgb(190, 190, 190);\n"
+"}")
+        self.lb_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.gridLayout.addWidget(self.lb_title, 0, 0, 1, 3, Qt.AlignHCenter)
+        self.gridLayout.addWidget(self.lb_title, 0, 0, 1, 3, Qt.AlignmentFlag.AlignHCenter)
 
         self.vl_center = QVBoxLayout()
         self.vl_center.setSpacing(16)
@@ -214,12 +217,12 @@ class Ui_add_serials_window(object):
 "\n"
 "\n"
 "")
-        self.lw_serials.setFrameShape(QFrame.StyledPanel)
-        self.lw_serials.setFrameShadow(QFrame.Raised)
-        self.lw_serials.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.lw_serials.setFrameShape(QFrame.Shape.StyledPanel)
+        self.lw_serials.setFrameShadow(QFrame.Shadow.Raised)
+        self.lw_serials.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.lw_serials.setAlternatingRowColors(False)
-        self.lw_serials.setSelectionMode(QAbstractItemView.MultiSelection)
-        self.lw_serials.setSelectionBehavior(QAbstractItemView.SelectItems)
+        self.lw_serials.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.lw_serials.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectItems)
 
         self.vl_center.addWidget(self.lw_serials)
 
@@ -238,7 +241,7 @@ class Ui_add_serials_window(object):
         self.pb_delete.setFont(font)
         self.pb_delete.setStyleSheet(u"QPushButton {\n"
 "color: white;\n"
-"	background-color: rgb(212, 39, 0);\n"
+"	background-color: rgb(215,0,75)\n"
 "    }\n"
 "QPushButton:disabled {\n"
 "	background-color: rgba(170, 35, 0, 150);\n"
@@ -251,7 +254,7 @@ class Ui_add_serials_window(object):
 "	background-color: rgb(129, 24, 0);\n"
 "    }")
 
-        self.hl_center.addWidget(self.pb_delete, 0, Qt.AlignTop)
+        self.hl_center.addWidget(self.pb_delete, 0, Qt.AlignmentFlag.AlignTop)
 
         self.pb_clear = QPushButton(add_serials_window)
         self.pb_clear.setObjectName(u"pb_clear")
@@ -265,7 +268,7 @@ class Ui_add_serials_window(object):
         self.pb_clear.setFont(font)
         self.pb_clear.setStyleSheet(u"QPushButton {\n"
 "	background-color: rgb(161, 172, 177);\n"
-"	color: rgb(43, 43, 43);\n"
+"	color: rgb(75,75,70)\n"
 "    }\n"
 "QPushButton:disabled {\n"
 "	background-color: rgba(161, 172, 177, 50);\n"
@@ -280,7 +283,7 @@ class Ui_add_serials_window(object):
 "	background-color: rgb(115, 123, 126);\n"
 "    }")
 
-        self.hl_center.addWidget(self.pb_clear, 0, Qt.AlignTop)
+        self.hl_center.addWidget(self.pb_clear, 0, Qt.AlignmentFlag.AlignTop)
 
 
         self.vl_center.addLayout(self.hl_center)

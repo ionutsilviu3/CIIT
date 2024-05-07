@@ -13,10 +13,10 @@ class SQLClient:
         Initializes a SQLClient object.
 
         Args:
-            url (str): The URL of the SQL server.
+            end_point (str): The end_point of the AWS RDS.
             port (int): The port number of the SQL server.
             db (str): The name of the database.
-            user (str): The mail for authentication.
+            user (str): The user for authentication.
             password (str): The password for authentication.
         """
         self.end_point = end_point
@@ -26,7 +26,6 @@ class SQLClient:
         self.password = password
         self.engine = None
         self.session = None
-        self.query_master = QueryMaster()
 
     # Connection function
     def connect(self):
@@ -50,27 +49,39 @@ class SQLClient:
             print("Disconnected from the database.")
         except Exception as e:
             print(f"Error disconnecting from the database: {e}")
-
-    def isUserExisting(self, email, password):
+        
+    #TODO remove, used for temp inserts
+    def execute_query_t(self, df, update=False, batch_size=1000):
         try:
-            # Define the SQL query with placeholders
-            query = text(self.query_master.get_user_credentials_query())
-            # Execute the query with parameters
-            result = self.execute_query(query, params={"email": email, "password": password})
-            if result is not None and not result.empty:
-                return True
+            if update:
+                # Update the database in batches
+                with self.engine.connect() as connection:
+                    with connection.begin():
+                        total_records = len(df)
+                        for chunk_start in range(0, total_records, batch_size):
+                            chunk_end = min(chunk_start + batch_size, total_records)
+                            chunk_df = df.iloc[chunk_start:chunk_end]
+                            # Construct the UPDATE query
+                            update_query = "UPDATE results SET event_id = :event_id WHERE id = :id"
+                            # Execute the UPDATE query for the current chunk
+                            for index, row in chunk_df.iterrows():
+                                connection.execute(text(update_query), {"event_id": row['event_id'], "id": row['id']})
+                            print(f"Updated {chunk_end} records out of {total_records}")
+                print("Database table updated successfully!")
             else:
-                return False
-
+                # Execute the SELECT query
+                query = "SELECT * FROM results"
+                result_df = pd.read_sql(query, self.engine)
+                return result_df
         except Exception as e:
-            print(f"Error during login: {e}")
-            return False
-    
-    # Query execution function
+            print(f"SQL query execution error: {e}")
+        return None
+
+
 
     def execute_query(self, query, params=None):
         try:
-            df = pd.read_sql(query, self.engine, params=params)
+            df = pd.read_sql(text(query), self.engine, params=params)
             return df
         except Exception as e:
             print(f"SQL query execution error: {e}")
@@ -83,35 +94,6 @@ class SQLClient:
         except Exception as e:
             print(f"SQL query execution error: {e}")
         return None
-    
-    # Insert process events into the database
-    def insert_process_events(self, process_events):
-        try:
-            with self.engine.begin() as conn:
-                process_event_values = ', '.join(f"({event['event_type_id']}, {event['serial_id']}, {event['station_id']}, '{event['start_time']}', '{event['end_time']}')" for event in process_events)
-                process_event_query = f"INSERT INTO ProcessEvents (event_type_id, serial_id, station_id, start_time, end_time) VALUES {process_event_values};"
-
-                # Execute the SQL insert statement for process events chunk
-                conn.execute(text(process_event_query))
-            print("Process events inserted successfully!")
-        except Exception as e:
-            print(f"Error inserting process events into the database: {e}")
-
-
-
-    # Insert results into the database
-    def insert_results(self, results):
-        try:
-            print("START")
-            with self.engine.begin() as conn:
-                result_values = ', '.join(f"({result['event_id']}, {result['parameter_id']}, {result['value']}, '{result['created_at'].strftime('%Y-%m-%d %H:%M:%S')}')" for result in results)
-                result_query = f"INSERT INTO Results (event_id, parameter_id, value, created_at) VALUES {result_values};"
-
-                # Execute the SQL insert statement for results chunk
-                conn.execute(text(result_query))
-            print("Results inserted successfully!")
-        except Exception as e:
-            print(f"Error inserting results into the database: {e}")
 
 
 

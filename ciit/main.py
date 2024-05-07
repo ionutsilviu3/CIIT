@@ -1,9 +1,4 @@
-from PySide6.QtWidgets import QApplication
-from controllers.login_controller import LoginController
+from controllers.main_controller import MainController
 
-app = QApplication()
-
-login_controller = LoginController()
-login_controller.run()
-
-app.exec()
+if __name__ == "__main__":
+    main_controller = MainController()

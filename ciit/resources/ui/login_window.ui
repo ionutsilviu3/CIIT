@@ -137,7 +137,7 @@ border-radius: 12px;
         </property>
         <property name="styleSheet">
          <string notr="true">QLineEdit {
-    border-radius: 12px;
+    border-radius: 8px;
 }
 </string>
         </property>

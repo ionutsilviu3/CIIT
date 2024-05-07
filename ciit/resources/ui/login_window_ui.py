@@ -83,7 +83,7 @@ class Ui_Parent(object):
         self.widget.setSizePolicy(sizePolicy)
         self.widget.setFont(font2)
         self.widget.setStyleSheet(u"QLineEdit {\n"
-"    border-radius: 12px;\n"
+"    border-radius: 8px;\n"
 "}\n"
 "")
         self.formLayout = QFormLayout(self.widget)

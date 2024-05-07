@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdvancedOverviewWidget</class>
+ <widget class="QWidget" name="AdvancedOverviewWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>960</width>
+    <height>540</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>960</width>
+    <height>540</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#AdvancedOverviewWidget {
+	background-color: rgb(34, 48, 56);
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop">
+    <widget class="QLabel" name="lb_title">
+     <property name="font">
+      <font>
+       <family>Vitesco</family>
+       <pointsize>24</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel#lb_title
+{
+color: rgb(190, 190, 190);
+}</string>
+     </property>
+     <property name="text">
+      <string>Advanced Overview</string>
+     </property>
+    </widget>
+   </item>
+   <item alignment="Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignBottom">
+    <widget class="QLabel" name="lb_station">
+     <property name="font">
+      <font>
+       <family>Vitesco</family>
+       <pointsize>18</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel#lb_station
+{
+color: rgb(190, 190, 190);
+}</string>
+     </property>
+     <property name="text">
+      <string>Station</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QScrollArea" name="sa_radio_buttons">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>311</width>
+         <height>404</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QWidget#sa_contents_buttons {
+	background-color: rgb(33, 47, 55);
+}
+
+QRadioButton {
+	font: 20pt Vitesco;
+	color: rgb(190, 190, 190);
+    spacing: 10px;
+}
+
+QRadioButton::indicator {
+    width: 20px;
+    height: 20px;
+	background-color: rgb(190, 190, 190);
+	border-radius: 10px;
+}
+
+QRadioButton::indicator:checked {
+   background-color: #F0E614;
+}
+
+QScrollBar:vertical {
+    background-color: rgba(0, 0, 0, 0);
+    width: 20px;
+    margin: 10px 10px 10px 0px;  /* top right bottom left */
+	border-radius: 15px;
+}
+
+QScrollBar::handle:vertical {
+	background-color: rgb(44, 62, 72);
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+   
+	background-color: rgb(42, 59, 68);
+}
+
+QScrollBar::handle:vertical:pressed {
+   background-color: rgb(34, 48, 56)
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    background-color: rgba(0, 0, 0, 0);
+    height: 10px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="sa_contents_buttons">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>309</width>
+          <height>403</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QScrollArea" name="sa_plots">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>2</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QWidget#sa_contents_plots
+{
+background-color: rgb(34, 48, 56);
+}</string>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="sa_contents_plots">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>621</width>
+          <height>403</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel
+{
+	color: rgb(190, 190, 190);
+}</string>
+        </property>
+        <layout class="QVBoxLayout" name="vb_plots">
+         <property name="sizeConstraint">
+          <enum>QLayout::SizeConstraint::SetMinAndMaxSize</enum>
+         </property>
+         <item alignment="Qt::AlignmentFlag::AlignTop">
+          <widget class="QLabel" name="lb_message">
+           <property name="font">
+            <font>
+             <family>Vitesco</family>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Please select a station to see plots of parts parameters.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignBottom">
+    <widget class="QPushButton" name="pb_overview">
+     <property name="font">
+      <font>
+       <family>Vitesco</family>
+       <pointsize>10</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	border-radius: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: white;
+	background-color: rgb(215,0,75)
+    }</string>
+     </property>
+     <property name="text">
+      <string>Go to Overview</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

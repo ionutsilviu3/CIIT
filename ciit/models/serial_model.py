@@ -8,31 +8,18 @@ from models.query_master import QueryMaster
 
 class SerialModel:
 
-    def __init__(self):
+    def __init__(self, client, query_master):
         self.serials = []
-        dotenv_path = find_dotenv()
-        load_dotenv(dotenv_path)
-        self.client = SQLClient(
-            os.getenv("URL"),
-            os.getenv("PORT"),
-            os.getenv("DB"),
-            os.getenv("USER"),
-            os.getenv("PASSWORD"),
-        )
-        self.query_master = QueryMaster()
-        self.client.connect()
+        self.client = client
+        self.query_master = query_master
 
-    def __del__(self):
-        """
-        Disconnects from the SQL client when the object is destroyed.
-        """
-        self.client.disconnect()
-
-    #
     # Turning the input to uppercase and removing whitespace
-    def clean_string(self, text):
+    def clean_string(self, text) -> str:
         text = text.upper()
         return text.replace(" ", "")
+
+    def get_serials(self):
+        return self.serials
 
     def add_serial(self, serial):
         """
@@ -60,7 +47,7 @@ class SerialModel:
         """
         self.serials.clear()
 
-    def is_serial_in_db(self, serial):
+    def is_serial_in_db(self, serial) -> bool:
         """
         Checks if a given serial number exists in the database.
 
@@ -71,13 +58,11 @@ class SerialModel:
             bool: True if the serial number exists in the database, False otherwise.
         """
         try:
-            query = self.query_master.serial_exists(serial)
-
-            number_of_serials = self.client.execute_query(query)
-            num = number_of_serials.iloc[0, 0]
-            if num > 0:
-                return True
-            self.client.disconnect()
+            query = self.query_master.serial_exists_query()
+            result = self.client.execute_query(query, params={"serial": serial})
+            result = result['exists'][0]
+            print(result)
+            return result
 
         except Exception as e:
             print(
@@ -85,9 +70,7 @@ class SerialModel:
             )
             print(e)
             return False
-        return False
 
-    #
     # Validating the raw input from the line edit
     def validate_serial(self, text) -> str:
 
@@ -96,17 +79,11 @@ class SerialModel:
             return "The serial can not be empty!"
 
         # Checking if the text has any non-alphanumeric characters
-        if bool(re.search("\W", text)) is True:
+        if bool(re.search(r'\W', text)) is True:
             return "The serial must contain only letters and numbers!"
 
         if text in self.serials:
             return "The serial is already entered, try another one!"
-        # # Checking if the item is not already in the list and appending it
-        # if self.lw_serials.findItems(text, QtCore.Qt.MatchFlag.MatchFixedString):
-        #     self.handle_error_message(
-        #         True, custom_message=
-        #     )
-        #     return False
 
         # Checking if the text is between 5 and 30 alpha-numeric chars
         if len(text) not in range(5, 30):
@@ -114,7 +91,7 @@ class SerialModel:
                 "The serial must have a length \n between 5 and 20 letters and numbers!"
             )
 
-        if self.is_serial_in_db(text) is False:
+        if self.is_serial_in_db(text) == False:
             return "The serial doesn't exist in the database!"
 
         return None
