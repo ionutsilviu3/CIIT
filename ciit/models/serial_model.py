@@ -61,7 +61,6 @@ class SerialModel:
             query = self.query_master.serial_exists_query()
             result = self.client.execute_query(query, params={"serial": serial})
             result = result['exists'][0]
-            print(result)
             return result
 
         except Exception as e:
