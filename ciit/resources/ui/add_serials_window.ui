@@ -131,7 +131,7 @@ color: rgba(227, 45, 0, 0);
        </property>
        <property name="font">
         <font>
-         <family>Vitesco</family>
+         <family>Roboto</family>
          <pointsize>12</pointsize>
         </font>
        </property>
@@ -156,37 +156,78 @@ padding: 8px 32px;
        </property>
       </widget>
      </item>
-     <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop">
-      <widget class="QPushButton" name="pb_continue">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>64</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>128</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>Vitesco</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
+     <item>
+      <layout class="QHBoxLayout" name="hl_bottom">
+       <item>
+        <widget class="QPushButton" name="pb_import">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>2</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>Roboto</family>
+           <pointsize>12</pointsize>
+           <bold>false</bold>
+           <kerning>true</kerning>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	
+	background-color: rgb(37, 132, 46);
+    }
+QPushButton:disabled {
+	background-color: rgba(170, 35, 0, 150);
+    }
+    QPushButton:hover {
+	
+	background-color: rgb(30, 107, 36);
+    }
+
+    QPushButton:pressed {
+	
+	background-color: rgb(27, 97, 33);
+    }</string>
+         </property>
+         <property name="text">
+          <string>Import from Excel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pb_continue">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>64</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>128</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Vitesco</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
 	background-color: rgb(19, 165, 87);
     }
 
@@ -203,11 +244,13 @@ padding: 8px 32px;
 	
 	background-color: rgb(40, 149, 77);
     }</string>
-       </property>
-       <property name="text">
-        <string>Continue</string>
-       </property>
-      </widget>
+         </property>
+         <property name="text">
+          <string>Continue</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
@@ -386,7 +429,7 @@ QScrollBar::sub-page:vertical {
          </property>
          <property name="font">
           <font>
-           <family>Vitesco</family>
+           <family>Roboto</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -430,7 +473,7 @@ QPushButton:disabled {
          </property>
          <property name="font">
           <font>
-           <family>Vitesco</family>
+           <family>Roboto</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -466,7 +509,6 @@ QPushButton:pressed {
  <tabstops>
   <tabstop>lw_serials</tabstop>
   <tabstop>le_serials</tabstop>
-  <tabstop>pb_continue</tabstop>
   <tabstop>pb_delete</tabstop>
   <tabstop>pb_clear</tabstop>
  </tabstops>

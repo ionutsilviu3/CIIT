@@ -1,6 +1,7 @@
 import os
 import re
 from dotenv import find_dotenv, load_dotenv
+import pandas as pd
 
 from models.SQLClient import SQLClient
 from models.query_master import QueryMaster
@@ -12,6 +13,7 @@ class SerialModel:
         self.serials = []
         self.client = client
         self.query_master = query_master
+        self.serials_limit = 50
 
     # Turning the input to uppercase and removing whitespace
     def clean_string(self, text) -> str:
@@ -46,7 +48,18 @@ class SerialModel:
         Clears all serial numbers from the list of serials.
         """
         self.serials.clear()
-
+    
+    def read_serials_from_excel(self, file_path):
+        if file_path:
+            df = pd.read_excel(file_path, header=None)
+            if not df.empty:
+                print("MODEL: ",df)
+                return df.iloc[:, 0]
+        return []
+    
+    def get_serials_limit(self):
+        return self.serials_limit
+    
     def is_serial_in_db(self, serial) -> bool:
         """
         Checks if a given serial number exists in the database.
