@@ -1,7 +1,8 @@
 from PySide6.QtWidgets import QWidget, QListWidgetItem
 from PySide6 import QtCore
 from resources.ui.add_serials_window_ui import Ui_add_serials_window
-import re
+from PySide6.QtWidgets import QFileDialog
+from PySide6.QtCore import QStandardPaths
 
 
 class AddSerialWindow(QWidget, Ui_add_serials_window):
@@ -10,7 +11,7 @@ class AddSerialWindow(QWidget, Ui_add_serials_window):
     delete_serials_signal = QtCore.Signal()
     clear_list_signal = QtCore.Signal()
     continue_signal = QtCore.Signal()
-
+    import_signal = QtCore.Signal()
     #
     # Initializing the window for adding serials into the app
     def __init__(self, app):
@@ -34,23 +35,24 @@ class AddSerialWindow(QWidget, Ui_add_serials_window):
         self.le_serials.textEdited.connect(self.disable_error_message_slot)
 
         self.pb_continue.clicked.connect(self.continue_signal)
+        
+        self.pb_import.clicked.connect(self.import_signal)
 
     def get_input_from_user(self):
         return self.le_serials.text()
 
     #
-    # Adding input from line edit to list view, validating for empty entries, whitespaces and duplicates
-    def add_serials(self):
-        text = self.get_input_from_user()
-
+    # Adding input from line edit to list view
+    def add_serial(self, serial):
+ 
         # Converting the text to an item, for styling purposes
-        item = QListWidgetItem(text)
+        item = QListWidgetItem(serial)
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
-
+ 
         self.lw_serials.addItem(item)
-
+        print("SERIAL ADDED:", serial)
         self.switch_enabled_state(self.pb_clear, self.pb_continue, state_to_switch=True)
-
+ 
         # Clearing the line edit
         self.le_serials.clear()
 
@@ -90,6 +92,17 @@ class AddSerialWindow(QWidget, Ui_add_serials_window):
     # Intermediary function due to Qt arhitecture
     def enable_delete_button(self):
         self.switch_enabled_state(self.pb_delete, state_to_switch=True)
+        
+    def get_excel_file_path(self):
+        file_dialog = QFileDialog()
+        downloads_path = QStandardPaths.writableLocation(
+            QStandardPaths.DownloadLocation
+        )
+        file_dialog.setDirectory(downloads_path)
+        file_path, _ = file_dialog.getOpenFileName(
+            self, "Open Excel file", "", "Excel Files (*.xls *.xlsx)"
+        )
+        return file_path
 
     #
     # Handling the error message of invalid serial inputs

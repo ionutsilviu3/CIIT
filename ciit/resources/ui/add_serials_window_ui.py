@@ -78,7 +78,10 @@ class Ui_add_serials_window(object):
         self.le_serials.setMinimumSize(QSize(128, 34))
         self.le_serials.setMaximumSize(QSize(512, 34))
         self.le_serials.setSizeIncrement(QSize(0, 0))
-        self.le_serials.setFont(font)
+        font1 = QFont()
+        font1.setFamilies([u"Roboto"])
+        font1.setPointSize(12)
+        self.le_serials.setFont(font1)
         self.le_serials.setStyleSheet(u"color: black;\n"
 "background-color: #A1ACB1;\n"
 "border-radius: 12px;\n"
@@ -89,11 +92,48 @@ class Ui_add_serials_window(object):
 
         self.vl_bottom.addWidget(self.le_serials, 0, Qt.AlignmentFlag.AlignVCenter)
 
+        self.hl_bottom = QHBoxLayout()
+        self.hl_bottom.setObjectName(u"hl_bottom")
+        self.pb_import = QPushButton(add_serials_window)
+        self.pb_import.setObjectName(u"pb_import")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy2.setHorizontalStretch(2)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.pb_import.sizePolicy().hasHeightForWidth())
+        self.pb_import.setSizePolicy(sizePolicy2)
+        font2 = QFont()
+        font2.setFamilies([u"Roboto"])
+        font2.setPointSize(12)
+        font2.setBold(False)
+        font2.setKerning(True)
+        self.pb_import.setFont(font2)
+        self.pb_import.setStyleSheet(u"QPushButton {\n"
+"	\n"
+"	background-color: rgb(37, 132, 46);\n"
+"    }\n"
+"QPushButton:disabled {\n"
+"	background-color: rgba(170, 35, 0, 150);\n"
+"    }\n"
+"    QPushButton:hover {\n"
+"	\n"
+"	background-color: rgb(30, 107, 36);\n"
+"    }\n"
+"\n"
+"    QPushButton:pressed {\n"
+"	\n"
+"	background-color: rgb(27, 97, 33);\n"
+"    }")
+
+        self.hl_bottom.addWidget(self.pb_import)
+
         self.pb_continue = QPushButton(add_serials_window)
         self.pb_continue.setObjectName(u"pb_continue")
         self.pb_continue.setEnabled(False)
-        sizePolicy1.setHeightForWidth(self.pb_continue.sizePolicy().hasHeightForWidth())
-        self.pb_continue.setSizePolicy(sizePolicy1)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy3.setHorizontalStretch(1)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.pb_continue.sizePolicy().hasHeightForWidth())
+        self.pb_continue.setSizePolicy(sizePolicy3)
         self.pb_continue.setMinimumSize(QSize(64, 0))
         self.pb_continue.setMaximumSize(QSize(128, 16777215))
         self.pb_continue.setFont(font)
@@ -115,7 +155,10 @@ class Ui_add_serials_window(object):
 "	background-color: rgb(40, 149, 77);\n"
 "    }")
 
-        self.vl_bottom.addWidget(self.pb_continue, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
+        self.hl_bottom.addWidget(self.pb_continue)
+
+
+        self.vl_bottom.addLayout(self.hl_bottom)
 
 
         self.gridLayout.addLayout(self.vl_bottom, 10, 1, 1, 1)
@@ -123,12 +166,12 @@ class Ui_add_serials_window(object):
         self.lb_title = QLabel(add_serials_window)
         self.lb_title.setObjectName(u"lb_title")
         self.lb_title.setMaximumSize(QSize(16777215, 16777215))
-        font1 = QFont()
-        font1.setFamilies([u"Vitesco"])
-        font1.setPointSize(32)
-        font1.setBold(True)
-        font1.setStrikeOut(False)
-        self.lb_title.setFont(font1)
+        font3 = QFont()
+        font3.setFamilies([u"Vitesco"])
+        font3.setPointSize(32)
+        font3.setBold(True)
+        font3.setStrikeOut(False)
+        self.lb_title.setFont(font3)
         self.lb_title.setStyleSheet(u"QLabel\n"
 "{\n"
 "	\n"
@@ -143,19 +186,19 @@ class Ui_add_serials_window(object):
         self.vl_center.setObjectName(u"vl_center")
         self.lw_serials = QListWidget(add_serials_window)
         self.lw_serials.setObjectName(u"lw_serials")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.lw_serials.sizePolicy().hasHeightForWidth())
-        self.lw_serials.setSizePolicy(sizePolicy2)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.lw_serials.sizePolicy().hasHeightForWidth())
+        self.lw_serials.setSizePolicy(sizePolicy4)
         self.lw_serials.setMinimumSize(QSize(256, 256))
         self.lw_serials.setMaximumSize(QSize(512, 256))
         self.lw_serials.setSizeIncrement(QSize(2, 2))
-        font2 = QFont()
-        font2.setFamilies([u"Vitesco"])
-        font2.setPointSize(14)
-        font2.setStrikeOut(False)
-        self.lw_serials.setFont(font2)
+        font4 = QFont()
+        font4.setFamilies([u"Vitesco"])
+        font4.setPointSize(14)
+        font4.setStrikeOut(False)
+        self.lw_serials.setFont(font4)
         self.lw_serials.setStyleSheet(u"QListWidget\n"
 "{\n"
 "    background-color: #344955; \n"
@@ -232,13 +275,10 @@ class Ui_add_serials_window(object):
         self.pb_delete = QPushButton(add_serials_window)
         self.pb_delete.setObjectName(u"pb_delete")
         self.pb_delete.setEnabled(False)
-        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        sizePolicy3.setHorizontalStretch(2)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.pb_delete.sizePolicy().hasHeightForWidth())
-        self.pb_delete.setSizePolicy(sizePolicy3)
+        sizePolicy2.setHeightForWidth(self.pb_delete.sizePolicy().hasHeightForWidth())
+        self.pb_delete.setSizePolicy(sizePolicy2)
         self.pb_delete.setMaximumSize(QSize(256, 16777215))
-        self.pb_delete.setFont(font)
+        self.pb_delete.setFont(font1)
         self.pb_delete.setStyleSheet(u"QPushButton {\n"
 "color: white;\n"
 "	background-color: rgb(215,0,75)\n"
@@ -259,13 +299,10 @@ class Ui_add_serials_window(object):
         self.pb_clear = QPushButton(add_serials_window)
         self.pb_clear.setObjectName(u"pb_clear")
         self.pb_clear.setEnabled(False)
-        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        sizePolicy4.setHorizontalStretch(1)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.pb_clear.sizePolicy().hasHeightForWidth())
-        self.pb_clear.setSizePolicy(sizePolicy4)
+        sizePolicy3.setHeightForWidth(self.pb_clear.sizePolicy().hasHeightForWidth())
+        self.pb_clear.setSizePolicy(sizePolicy3)
         self.pb_clear.setMaximumSize(QSize(192, 16777215))
-        self.pb_clear.setFont(font)
+        self.pb_clear.setFont(font1)
         self.pb_clear.setStyleSheet(u"QPushButton {\n"
 "	background-color: rgb(161, 172, 177);\n"
 "	color: rgb(75,75,70)\n"
@@ -292,8 +329,7 @@ class Ui_add_serials_window(object):
         self.gridLayout.addLayout(self.vl_center, 1, 1, 1, 1)
 
         QWidget.setTabOrder(self.lw_serials, self.le_serials)
-        QWidget.setTabOrder(self.le_serials, self.pb_continue)
-        QWidget.setTabOrder(self.pb_continue, self.pb_delete)
+        QWidget.setTabOrder(self.le_serials, self.pb_delete)
         QWidget.setTabOrder(self.pb_delete, self.pb_clear)
 
         self.retranslateUi(add_serials_window)
@@ -306,6 +342,7 @@ class Ui_add_serials_window(object):
         self.lb_error.setText(QCoreApplication.translate("add_serials_window", u"The serial entered is not valid! Please try another!", None))
         self.le_serials.setText("")
         self.le_serials.setPlaceholderText(QCoreApplication.translate("add_serials_window", u"Write serials here", None))
+        self.pb_import.setText(QCoreApplication.translate("add_serials_window", u"Import from Excel", None))
         self.pb_continue.setText(QCoreApplication.translate("add_serials_window", u"Continue", None))
         self.lb_title.setText(QCoreApplication.translate("add_serials_window", u"Add serials", None))
         self.pb_delete.setText(QCoreApplication.translate("add_serials_window", u"Delete selected", None))
