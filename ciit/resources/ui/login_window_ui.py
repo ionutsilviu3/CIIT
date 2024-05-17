@@ -29,7 +29,7 @@ class Ui_Parent(object):
         font = QFont()
         font.setPointSize(12)
         Parent.setFont(font)
-        Parent.setStyleSheet(u"QWidget#Parent {background-color: rgba(29, 38, 30, 255)}\n"
+        Parent.setStyleSheet(u"QWidget#Parent {background-color: rgb(34, 48, 56)}\n"
 "")
         self.horizontalLayout = QHBoxLayout(Parent)
         self.horizontalLayout.setSpacing(8)
@@ -55,7 +55,7 @@ class Ui_Parent(object):
         font2.setPointSize(16)
         self.Form.setFont(font2)
         self.Form.setStyleSheet(u"QPushButton {\n"
-"border-radius: 12px;\n"
+"border-radius: 16px;\n"
 "}")
         self.verticalLayout_3 = QVBoxLayout(self.Form)
         self.verticalLayout_3.setSpacing(16)
@@ -70,9 +70,9 @@ class Ui_Parent(object):
         font3.setBold(True)
         self.lb_login_title.setFont(font3)
         self.lb_login_title.setStyleSheet(u"color: rgb(226, 220, 220);")
-        self.lb_login_title.setAlignment(Qt.AlignCenter)
+        self.lb_login_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.verticalLayout_3.addWidget(self.lb_login_title)
+        self.verticalLayout_3.addWidget(self.lb_login_title, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
         self.widget = QWidget(self.Form)
         self.widget.setObjectName(u"widget")
@@ -83,15 +83,20 @@ class Ui_Parent(object):
         self.widget.setSizePolicy(sizePolicy)
         self.widget.setFont(font2)
         self.widget.setStyleSheet(u"QLineEdit {\n"
-"    border-radius: 8px;\n"
+"    border-radius: 16px;	\n"
+"	background-color: rgba(29, 38, 30,0);	\n"
+"	color: rgb(226, 220, 220);\n"
+"	border-style: solid;\n"
+"    border-width: 1.5px;\n"
+"	border-color:  rgb(80, 118, 70);\n"
 "}\n"
 "")
         self.formLayout = QFormLayout(self.widget)
         self.formLayout.setSpacing(12)
         self.formLayout.setContentsMargins(26, 26, 26, 26)
         self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setLabelAlignment(Qt.AlignCenter)
-        self.formLayout.setFormAlignment(Qt.AlignCenter)
+        self.formLayout.setLabelAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.formLayout.setFormAlignment(Qt.AlignmentFlag.AlignCenter)
         self.formLayout.setHorizontalSpacing(8)
         self.formLayout.setVerticalSpacing(16)
         self.formLayout.setContentsMargins(8, 8, 8, 8)
@@ -114,14 +119,15 @@ class Ui_Parent(object):
         self.le_user.setObjectName(u"le_user")
         sizePolicy1.setHeightForWidth(self.le_user.sizePolicy().hasHeightForWidth())
         self.le_user.setSizePolicy(sizePolicy1)
-        self.le_user.setMinimumSize(QSize(192, 48))
-        self.le_user.setMaximumSize(QSize(192, 16777215))
+        self.le_user.setMinimumSize(QSize(256, 48))
+        self.le_user.setMaximumSize(QSize(256, 16777215))
         font4 = QFont()
         font4.setFamilies([u"Roboto"])
         font4.setPointSize(12)
         self.le_user.setFont(font4)
         self.le_user.setToolTipDuration(-1)
-        self.le_user.setAlignment(Qt.AlignCenter)
+        self.le_user.setStyleSheet(u"color: rgb(255, 255, 255);")
+        self.le_user.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.le_user)
 
@@ -135,12 +141,12 @@ class Ui_Parent(object):
         self.le_password.setObjectName(u"le_password")
         sizePolicy1.setHeightForWidth(self.le_password.sizePolicy().hasHeightForWidth())
         self.le_password.setSizePolicy(sizePolicy1)
-        self.le_password.setMinimumSize(QSize(192, 48))
+        self.le_password.setMinimumSize(QSize(256, 48))
         self.le_password.setMaximumSize(QSize(192, 16777215))
         self.le_password.setFont(font4)
         self.le_password.setToolTipDuration(-1)
-        self.le_password.setEchoMode(QLineEdit.Password)
-        self.le_password.setAlignment(Qt.AlignCenter)
+        self.le_password.setEchoMode(QLineEdit.EchoMode.Password)
+        self.le_password.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.le_password.setClearButtonEnabled(False)
 
         self.formLayout.setWidget(3, QFormLayout.FieldRole, self.le_password)
@@ -191,14 +197,14 @@ class Ui_Parent(object):
 "{\n"
 "	color: rgba(0, 0, 0, 0);\n"
 "}")
-        self.lb_warning_message.setFrameShape(QFrame.NoFrame)
-        self.lb_warning_message.setFrameShadow(QFrame.Plain)
-        self.lb_warning_message.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.lb_warning_message.setFrameShape(QFrame.Shape.NoFrame)
+        self.lb_warning_message.setFrameShadow(QFrame.Shadow.Plain)
+        self.lb_warning_message.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
 
         self.formLayout.setWidget(5, QFormLayout.FieldRole, self.lb_warning_message)
 
 
-        self.verticalLayout_3.addWidget(self.widget, 0, Qt.AlignHCenter|Qt.AlignVCenter)
+        self.verticalLayout_3.addWidget(self.widget, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
         self.pb_log_in = QPushButton(self.Form)
         self.pb_log_in.setObjectName(u"pb_log_in")
@@ -208,7 +214,7 @@ class Ui_Parent(object):
         font7 = QFont()
         font7.setFamilies([u"Roboto"])
         font7.setPointSize(16)
-        font7.setBold(False)
+        font7.setBold(True)
         font7.setItalic(False)
         font7.setUnderline(False)
         font7.setKerning(True)
@@ -220,11 +226,11 @@ class Ui_Parent(object):
         self.pb_log_in.setStyleSheet(u"QPushButton\n"
 "{\n"
 "background-color: rgb(80, 118, 70);\n"
-"color: rgb(193, 196, 201);\n"
+"color: rgb(226, 220, 220);\n"
 "padding-left: 32px;\n"
 "padding-right: 32px;\n"
-"padding-top: 18px;\n"
-"padding-bottom: 18px;\n"
+"padding-top: 16px;\n"
+"padding-bottom: 16px;\n"
 "}\n"
 "\n"
 "QPushButton:hover\n"
@@ -232,7 +238,7 @@ class Ui_Parent(object):
 "	background-color: rgb(53, 78, 40);\n"
 "}")
 
-        self.verticalLayout_3.addWidget(self.pb_log_in, 0, Qt.AlignHCenter|Qt.AlignTop)
+        self.verticalLayout_3.addWidget(self.pb_log_in, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
 
 
         self.horizontalLayout.addWidget(self.Form)
@@ -248,7 +254,7 @@ class Ui_Parent(object):
     def retranslateUi(self, Parent):
         Parent.setWindowTitle(QCoreApplication.translate("Parent", u"Login", None))
         self.lb_background.setText("")
-        self.lb_login_title.setText(QCoreApplication.translate("Parent", u"Log In", None))
+        self.lb_login_title.setText(QCoreApplication.translate("Parent", u"Log in", None))
         self.lb_user.setText("")
 #if QT_CONFIG(tooltip)
         self.le_user.setToolTip("")
