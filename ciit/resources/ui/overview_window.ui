@@ -261,7 +261,7 @@ QScrollBar::sub-page:vertical, QScrollBar::sub-page:horizontal {
      </item>
     </layout>
    </item>
-   <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignBottom">
+   <item alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignBottom">
     <widget class="QPushButton" name="pb_advanced_overview">
      <property name="font">
       <font>

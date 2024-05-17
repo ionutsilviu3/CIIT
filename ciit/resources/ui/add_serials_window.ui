@@ -191,8 +191,8 @@ padding: 8px 32px;
     }
 
     QPushButton:disabled {
-	background-color: rgb(48, 88, 68);
-	color: black;
+	background-color: rgba(0,0,0,0);
+	color:  rgba(0,0,0,0);
     }
     QPushButton:hover {
 	

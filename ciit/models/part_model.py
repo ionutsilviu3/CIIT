@@ -1,10 +1,8 @@
 from concurrent.futures import Future
 from datetime import datetime, timedelta
 import threading
-from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn
 from models.serial_model import SerialModel
 
 
@@ -144,6 +142,7 @@ class PartModel:
                     [parts, result], ignore_index=True
                     # Use pd.concat() to concatenate the result DataFrame to parts
                 )
+            parts = parts[~parts['unit_serial_number'].isin(self.serials)]
 
         except Exception as e:
             print(
@@ -179,33 +178,6 @@ class PartModel:
                     chunk.values.tolist(), station)]
             )
         return parameters.drop_duplicates()
-
-    # # get the production date when the given serials were produced
-    # # TODO make this dynamic and smarter
-    # def get_parts_production_datetimes(self):
-    #     if self.timeframes is None:
-    #         parts_production_datetimes = []
-    #         try:
-    #             for serial in self.serials:
-    #                 query = self.query_master.get_last_datetime(serial=serial)
-    #                 datetime = self.client.execute_query(query)
-    #                 parts_production_datetimes.append(datetime["pe_endtime"])
-    #         except Exception as e:
-    #             print(
-    #                 f"ERROR: Something went wrong when trying to get the datetime of the production of the following serials : {self.serials}."
-    #             )
-    #             print(e)
-
-    #         df = pd.DataFrame(parts_production_datetimes)[0]
-
-    #         # Sort the datetimes before converting them to strings
-    #         df = df.sort_values()
-
-    #         # Convert the sorted datetimes to strings
-    #         self.timeframes = df.dt.strftime("%d.%m.%Y %H:%M:%S")
-
-    #     # Returning sorted datetimes
-    #     return self.timeframes
 
     def get_parts_production_datetimes(self):
         if self.timeframes is None:
@@ -266,30 +238,3 @@ class PartModel:
 
         # Returning timeframes
         return self.timeframes
-
-    def scatter_plot(self, input_parts, other_parts, parameter):
-        other_parts_param = other_parts[other_parts["name"] == parameter]
-        input_parts_param = input_parts[input_parts["name"] == {parameter}]
-
-        seaborn.set_theme(style="dark")
-
-        ax = seaborn.scatterplot(
-            x="dcrd_created",
-            y="dcrd_value_num",
-            data=other_parts_param,
-            label="Parts Produced",
-        )
-        seaborn.scatterplot(
-            data=input_parts_param,
-            x="dcrd_created",
-            y="dcrd_value_num",
-            ax=ax,
-            label="Input Parts",
-            marker="D",
-            color="red",
-            s=100,
-        )
-        plt.xlabel("Time")
-        plt.ylabel("Parameter Value")
-        plt.title("Scatter Plot of f{parameter} Value Over Time")
-        plt.show()

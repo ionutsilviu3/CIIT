@@ -81,6 +81,12 @@ class MainController:
         Disconnects from the SQL client when the object is destroyed.
         """
         self.client.disconnect()
+        self.cleanup_html_files()
+    
+    def cleanup_html_files(self):
+        html_files = [f for f in os.listdir() if f.endswith('.html')]
+        for file in html_files:
+            os.remove(file)
 
     def switch_to_add_serials(self):
         self.stacked_widget.setCurrentIndex(1)

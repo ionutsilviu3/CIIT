@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'add_serials_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.2
+## Created by: Qt User Interface Compiler version 6.7.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -102,8 +102,8 @@ class Ui_add_serials_window(object):
 "    }\n"
 "\n"
 "    QPushButton:disabled {\n"
-"	background-color: rgb(48, 88, 68);\n"
-"	color: black;\n"
+"	background-color: rgba(0,0,0,0);\n"
+"	color:  rgba(0,0,0,0);\n"
 "    }\n"
 "    QPushButton:hover {\n"
 "	\n"

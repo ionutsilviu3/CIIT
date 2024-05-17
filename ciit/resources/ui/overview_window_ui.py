@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'overview_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.2
+## Created by: Qt User Interface Compiler version 6.7.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -243,7 +243,7 @@ class Ui_OverviewWidget(object):
 "	background-color: rgb(215,0,75)\n"
 "    }")
 
-        self.verticalLayout.addWidget(self.pb_advanced_overview, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignBottom)
+        self.verticalLayout.addWidget(self.pb_advanced_overview, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignBottom)
 
 
         self.retranslateUi(OverviewWidget)
