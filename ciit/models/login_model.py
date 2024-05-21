@@ -1,12 +1,12 @@
-import random
+import msal
 import numpy as np
 import pandas as pd
 
-
 class LoginModel:
-    def __init__(self, client, query_master):
-        self.client = client
-        self.query_master = query_master
+    def __init__(self, client_id, authority):
+        self.SCOPES = ['User.Read']
+        self.client_id = client_id
+        self.authority = authority
         #TODO remove, used for temp inserts
         # df = self.client.execute_query(self.query_master.get_process_events())
         # print(df)
@@ -26,6 +26,25 @@ class LoginModel:
         #     self.client.insert_process_events(chunk)
         # for chunk in result_chunks:
         #     self.client.insert_results(chunk)
+        
+    def is_valid(self, user_credentials):
+        app = msal.PublicClientApplication(self.client_id, authority=self.authority)
+        
+        # Attempt to acquire token using ROPC
+        result = app.acquire_token_by_username_password(
+            username=user_credentials.get('email'),
+            password=user_credentials.get('password'),
+            scopes=self.SCOPES,
+        )
+
+        if "access_token" in result:
+            print("Authentication successful")
+            return True
+        else:
+            print("Authentication failed")
+            return False
+
+
     #TODO remove, used for temp inserts    
     def generate_results(self, process_events_df):
         results = []
@@ -150,20 +169,4 @@ class LoginModel:
             elif row['parameter_id'] == 10:
                 event_id += 1
 
-        self.client.execute_query_t(df, update=True, batch_size=1000)    
-    def is_valid(self, user_credentials):
-        try:
-            email = user_credentials.get('email')
-            password = user_credentials.get('password')
-            
-            query = self.query_master.get_user_credentials_query()
-            # Execute the query with parameters
-            result = self.client.execute_query(query, params={"email": email, "password": password})
-            if result is not None and not result.empty:
-                return True
-            else:
-                return False
-
-        except Exception as e:
-            print(f"Error during login: {e}")
-            return False
+        self.client.execute_query_t(df, update=True, batch_size=1000)

@@ -29,7 +29,7 @@ class MainController:
         self.query_master = QueryMaster()
         self.client.connect()
 
-        self.login_model = LoginModel(self.client, self.query_master)
+        self.login_model = LoginModel(os.getenv("CLIENT_ID"), os.getenv("AUTHORITY"))
         self.serial_model = SerialModel(self.client, self.query_master)
         self.part_model = PartModel(self.client, self.query_master)
 
