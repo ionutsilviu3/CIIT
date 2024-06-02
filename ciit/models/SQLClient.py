@@ -79,13 +79,18 @@ class SQLClient:
 
 
 
-    def execute_query(self, query, params=None):
-        try:
-            df = pd.read_sql(text(query), self.engine, params=params)
-            return df
-        except Exception as e:
-            print(f"SQL query execution error: {e}")
-        return None
+    def execute_query(self, query, params=None, fetch_results=True):
+            try:
+                with self.engine.connect() as connection:
+                    if fetch_results:
+                        df = pd.read_sql(text(query), self.engine, params=params)
+                        return df
+                    else:
+                        connection.execute(text(query), params)
+                        connection.commit()
+            except Exception as e:
+                print(f"SQL query execution error: {e}")
+            return None
 
     def execute_query_as_list(self, query):
         try:

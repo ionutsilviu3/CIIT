@@ -1,12 +1,136 @@
-import random
+import re
+import bcrypt
 import numpy as np
 import pandas as pd
 
-
-class LoginModel:
+class UserModel:
     def __init__(self, client, query_master):
         self.client = client
         self.query_master = query_master
+        self.current_user_id = None
+    
+    def is_valid(self, user_credentials):
+        email = user_credentials.get('email')
+        password = user_credentials.get('password')
+        user = self.get_user_by_email(email)
+        if user is not None:
+            hashed_password = user['password'][0]
+            if hashed_password is not None:
+                if self.verify_password(password, hashed_password):
+                    self.current_user_id = int(user['id'][0])
+                    return True
+            else:
+                hashed_password = self.hash_password(password)
+                self.current_user_id = int(user['id'][0])
+                self.set_hashed_password(self.current_user_id, hashed_password)
+                new_role_id = self.get_role_id_by_name("Engineer")
+                self.modify_user_role(self.current_user_id, new_role_id)
+                return True
+        return False
+        
+    def get_user_by_email(self, email):
+        query = self.query_master.get_user_by_email_query()
+        result = self.client.execute_query(query, params={"email": email})
+        if result is not None and not result.empty:
+            return result
+        return None
+
+    def get_role(self, user_id):
+        query = self.query_master.get_user_role_query()
+        result = self.client.execute_query(query, params={"user_id": user_id})
+        return result
+    
+    def get_all_users(self):
+        query = self.query_master.get_all_users_emails_query()
+        result = self.client.execute_query(query)
+        return result
+
+    def get_subordinate_users(self, role_id):
+        query = self.query_master.get_subordinate_users_query()
+        result = self.client.execute_query(query, params={"role_id": role_id})
+        return result
+
+    def delete_user(self, user_id):
+        query = self.query_master.delete_user_by_id_query()
+        self.client.execute_query(query, params={"id": user_id}, fetch_results=False)
+        
+    def modify_user_role(self, user_id, role_id):
+        query = self.query_master.modify_user_role_query()
+        self.client.execute_query(query, params={"user_id": user_id, "role_id": role_id}, fetch_results=False)
+    
+    def add_new_user(self, email):
+        role_name = "Unregistred"
+        role_id = self.get_role_id_by_name(role_name)
+        query = self.query_master.create_new_user_query()
+        self.client.execute_query(query, params={"email": email,"role_id": role_id}, fetch_results=False)
+        new_user = self.get_user_by_email(email)
+        new_user_id = int(new_user['id'][0])
+        self.insert_ids(new_user_id, role_id)
+        
+    
+    def get_role_id_by_name(self, role_name):
+        query = self.query_master.get_role_id_query()
+        result = self.client.execute_query(query, params={"role_name": role_name})
+        return int(result['id'][0])
+    
+    def insert_ids(self, user_id, role_id):
+        query = self.query_master.insert_ids_in_user_roles_query()
+        self.client.execute_query(query, params={"user_id": user_id,"role_id": role_id}, fetch_results=False)
+        
+    def set_hashed_password(self, user_id, hashed_password):
+        query = self.query_master.set_user_password_query()
+        self.client.execute_query(query, params={"id": user_id,"password": hashed_password}, fetch_results=False)
+    
+    def hash_password(self, password: str) -> str:
+        """
+        Hash a password using bcrypt.
+        
+        Args:
+        password (str): The password to be hashed.
+        
+        Returns:
+        str: The hashed password.
+        """
+        # Generate a salt
+        salt = bcrypt.gensalt()
+        # Hash the password
+        hashed_password = bcrypt.hashpw(password.encode(), salt)
+        # Return the hashed password as a string
+        return hashed_password.decode()
+    
+    def validate_email(self, email) -> str:
+        
+        pattern = r'^([!#-\'*+/-9=?A-Z^-~-]+(\.[!#-\'*+/-9=?A-Z^-~-]+)*|"([]!#-[^-~ \t]|(\\\\[\\t -~]))+")@([!#-\'*+/-9=?A-Z^-~-]+(\.[!#-\'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])$'
+        
+        if email is None:
+            return "The email can not be empty!"
+
+        if re.match(pattern, email) is None:
+            return "The email is not in a valid format."
+
+        if self.get_user_by_email(email) is not None:
+            return "The user already exists in the database!"
+
+        return None
+    
+    def verify_password(self, password: str, hashed_password: str) -> bool:
+        """
+        Verify a password against a hashed password using bcrypt.
+        
+        Args:
+        password (str): The password to verify.
+        hashed_password (str): The hashed password to compare against.
+        
+        Returns:
+        bool: True if the password matches the hash, False otherwise.
+        """
+        # Verify the password
+        return bcrypt.checkpw(password.encode(), hashed_password.encode())
+
+    #TODO remove, used for temp inserts    
+    def boilerplate():
+        
+        pass    
         #TODO remove, used for temp inserts
         # df = self.client.execute_query(self.query_master.get_process_events())
         # print(df)
@@ -26,7 +150,6 @@ class LoginModel:
         #     self.client.insert_process_events(chunk)
         # for chunk in result_chunks:
         #     self.client.insert_results(chunk)
-    #TODO remove, used for temp inserts    
     def generate_results(self, process_events_df):
         results = []
 
@@ -150,20 +273,4 @@ class LoginModel:
             elif row['parameter_id'] == 10:
                 event_id += 1
 
-        self.client.execute_query_t(df, update=True, batch_size=1000)    
-    def is_valid(self, user_credentials):
-        try:
-            email = user_credentials.get('email')
-            password = user_credentials.get('password')
-            
-            query = self.query_master.get_user_credentials_query()
-            # Execute the query with parameters
-            result = self.client.execute_query(query, params={"email": email, "password": password})
-            if result is not None and not result.empty:
-                return True
-            else:
-                return False
-
-        except Exception as e:
-            print(f"Error during login: {e}")
-            return False
+        self.client.execute_query_t(df, update=True, batch_size=1000)

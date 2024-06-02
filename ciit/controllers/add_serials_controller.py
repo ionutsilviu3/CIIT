@@ -18,7 +18,7 @@ class AddSerialsController:
             self.view.handle_error_message(True, custom_message=result)
         else:
             self.model.add_serial(serial)
-            self.view.add_serials()
+            self.view.add_serial(serial)
             
     def import_serials(self):
         serials = self.get_serials_from_excel()

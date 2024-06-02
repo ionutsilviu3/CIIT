@@ -22,9 +22,50 @@
   <property name="styleSheet">
    <string notr="true">QWidget#OverviewWidget {
 background-color: rgb(34, 48, 56);
-}</string>
+}
+
+QPushButton {
+	border-radius: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(190, 190, 190);
+	background-color: rgb(55, 79, 91);
+    }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pb_info">
+       <property name="text">
+        <string>Info</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pb_settings">
+       <property name="text">
+        <string>Settings</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop">
     <widget class="QLabel" name="lb_title">
      <property name="font">
@@ -77,56 +118,65 @@ color: rgb(190, 190, 190);
        </property>
        <property name="minimumSize">
         <size>
-         <width>311</width>
+         <width>200</width>
          <height>408</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>400</width>
+         <width>200</width>
          <height>16777215</height>
         </size>
        </property>
        <property name="styleSheet">
         <string notr="true">QWidget#sa_contents_buttons {
-background-color: rgb(34, 48, 56);
+    background-color: rgb(34, 48, 56);
+    border: 2px solid rgb(80, 118, 70);
+    border-radius: 18px; /* Set the border radius for rounded corners */
+    padding: 5px; /* Add some padding to ensure the contents do not touch the borders */
+    margin: 0; /* Remove any default margin */
 }
+
 QRadioButton {
-	font: 20pt Vitesco;
+	font: 24pt Vitesco;
 	color: rgb(190, 190, 190);
-    spacing: 10px;
+    spacing: 12px;
 }
 
 QRadioButton::indicator {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
 	background-color: rgb(190, 190, 190);
-	border-radius: 10px;
+	border-radius: 12px;
 }
 
 QRadioButton::indicator:checked {
-   background-color: #F0E614;
+   background-color: rgb(80, 118, 70);;
+}
+
+QScrollArea {
+    border: none; /* Remove any border from the scroll area itself */
+    background-color: rgba(0, 0, 0, 0); /* Ensure the scroll area has no background */
 }
 
 QScrollBar:vertical {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0); /* Make scrollbar background transparent */
     width: 20px;
     margin: 10px 10px 10px 0px;  /* top right bottom left */
-	border-radius: 15px;
+    border-radius: 15px;
 }
 
 QScrollBar::handle:vertical {
-	background-color: rgb(44, 62, 72);
+    background-color: rgb(44, 62, 72);
     border-radius: 5px;
 }
 
 QScrollBar::handle:vertical:hover {
-   
-	background-color: rgb(42, 59, 68);
+    background-color: rgb(42, 59, 68);
 }
 
 QScrollBar::handle:vertical:pressed {
-   background-color: rgb(34, 48, 56)
+    background-color: rgb(34, 48, 56);
 }
 
 QScrollBar::add-line:vertical,
@@ -139,9 +189,10 @@ QScrollBar::sub-line:vertical {
 
 QScrollBar::add-page:vertical,
 QScrollBar::sub-page:vertical {
-    
-	background-color: rgba(0, 0, 0, 0);
-}</string>
+    background-color: rgba(0, 0, 0, 0);
+}
+
+</string>
        </property>
        <property name="widgetResizable">
         <bool>true</bool>
@@ -151,9 +202,14 @@ QScrollBar::sub-page:vertical {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>309</width>
-          <height>406</height>
+          <width>200</width>
+          <height>408</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget &gt; QRadioButton{
+padding-left: 12px;
+}</string>
         </property>
        </widget>
       </widget>
@@ -265,9 +321,13 @@ QScrollBar::sub-page:vertical, QScrollBar::sub-page:horizontal {
     <widget class="QPushButton" name="pb_advanced_overview">
      <property name="font">
       <font>
-       <family>Vitesco</family>
+       <family>Roboto</family>
        <pointsize>10</pointsize>
+       <italic>false</italic>
        <bold>true</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+       <kerning>true</kerning>
       </font>
      </property>
      <property name="styleSheet">

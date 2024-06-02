@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'add_serials_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.0
+## Created by: Qt User Interface Compiler version 6.7.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -138,7 +138,8 @@ class Ui_add_serials_window(object):
         self.pb_continue.setMaximumSize(QSize(128, 16777215))
         self.pb_continue.setFont(font)
         self.pb_continue.setStyleSheet(u"QPushButton {\n"
-"	background-color: rgb(19, 165, 87);\n"
+"	\n"
+"	background-color: rgb(37, 132, 46);\n"
 "    }\n"
 "\n"
 "    QPushButton:disabled {\n"

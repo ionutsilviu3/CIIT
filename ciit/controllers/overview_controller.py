@@ -16,7 +16,7 @@ class OverviewController:
         return self.model.get_locations()
 
     def update_table(self):
-        self.view.update_table(self.get_parameters())
+        self.view.update_table(self.get_parameters(), self.model.get_limit_threshold())
 
     def get_parameters(self):
         station = self.view.get_selected_location()

@@ -6,6 +6,9 @@ from resources.ui.login_window_ui import Ui_Parent
 class LoginWindow(QWidget, Ui_Parent):
     validate_login_signal = QtCore.Signal()
     go_to_add_serials_signal = QtCore.Signal()
+    go_to_admin_signal = QtCore.Signal()
+    go_to_manager_signal = QtCore.Signal()
+    
     def __init__(self, app):
         super().__init__()
         self.setupUi(self)

@@ -53,7 +53,6 @@ class SerialModel:
         if file_path:
             df = pd.read_excel(file_path, header=None)
             if not df.empty:
-                print("MODEL: ",df)
                 return df.iloc[:, 0]
         return []
     

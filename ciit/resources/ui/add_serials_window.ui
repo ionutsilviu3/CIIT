@@ -228,7 +228,8 @@ QPushButton:disabled {
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-	background-color: rgb(19, 165, 87);
+	
+	background-color: rgb(37, 132, 46);
     }
 
     QPushButton:disabled {

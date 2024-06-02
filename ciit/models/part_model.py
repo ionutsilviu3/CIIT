@@ -4,11 +4,16 @@ import threading
 import numpy as np
 import pandas as pd
 from models.serial_model import SerialModel
-
+from scipy.spatial.distance import mahalanobis
+from openpyxl import Workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
+from openpyxl.worksheet.table import Table, TableStyleInfo
+from openpyxl.utils import get_column_letter
+from openpyxl.utils import column_index_from_string
 
 class PartModel:
 
-    def __init__(self, client, query_master):
+    def __init__(self, client, query_master, observer_model):
         self.serials = []
         self.parts = None
         self.parametrized_parts = {}
@@ -17,7 +22,50 @@ class PartModel:
         self.client = client
         self.query_master = query_master
         self.thread_result = None
-        self.timeframe_scatter_plot = 8
+        self.plot_timeframe = 8
+        self.limit_threshold = 0.05
+        self.outlier_sensitivity_levels_input = 1.5
+        self.outlier_sensitivity_levels_other = 1.5
+        self.observer_model = observer_model
+        self.observer_model.attach(self)
+ 
+    def get_limit_threshold(self):
+        return self.limit_threshold
+ 
+    def get_plot_timeframe(self):
+        return self.plot_timeframe
+ 
+    def get_outlier_sensitivity_levels_input(self):
+        return self.outlier_sensitivity_levels_input
+ 
+    def get_outlier_sensitivity_levels_other(self):
+        return self.outlier_sensitivity_levels_other
+ 
+    def update(self, model):
+        sensitivity_levels_input = {
+            "low": 1,
+            "normal": 1.5,
+            "high": 2,
+        }
+        sensitivity_levels_other = {
+            "low": 1,
+            "normal": 1.5,
+            "high": 2,
+        }
+        self.outlier_sensitivity_levels_input = (
+            sensitivity_levels_input[model.settings["input_priority"]] / 100
+        )
+        self.outlier_sensitivity_levels_other = sensitivity_levels_other[
+            model.settings["other_priority"]
+        ]
+        self.limit_threshold = (
+            model.settings["limit_sensitivity"] / 100
+            if model.settings["limit_sensitivity"] > 0
+            else 0
+        )
+        self.plot_timeframe = model.settings["timeframe"]
+        self.timeframes = None
+        self.get_parts_production_datetimes()
 
     def set_serials(self, serials):
         self.serials = serials
@@ -51,10 +99,6 @@ class PartModel:
                 formated_serials, station)
             parametrized_part = self.client.execute_query(query)
 
-            # Calculating PASS/FAIL result
-            # parametrized_part['Result'] = np.where((parametrized_part['DCRD_VALUE_NUM']
-            #                                         >= parametrized_part['DCDDC_LSL']) & (parametrized_part['DCRD_VALUE_NUM']
-            #                                                                               <= parametrized_part['DCDDC_USL']), "PASS", "FAIL")
             return parametrized_part
         except Exception as e:
             print(
@@ -206,35 +250,118 @@ class PartModel:
                 if not timeframes:
                     # If it's the first part, start a new timeframe
                     start = datetime_obj - \
-                        timedelta(hours=self.timeframe_scatter_plot)
+                        timedelta(hours=self.plot_timeframe)
                     end = datetime_obj + \
-                        timedelta(hours=self.timeframe_scatter_plot)
+                        timedelta(hours=self.plot_timeframe)
                     timeframes.append((start, end))
                 else:
                     # If it's not the first part, check the difference with the last timeframe
                     _, last_end = timeframes[-1]
                     diff = datetime_obj - last_end
-                    if diff <= timedelta(hours=self.timeframe_scatter_plot * 2):
+                    if diff <= timedelta(hours=self.plot_timeframe * 2):
                         # If the difference is less than or equal to 16 hours, extend the last timeframe
                         timeframes[-1] = (
                             timeframes[-1][0],
                             datetime_obj +
-                            timedelta(hours=self.timeframe_scatter_plot * 2),
+                            timedelta(hours=self.plot_timeframe * 2),
                         )
                     else:
                         # If the difference is more than 16 hours, start a new timeframe
                         start = datetime_obj - \
-                            timedelta(hours=self.timeframe_scatter_plot)
+                            timedelta(hours=self.plot_timeframe)
                         end = datetime_obj + \
-                            timedelta(hours=self.timeframe_scatter_plot)
+                            timedelta(hours=self.plot_timeframe)
                         timeframes.append((start, end))
             tf = timeframes
-        # Convert the timeframes to strings
-        self.timeframes = [
-            (start.strftime("%Y-%m-%d %H:%M:%S"),
-             end.strftime("%Y-%m-%d %H:%M:%S"))
-            for start, end in tf
-        ]
+            # Convert the timeframes to strings
+            self.timeframes = [
+                (start.strftime("%Y-%m-%d %H:%M:%S"),
+                end.strftime("%Y-%m-%d %H:%M:%S"))
+                for start, end in tf
+            ]
 
         # Returning timeframes
         return self.timeframes
+    
+    def calculate_mahalanobis_distances(self, blue_points, red_outlier_points):
+        """Calculate Mahalanobis distances between blue points and red outlier points."""
+        cov_matrix = np.cov(blue_points, rowvar=False)
+        inv_cov_matrix = np.linalg.inv(cov_matrix)
+        distances = np.array([mahalanobis(blue_point, red_outlier, inv_cov_matrix)
+                            for blue_point in blue_points for red_outlier in red_outlier_points])
+        return distances.reshape(len(blue_points), len(red_outlier_points))
+    
+    def export_data_to_excel(self, writer, data, sheet_name, table_name):
+        if not data.empty:
+            data.to_excel(writer, sheet_name=sheet_name, index=False)
+            worksheet = writer.sheets[sheet_name]
+            table = Table(displayName=table_name, ref=worksheet.dimensions)
+            style = TableStyleInfo(name="TableStyleMedium9", showFirstColumn=False, 
+                                showLastColumn=False, showRowStripes=True, showColumnStripes=True)
+            table.tableStyleInfo = style
+            worksheet.add_table(table)
+            
+            # Autofit table columns
+            dimensions = worksheet.calculate_dimension()
+            for column in worksheet.columns:
+                column_letter = column[0].column_letter
+                max_length = max(len(str(cell.value)) for cell in column)
+                adjusted_width = (max_length + 2)
+                worksheet.column_dimensions[column_letter].width = adjusted_width
+                
+    def calculate_outliers(self, input_parts, other_parts):
+        """
+        Calculate outliers between input parts and other parts.
+
+        Args:
+            input_parts (pd.DataFrame): DataFrame containing input parts data.
+            other_parts (pd.DataFrame): DataFrame containing other parts data.
+
+        Returns:
+            pd.DataFrame: Combined DataFrame with outliers information.
+        """
+        parameters = input_parts["name"].unique()
+        all_data = []
+
+        for parameter in parameters:
+            # Filter parts for the current parameter
+            other_parts_param = other_parts[other_parts["name"] == parameter].copy()
+            input_parts_param = input_parts[input_parts["name"] == parameter].copy()
+
+            if other_parts_param.empty or input_parts_param.empty:
+                continue
+
+            # Set limits for the current parameter
+            parameter_limits = input_parts_param.iloc[0][["lower_limit", "upper_limit"]]
+            other_parts_param.loc[:, "lower_limit"] = parameter_limits["lower_limit"]
+            other_parts_param.loc[:, "upper_limit"] = parameter_limits["upper_limit"]
+
+            # Calculate mean and standard deviation of the other parts
+            blue_value_mean = other_parts_param['value'].mean()
+            blue_value_std = other_parts_param['value'].std()
+
+            # Identify outliers in the input parts
+            red_outliers = (input_parts_param['value'] < blue_value_mean - 2 * blue_value_std) | \
+                        (input_parts_param['value'] > blue_value_mean + 2 * blue_value_std)
+            red_outlier_points = input_parts_param[red_outliers][['created_at_numeric', 'value']].to_numpy()
+
+            # Identify outliers in the other parts
+            if red_outlier_points.size > 0:
+                blue_outliers = (other_parts_param['value'] < blue_value_mean - 2 * blue_value_std) | \
+                                (other_parts_param['value'] > blue_value_mean + 2 * blue_value_std)
+            else:
+                blue_outliers = np.zeros(len(other_parts_param), dtype=bool)
+
+            # Mark outliers and part types in the DataFrames
+            input_parts_param.loc[:, 'part_type'] = 'Input'
+            input_parts_param.loc[:, 'is_outlier'] = red_outliers
+            other_parts_param.loc[:, 'part_type'] = 'Other'
+            other_parts_param.loc[:, 'is_outlier'] = blue_outliers
+
+            # Combine input and other parts data
+            combined_data = pd.concat([input_parts_param, other_parts_param])
+            all_data.append(combined_data)
+
+        # Combine all data into a single DataFrame
+        combined_all_data = pd.concat(all_data)
+        return combined_all_data
