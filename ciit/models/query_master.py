@@ -1,7 +1,57 @@
 class QueryMaster:
-    def get_user_credentials_query(self):
-        return "SELECT * FROM users WHERE email = :email AND password = :password"
+    def get_user_by_email_query(self):
+        return """SELECT *
+                  FROM users
+                  WHERE email = :email;
+               """
 
+    def get_all_users_emails_query(self):
+        return "SELECT email FROM users"
+
+    def get_subordinate_users_query(self):
+        return """SELECT users.email, roles.name FROM users,
+                    roles,
+                    user_roles
+                    WHERE user_roles.user_id  = users.id
+                    AND user_roles.role_id = roles.id
+                    AND roles.id > :role_id            
+                """
+
+    def delete_user_by_id_query(self):
+        return """
+                  DELETE FROM user_roles
+                  WHERE user_id = :id;
+                  DELETE FROM users
+                  WHERE id = :id;
+                  """
+    
+    def get_user_role_query(self):
+        return """SELECT roles.id, roles.name 
+                  FROM user_roles,
+                       roles
+                  WHERE user_roles.user_id = :user_id
+                  AND user_roles.role_id = roles.id
+               """
+    
+    def modify_user_role_query(self):
+        return """UPDATE User_Roles
+                    SET Role_id = :role_id
+                    WHERE User_id = :user_id;
+                """
+    def set_user_password_query(self):
+        return """UPDATE users
+                SET password = :password
+                WHERE id = :id;
+                """
+    def create_new_user_query(self):
+        return """INSERT INTO users (email) VALUES (:email);
+                """
+    def get_role_id_query(self):
+        return """SELECT id FROM roles WHERE name = :role_name;"""
+    
+    def insert_ids_in_user_roles_query(self):
+        return """INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, :role_id);"""
+    
     def serial_exists_query(self):
         return """SELECT EXISTS (
                     SELECT 1

@@ -50,7 +50,6 @@ class AddSerialWindow(QWidget, Ui_add_serials_window):
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
  
         self.lw_serials.addItem(item)
-        print("SERIAL ADDED:", serial)
         self.switch_enabled_state(self.pb_clear, self.pb_continue, state_to_switch=True)
  
         # Clearing the line edit
