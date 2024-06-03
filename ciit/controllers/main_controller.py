@@ -17,6 +17,7 @@ from controllers.add_serials_controller import AddSerialsController
 from controllers.overview_controller import OverviewController
 from controllers.advanced_overview_controller import AdvancedOverviewController
 
+from views.info_window import InfoWindow
 from PySide6.QtWidgets import QApplication, QStackedWidget
 
 class Page(Enum):
@@ -26,6 +27,7 @@ class Page(Enum):
     ADVANCED_OVERVIEW = 3
     ADMIN = 4
     SETTINGS = 5
+    INFO = 6
 
 class MainController:
     def __init__(self):
@@ -67,6 +69,7 @@ class MainController:
         self.advanced_overview_controller = AdvancedOverviewController(
             self.app, self.part_model
         )
+        self.info_view = InfoWindow(self.app)
         
         self.stacked_widget.addWidget(self.login_controller.view)
         self.stacked_widget.addWidget(self.add_serials_controller.view)
@@ -74,7 +77,7 @@ class MainController:
         self.stacked_widget.addWidget(self.advanced_overview_controller.view)
         self.stacked_widget.addWidget(self.admin_controller.view)
         self.stacked_widget.addWidget(self.settings_controller.view)
-
+        self.stacked_widget.addWidget(self.info_view)
         # Mapping of pages
         self.page_mapping = {
             Page.LOGIN: self.login_controller.view,
@@ -82,7 +85,8 @@ class MainController:
             Page.OVERVIEW: self.overview_controller.view,
             Page.ADVANCED_OVERVIEW: self.advanced_overview_controller.view,
             Page.ADMIN: self.admin_controller.view,
-            Page.SETTINGS: self.settings_controller.view
+            Page.SETTINGS: self.settings_controller.view,
+            Page.INFO: self.info_view
         }
 
         # Initialize navigation history stack
@@ -93,19 +97,23 @@ class MainController:
             lambda: self.switch_page(Page.ADD_SERIALS))
         
         self.login_controller.view.go_to_admin_signal.connect(
-            lambda: self.switch_page(Page.ADMIN))
+            self.switch_to_admin)
         
         self.login_controller.view.go_to_manager_signal.connect(
             self.switch_to_manager)
         
         self.add_serials_controller.view.continue_signal.connect(
             self.switch_windows)
+        self.add_serials_controller.view.go_to_info_signal.connect(
+            lambda: self.switch_page(Page.INFO))
         self.overview_controller.view.go_to_advanced_overview_signal.connect(
             lambda: self.switch_page(Page.ADVANCED_OVERVIEW)
         )
         self.overview_controller.view.go_to_settings_signal.connect(
             lambda: self.switch_page(Page.SETTINGS)
         )
+        self.overview_controller.view.go_to_info_signal.connect(
+            lambda: self.switch_page(Page.INFO))
         self.advanced_overview_controller.view.go_to_overview_signal.connect(
             lambda: self.switch_page(Page.OVERVIEW)
         )
@@ -113,8 +121,10 @@ class MainController:
         self.advanced_overview_controller.view.go_to_settings_signal.connect(
             lambda: self.switch_page(Page.SETTINGS)
         )
+        self.advanced_overview_controller.view.go_to_info_signal.connect(
+            lambda: self.switch_page(Page.INFO))
         self.settings_controller.view.go_to_previous_signal.connect(lambda: self.go_back())
-
+        self.info_view.go_to_previous_signal.connect(lambda: self.go_back())
         # Show the login window first
         self.switch_page(Page.LOGIN)
         self.stacked_widget.show()
@@ -148,13 +158,16 @@ class MainController:
             self.stacked_widget.setCurrentWidget(self.page_mapping[previous_page])
 
     def switch_windows(self):
-        self.switch_page(Page.OVERVIEW)
         self.overview_controller.set_serials(
             self.add_serials_controller.get_serials())
         self.overview_controller.update_locations_filter()
         self.advanced_overview_controller.update_locations_filter()
         self.settings_model.notify()
+        self.switch_page(Page.OVERVIEW)
 
+    def switch_to_admin(self):
+        self.admin_controller.show_users()
+        self.switch_page(Page.ADMIN)
     def switch_to_manager(self):
         pass
     

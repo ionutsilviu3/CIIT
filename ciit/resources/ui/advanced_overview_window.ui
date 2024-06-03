@@ -30,8 +30,8 @@ QPushButton {
 	padding-right: 16px;
 	padding-top: 8 px;
 	padding-bottom: 8 px;
-	color: rgb(190, 190, 190);
-	background-color: rgb(55, 79, 91);
+	color: rgb(226, 220, 220);
+	background-color: rgb(56, 76, 83);
     }
 </string>
   </property>
@@ -53,6 +53,15 @@ QPushButton {
      </item>
      <item>
       <widget class="QPushButton" name="pb_info">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #384C53</string>
+       </property>
        <property name="text">
         <string>Info</string>
        </property>
@@ -60,6 +69,15 @@ QPushButton {
      </item>
      <item>
       <widget class="QPushButton" name="pb_settings">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(56, 76, 83);</string>
+       </property>
        <property name="text">
         <string>Settings</string>
        </property>
@@ -79,7 +97,7 @@ QPushButton {
      <property name="styleSheet">
       <string notr="true">QLabel#lb_title
 {
-color: rgb(190, 190, 190);
+color: rgb(226, 220, 220);
 }</string>
      </property>
      <property name="text">
@@ -101,7 +119,7 @@ color: rgb(190, 190, 190);
        <property name="styleSheet">
         <string notr="true">QLabel#lb_station
 {
-color: rgb(190, 190, 190);
+color: rgb(226, 220, 220);
 }</string>
        </property>
        <property name="text">
@@ -114,11 +132,16 @@ color: rgb(190, 190, 190);
        <property name="font">
         <font>
          <family>Roboto</family>
-         <pointsize>10</pointsize>
+         <pointsize>12</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(190, 190, 190);</string>
+        <string notr="true">QLabel {
+    color: rgb(226, 220, 220);
+    font: 12pt &quot;Roboto&quot;;
+}</string>
        </property>
        <property name="text">
         <string/>
@@ -159,7 +182,7 @@ color: rgb(190, 190, 190);
        <property name="styleSheet">
         <string notr="true">QWidget#sa_contents_buttons {
     background-color: rgb(34, 48, 56);
-    border: 2px solid rgb(80, 118, 70);
+    border: 2px solid rgb(64, 130, 100);
     border-radius: 18px; /* Set the border radius for rounded corners */
     padding: 5px; /* Add some padding to ensure the contents do not touch the borders */
     margin: 0; /* Remove any default margin */
@@ -171,7 +194,7 @@ QScrollArea {
 }
 
 QRadioButton {
-	font: 24pt Vitesco;
+	font: 24pt Roboto;
 	color: rgb(190, 190, 190);
     spacing: 12px;
 }
@@ -184,7 +207,7 @@ QRadioButton::indicator {
 }
 
 QRadioButton::indicator:checked {
-   background-color: rgb(80, 118, 70);;
+   background-color: rgb(64, 130, 100);
 }
 
 QScrollBar:vertical {
@@ -233,6 +256,11 @@ QScrollBar::sub-page:vertical {
           <width>200</width>
           <height>404</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget &gt; QRadioButton{
+padding-left: 12px;
+}</string>
         </property>
        </widget>
       </widget>
@@ -333,7 +361,7 @@ QScrollBar::sub-page:horizontal {
           <x>0</x>
           <y>0</y>
           <width>734</width>
-          <height>358</height>
+          <height>359</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -383,8 +411,8 @@ QScrollBar::sub-page:horizontal {
 	padding-right: 16px;
 	padding-top: 8 px;
 	padding-bottom: 8 px;
-	color: white;
-	background-color: rgb(215,0,75)
+	color: rgb(226, 220, 220);
+	background-color: rgb(64, 130, 100);
     }</string>
        </property>
        <property name="text">
@@ -404,12 +432,12 @@ QScrollBar::sub-page:horizontal {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton:Enabled{
-	background-color: rgb(53, 78, 40);
-	color: rgba(255,255,255, 200);
+	background-color: rgb(64, 130, 100);
+	color: rgb(226, 220, 220);
 }
 QPushButton:Disabled{
-	background-color: rgba(53, 78, 40, 100);
-	color: rgba(255,255,255, 100);
+	background-color: rgba(46, 93, 71,150);
+	color: rgba(226, 220, 220, 150);
 }</string>
        </property>
        <property name="text">

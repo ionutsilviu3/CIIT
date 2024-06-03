@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="Images">
+    <file>add_serials.png</file>
+    <file>advanced.png</file>
+    <file>background.jpg</file>
+    <file>overview.png</file>
+    <file>vertical_background.jpg</file>
+  </qresource>
+</RCC>

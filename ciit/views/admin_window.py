@@ -9,14 +9,14 @@ from resources.ui.admin_window_ui import Ui_admin_overview
 class AdminWindow(QWidget, Ui_admin_overview):
 
     validate_signal = QtCore.Signal()
-    delete_user_signal = QtCore.Signal(str)  # emit the email of the user to delete
+    # emit the email of the user to delete
+    delete_user_signal = QtCore.Signal(str)
     user_selected_signal = QtCore.Signal(str, str)  # emit email and role
-
     def __init__(self, app):
         super().__init__()
         self.setupUi(self)
         self.app = app
-        
+
         self.tw_users.setColumnCount(2)
         self.tw_users.setAlternatingRowColors(True)
         self.tw_users.setHorizontalHeaderLabels(['Email', 'Role'])
@@ -35,20 +35,18 @@ class AdminWindow(QWidget, Ui_admin_overview):
         # Initially disable the delete and modify buttons
         self.pb_delete.setEnabled(False)
         self.pb_modify_role.setEnabled(False)
-        
+
         # Set up the pie chart
         self.chart = QChart()
         self.chart.setTitle("User Roles Distribution")
-        self.chart.setTitleFont(QFont("Arial", 14, QFont.Bold))
-        self.chart.setTitleBrush(QColor("darkblue"))
-        self.chart.setBackgroundBrush(QColor("white"))
+        self.chart.setTitleFont(QFont("Roboto", 14, QFont.Bold))
+        self.chart.setTitleBrush(QColor(226, 220, 220))
+        self.chart.setBackgroundBrush(QColor(34, 48, 56))
 
         self.chart_view = QChartView(self.chart)
         self.chart_view.setRenderHint(QPainter.Antialiasing)
-        
+
         self.vl_chart.addWidget(self.chart_view)
-        
-        self.update_chart()
 
     def get_input(self):
         return self.le_users.text()
@@ -61,7 +59,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
             role_item = QTableWidgetItem(role)
             self.tw_users.setItem(row_idx, 0, email_item)
             self.tw_users.setItem(row_idx, 1, role_item)
-    
+
     def on_user_clicked(self, item):
         row = item.row()
         email_item = self.tw_users.item(row, 0)
@@ -70,7 +68,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
             email = email_item.text()
             role = role_item.text()
             self.user_selected_signal.emit(email, role)
-    
+
     def on_selection_changed(self):
         selected_items = self.tw_users.selectedItems()
         if not selected_items:
@@ -83,7 +81,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
         elif user_role == "Engineer":
             self.pb_modify_role.setText("Turn into manager")
         self.pb_modify_role.setEnabled(True)
-    
+
     def add_new_user(self, email):
         row_idx = self.tw_users.rowCount()
         self.tw_users.insertRow(row_idx)
@@ -116,7 +114,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
             if email_item:
                 email = email_item.text()
                 self.delete_user_signal.emit(email)
-    
+
     def on_modify_role_clicked(self):
         selected_row = self.tw_users.currentRow()
         if selected_row != -1:
@@ -128,7 +126,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
                 new_role = "Engineer" if current_role == "Manager" else "Manager"
                 self.modify_user_role(email, new_role)
                 # Directly call controller method if needed to update model
-    
+
     def disable_error_message_slot(self):
         self.handle_error_message(False)
 
@@ -162,9 +160,9 @@ class AdminWindow(QWidget, Ui_admin_overview):
 
         series = QPieSeries()
         custom_colors = {
-            "Manager": QColor("#4caf50"),  # Green
-            "Engineer": QColor("#2196f3"),  # Blue
-            "Unregistered": QColor("#f44336")  # Red
+            "Manager": QColor("#00AAB0"),
+            "Engineer": QColor("#00C598"),
+            "Unregistred": QColor("#DD733F")
         }
 
         total_count = sum(role_counts.values())
@@ -184,8 +182,8 @@ class AdminWindow(QWidget, Ui_admin_overview):
         self.chart.setTitle("User Roles Distribution")
         self.chart.legend().setVisible(True)
         self.chart.legend().setAlignment(Qt.AlignBottom)
-        self.chart.legend().setFont(QFont("Arial", 10))
-        self.chart.legend().setLabelBrush(QColor("darkblue"))
+        self.chart.legend().setFont(QFont("Roboto", 10))
+        self.chart.legend().setLabelBrush(QColor(226, 220, 220))
 
         # Remove percentages from the legend
         for marker in self.chart.legend().markers(series):
@@ -193,9 +191,6 @@ class AdminWindow(QWidget, Ui_admin_overview):
 
         # Add animations
         self.chart.setAnimationOptions(QChart.SeriesAnimations)
-
-        # Add shadow effect
-        self.chart.setDropShadowEnabled(True)
 
     def on_slice_hovered(self, hovered):
         slice = self.sender()

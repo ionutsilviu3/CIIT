@@ -15,19 +15,21 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
     go_to_overview_signal = Signal()
     go_to_settings_signal = Signal()
     export_data_signal = Signal()
+    go_to_info_signal = Signal()
     
     def __init__(self, app):
         super().__init__()
         self.setupUi(self)
         self.app = app
         self.vb_locations = QVBoxLayout()
-        self.vb_locations.setSpacing(14)
-        self.vb_plots.setSpacing(14)
+        self.vb_locations.setSpacing(16)
+        self.vb_plots.setSpacing(16)
         self.sa_contents_buttons.setLayout(self.vb_locations)
         self.sa_radio_buttons.setWidget(self.sa_contents_buttons)
         self.pb_overview.clicked.connect(self.go_to_overview_signal.emit)
         self.pb_settings.clicked.connect(self.go_to_settings_signal)
         self.pb_export.clicked.connect(self.export_data_signal)
+        self.pb_info.clicked.connect(self.go_to_info_signal)
         self.views = {}
         self.selected_location = None
         self.locations_radio_buttons = []

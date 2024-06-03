@@ -1,7 +1,4 @@
-from concurrent.futures import Future, ThreadPoolExecutor
-
-from nbconvert import export
-from models.part_model import PartModel
+from concurrent.futures import ThreadPoolExecutor
 from views.advanced_overview_window import AdvancedOverviewWindow
 import pandas as pd
 from PySide6.QtWidgets import QMessageBox
@@ -16,7 +13,14 @@ class AdvancedOverviewController:
         self.view.export_data_signal.connect(self.export_data)
         self.raw_data_cache = {}
         self.processed_data_cache = {}
+        self.invalidate_cache()
         
+    def invalidate_cache(self):
+        self.raw_data_cache.clear()
+        self.processed_data_cache.clear()
+        self.model.is_cache_invalid = False
+        logging.info("Cache invalidated.")
+    
     def set_serials(self, serials):
         self.model.set_serials(serials)
 
@@ -62,6 +66,8 @@ class AdvancedOverviewController:
             self.view.pb_export.setEnabled(True)
 
     def get_other_parts(self, selected_station):
+        if self.model.is_cache_invalid:
+            self.invalidate_cache()
         if selected_station in self.raw_data_cache:
             return self.raw_data_cache[selected_station]
 

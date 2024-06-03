@@ -15,8 +15,6 @@ class PartModel:
 
     def __init__(self, client, query_master, observer_model):
         self.serials = []
-        self.parts = None
-        self.parametrized_parts = {}
         self.locations = []
         self.timeframes = None
         self.client = client
@@ -28,6 +26,7 @@ class PartModel:
         self.outlier_sensitivity_levels_other = 1.5
         self.observer_model = observer_model
         self.observer_model.attach(self)
+        self.is_cache_invalid = False
  
     def get_limit_threshold(self):
         return self.limit_threshold
@@ -43,17 +42,17 @@ class PartModel:
  
     def update(self, model):
         sensitivity_levels_input = {
-            "low": 1,
-            "normal": 1.5,
-            "high": 2,
+            "low": 1.75,
+            "normal": 2,
+            "high": 2.25,
         }
         sensitivity_levels_other = {
-            "low": 1,
-            "normal": 1.5,
-            "high": 2,
+            "low": 1.75,
+            "normal": 2,
+            "high": 2.25,
         }
         self.outlier_sensitivity_levels_input = (
-            sensitivity_levels_input[model.settings["input_priority"]] / 100
+            sensitivity_levels_input[model.settings["input_priority"]]
         )
         self.outlier_sensitivity_levels_other = sensitivity_levels_other[
             model.settings["other_priority"]
@@ -66,6 +65,7 @@ class PartModel:
         self.plot_timeframe = model.settings["timeframe"]
         self.timeframes = None
         self.get_parts_production_datetimes()
+        self.is_cache_invalid = True
 
     def set_serials(self, serials):
         self.serials = serials
@@ -259,14 +259,14 @@ class PartModel:
                     _, last_end = timeframes[-1]
                     diff = datetime_obj - last_end
                     if diff <= timedelta(hours=self.plot_timeframe * 2):
-                        # If the difference is less than or equal to 16 hours, extend the last timeframe
+                        
                         timeframes[-1] = (
                             timeframes[-1][0],
                             datetime_obj +
                             timedelta(hours=self.plot_timeframe * 2),
                         )
                     else:
-                        # If the difference is more than 16 hours, start a new timeframe
+                        
                         start = datetime_obj - \
                             timedelta(hours=self.plot_timeframe)
                         end = datetime_obj + \
@@ -341,14 +341,14 @@ class PartModel:
             blue_value_std = other_parts_param['value'].std()
 
             # Identify outliers in the input parts
-            red_outliers = (input_parts_param['value'] < blue_value_mean - 2 * blue_value_std) | \
-                        (input_parts_param['value'] > blue_value_mean + 2 * blue_value_std)
+            red_outliers = (input_parts_param['value'] < blue_value_mean - self.outlier_sensitivity_levels_input * blue_value_std) | \
+                        (input_parts_param['value'] > blue_value_mean + self.outlier_sensitivity_levels_input * blue_value_std)
             red_outlier_points = input_parts_param[red_outliers][['created_at_numeric', 'value']].to_numpy()
 
             # Identify outliers in the other parts
             if red_outlier_points.size > 0:
-                blue_outliers = (other_parts_param['value'] < blue_value_mean - 2 * blue_value_std) | \
-                                (other_parts_param['value'] > blue_value_mean + 2 * blue_value_std)
+                blue_outliers = (other_parts_param['value'] < blue_value_mean - self.outlier_sensitivity_levels_other * blue_value_std) | \
+                                (other_parts_param['value'] > blue_value_mean + self.outlier_sensitivity_levels_other * blue_value_std)
             else:
                 blue_outliers = np.zeros(len(other_parts_param), dtype=bool)
 

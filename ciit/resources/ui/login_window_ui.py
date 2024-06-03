@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'login_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.0
+## Created by: Qt User Interface Compiler version 6.7.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -18,7 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QSizePolicy,
     QVBoxLayout, QWidget)
-import resources.ui.icons_rc
+import resources.icons.icons_rc
 
 class Ui_Parent(object):
     def setupUi(self, Parent):
@@ -43,7 +43,7 @@ class Ui_Parent(object):
         font1.setFamilies([u"Roboto"])
         font1.setPointSize(8)
         self.lb_background.setFont(font1)
-        self.lb_background.setStyleSheet(u"border-image: url(:/Main/icons/vertical_background.jpg);")
+        self.lb_background.setStyleSheet(u"border-image: url(:/Images/vertical_background.jpg);")
 
         self.horizontalLayout.addWidget(self.lb_background)
 
@@ -88,7 +88,7 @@ class Ui_Parent(object):
 "	color: rgb(226, 220, 220);\n"
 "	border-style: solid;\n"
 "    border-width: 1.5px;\n"
-"	border-color:  rgb(80, 118, 70);\n"
+"	border-color: rgb(64, 130, 100);\n"
 "}\n"
 "")
         self.formLayout = QFormLayout(self.widget)
@@ -225,17 +225,22 @@ class Ui_Parent(object):
         self.pb_log_in.setToolTipDuration(-1)
         self.pb_log_in.setStyleSheet(u"QPushButton\n"
 "{\n"
-"background-color: rgb(80, 118, 70);\n"
+"background-color: rgb(64, 130, 100);\n"
 "color: rgb(226, 220, 220);\n"
-"padding-left: 32px;\n"
-"padding-right: 32px;\n"
+"padding-left: 24px;\n"
+"padding-right: 24px;\n"
 "padding-top: 16px;\n"
 "padding-bottom: 16px;\n"
 "}\n"
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"	background-color: rgb(53, 78, 40);\n"
+"	background-color: rgb(50, 102, 78);\n"
+"}\n"
+"\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: rgb(42, 85, 65);\n"
 "}")
 
         self.verticalLayout_3.addWidget(self.pb_log_in, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
@@ -269,7 +274,15 @@ class Ui_Parent(object):
         self.le_user.setPlaceholderText(QCoreApplication.translate("Parent", u"ex. user@company.com", None))
         self.lb_password.setText("")
 #if QT_CONFIG(tooltip)
-        self.le_password.setToolTip(QCoreApplication.translate("Parent", u"This is your usual work password.", None))
+        self.le_password.setToolTip(QCoreApplication.translate("Parent", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">If you </span><span style=\" font-size:10pt; font-weight:700;\">don't</span><span style=\" font-size:10pt;\"> have a </span><span style=\" font-size:10pt; font-weight:700;\">FaultID account</span><span style=\" font-size:10pt;\">, please </span><span style=\" font-size:10pt; font-weight:700;\">contact your manager</span><span style=\" font-size:10pt;\">.</span></p></"
+                        "body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.le_password.setPlaceholderText(QCoreApplication.translate("Parent", u"Your secret password", None))
 #if QT_CONFIG(accessibility)

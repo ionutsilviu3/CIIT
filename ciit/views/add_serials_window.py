@@ -12,6 +12,7 @@ class AddSerialWindow(QWidget, Ui_add_serials_window):
     clear_list_signal = QtCore.Signal()
     continue_signal = QtCore.Signal()
     import_signal = QtCore.Signal()
+    go_to_info_signal = QtCore.Signal()
     #
     # Initializing the window for adding serials into the app
     def __init__(self, app):
@@ -37,6 +38,8 @@ class AddSerialWindow(QWidget, Ui_add_serials_window):
         self.pb_continue.clicked.connect(self.continue_signal)
         
         self.pb_import.clicked.connect(self.import_signal)
+        
+        self.pb_info.clicked.connect(self.go_to_info_signal)
 
     def get_input_from_user(self):
         return self.le_serials.text()

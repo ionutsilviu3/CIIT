@@ -119,6 +119,9 @@ padding-bottom: 8 px;
      </item>
      <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
       <widget class="QPushButton" name="pb_modify_role">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="font">
         <font>
          <family>Roboto</family>
@@ -126,8 +129,15 @@ padding-bottom: 8 px;
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(161, 172, 177);
-color: rgb(255, 0, 0);</string>
+        <string notr="true">QPushButton{
+background-color: rgb(158, 174, 174);
+color: rgb(138, 29, 0);
+}
+
+QPushButton:disabled{
+background-color: rgba(158, 174, 174, 0);
+color: rgba(138, 29, 0, 0);
+}</string>
        </property>
        <property name="text">
         <string>Remove manager role</string>
@@ -159,18 +169,18 @@ color: rgb(255, 0, 0);</string>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-color: white;
-	background-color: rgb(215,0,75)
+	color: rgb(226, 220, 220);
+	background-color: rgb(138, 29, 0)
     }
 QPushButton:disabled {
-	background-color: rgba(170, 35, 0, 150);
+	background-color: rgba(109, 22, 0, 200);
     }
     QPushButton:hover {
-	background-color: rgb(193, 35, 0);
+	background-color: rgb(120, 24, 0);
     }
 
     QPushButton:pressed {
-	background-color: rgb(129, 24, 0);
+	background-color: rgb(94, 19, 0);
     }</string>
        </property>
        <property name="text">
@@ -180,8 +190,20 @@ QPushButton:disabled {
      </item>
      <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
       <widget class="QLabel" name="lb_message">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel
+{
+	color: rgb(226, 220, 220);
+}</string>
+       </property>
        <property name="text">
-        <string>User added!</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -218,10 +240,13 @@ QPushButton:disabled {
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: black;
-background-color: #A1ACB1;
+        <string notr="true">QLineEdit
+{
+color: rgb(26, 39, 39);
+background-color: rgb(158, 174, 174);
 border-radius: 12px;
-padding: 8px 32px;
+padding: 8px 32px
+}
 </string>
        </property>
        <property name="inputMask">
@@ -245,6 +270,9 @@ padding: 8px 32px;
        </property>
        <item alignment="Qt::AlignmentFlag::AlignHCenter">
         <widget class="QPushButton" name="pb_add">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>2</horstretch>
@@ -261,11 +289,12 @@ padding: 8px 32px;
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-	
-	background-color: rgb(37, 132, 46);
+	background-color: rgb(64, 130, 100);
+	color: rgb(226, 220, 220)
     }
 QPushButton:disabled {
-	background-color: rgba(170, 35, 0, 150);
+	background-color: rgba(46, 94, 72, 200);
+	color: rgba(226, 220, 220, 100);
     }
     QPushButton:hover {
 	
@@ -286,15 +315,34 @@ QPushButton:disabled {
      </item>
     </layout>
    </item>
-   <item row="1" column="3" alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignBottom">
-    <widget class="QPushButton" name="pb_main_app">
-     <property name="text">
-      <string>Go to main app</string>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="2">
-    <layout class="QVBoxLayout" name="vl_chart"/>
+    <layout class="QVBoxLayout" name="vl_chart">
+     <item alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignBottom">
+      <widget class="QPushButton" name="pb_main_app">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border-radius: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(226, 220, 220);
+	background-color: rgb(64, 130, 100);
+    }</string>
+       </property>
+       <property name="text">
+        <string>Go to main app</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

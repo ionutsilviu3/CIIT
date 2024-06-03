@@ -45,32 +45,33 @@ class Ui_settings_window(object):
 "}\n"
 "\n"
 "QRadioButton {\n"
-"	font: 12pt Vitesco;\n"
-"	color: rgb(190, 190, 190);\n"
+"	font: 12pt Roboto;\n"
+"	color: rgb(158, 174, 174);\n"
 "    spacing: 10px;\n"
 "}\n"
 "\n"
 "QRadioButton::indicator {\n"
 "    width: 16px;\n"
 "    height: 16px;\n"
-"	background-color: rgb(190, 190, 190);\n"
+"	background-color: rgb(158, 174, 174);\n"
 "	border-radius: 8px;\n"
 "}\n"
 "\n"
 "QRadioButton#rb_low_input::indicator:checked,\n"
 " QRadioButton#rb_low_other::indicator:checked{\n"
 "   \n"
-"	background-color: rgb(0, 170, 0);\n"
+"	background-color: rgb(64, 130, 100);\n"
 "}\n"
 "\n"
 "QRadioButton#rb_normal_input::indicator:checked,\n"
 " QRadioButton#rb_normal_other::indicator:checked {\n"
-"   background-color: #F0E614;\n"
+"   \n"
+"	background-color: rgb(249, 248, 113);\n"
 "}\n"
 "\n"
 "QRadioButton#rb_high_input::indicator:checked,\n"
 " QRadioButton#rb_high_other::indicator:checked {\n"
-"   background-color: rgb(255, 0, 0);\n"
+"   background-color: rgb(138, 29, 0);\n"
 "}\n"
 "")
         self.gridLayout = QGridLayout(settings_window)
@@ -88,7 +89,7 @@ class Ui_settings_window(object):
         font1.setPointSize(16)
         font1.setBold(True)
         self.lb_overview_title.setFont(font1)
-        self.lb_overview_title.setStyleSheet(u"color: rgb(190, 190, 190);")
+        self.lb_overview_title.setStyleSheet(u"color: rgb(226, 220, 220);")
 
         self.vl_contents.addWidget(self.lb_overview_title, 0, Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
 
@@ -102,7 +103,7 @@ class Ui_settings_window(object):
         font2.setFamilies([u"Roboto"])
         font2.setPointSize(12)
         self.lb_limit_sensitivity.setFont(font2)
-        self.lb_limit_sensitivity.setStyleSheet(u"color: rgb(190, 190, 190);")
+        self.lb_limit_sensitivity.setStyleSheet(u"color:rgb(226, 220, 220);")
 
         self.fl_overview.setWidget(0, QFormLayout.LabelRole, self.lb_limit_sensitivity)
 
@@ -113,7 +114,7 @@ class Ui_settings_window(object):
         font3.setPointSize(12)
         font3.setBold(False)
         self.sb_limit_sensitivity.setFont(font3)
-        self.sb_limit_sensitivity.setStyleSheet(u"color: rgb(190, 190, 190);")
+        self.sb_limit_sensitivity.setStyleSheet(u"color: rgb(226, 220, 220);")
         self.sb_limit_sensitivity.setWrapping(False)
         self.sb_limit_sensitivity.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
         self.sb_limit_sensitivity.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.UpDownArrows)
@@ -133,7 +134,7 @@ class Ui_settings_window(object):
         self.lb_advanced_overview_title = QLabel(settings_window)
         self.lb_advanced_overview_title.setObjectName(u"lb_advanced_overview_title")
         self.lb_advanced_overview_title.setFont(font1)
-        self.lb_advanced_overview_title.setStyleSheet(u"color: rgb(190, 190, 190);")
+        self.lb_advanced_overview_title.setStyleSheet(u"color: rgb(226, 220, 220);")
 
         self.vl_contents.addWidget(self.lb_advanced_overview_title)
 
@@ -144,14 +145,14 @@ class Ui_settings_window(object):
         self.lb_timeframe = QLabel(settings_window)
         self.lb_timeframe.setObjectName(u"lb_timeframe")
         self.lb_timeframe.setFont(font2)
-        self.lb_timeframe.setStyleSheet(u"color: rgb(190, 190, 190);")
+        self.lb_timeframe.setStyleSheet(u"color: rgb(226, 220, 220);")
 
         self.fl_advanced.setWidget(0, QFormLayout.LabelRole, self.lb_timeframe)
 
         self.sb_timeframe = QSpinBox(settings_window)
         self.sb_timeframe.setObjectName(u"sb_timeframe")
         self.sb_timeframe.setFont(font2)
-        self.sb_timeframe.setStyleSheet(u"color: rgb(190, 190, 190);")
+        self.sb_timeframe.setStyleSheet(u"color: rgb(226, 220, 220);")
         self.sb_timeframe.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.UpDownArrows)
         self.sb_timeframe.setMinimum(1)
         self.sb_timeframe.setMaximum(8)
@@ -161,14 +162,14 @@ class Ui_settings_window(object):
         self.lb_input_sensitivity = QLabel(settings_window)
         self.lb_input_sensitivity.setObjectName(u"lb_input_sensitivity")
         self.lb_input_sensitivity.setFont(font2)
-        self.lb_input_sensitivity.setStyleSheet(u"color: rgb(190, 190, 190);")
+        self.lb_input_sensitivity.setStyleSheet(u"color: rgb(226, 220, 220);")
 
         self.fl_advanced.setWidget(1, QFormLayout.LabelRole, self.lb_input_sensitivity)
 
         self.lb_other_sensitivity = QLabel(settings_window)
         self.lb_other_sensitivity.setObjectName(u"lb_other_sensitivity")
         self.lb_other_sensitivity.setFont(font2)
-        self.lb_other_sensitivity.setStyleSheet(u"color: rgb(190, 190, 190);")
+        self.lb_other_sensitivity.setStyleSheet(u"color: rgb(226, 220, 220);")
 
         self.fl_advanced.setWidget(3, QFormLayout.LabelRole, self.lb_other_sensitivity)
 
@@ -178,7 +179,7 @@ class Ui_settings_window(object):
 "    border-radius: 16px;	\n"
 "	border-style: solid;\n"
 "    border-width: 2px;\n"
-"	border-color:  rgb(80, 118, 70);\n"
+"	border-color:  rgb(64, 130, 100);\n"
 "}")
         self.horizontalLayout_6 = QHBoxLayout(self.gb_input_sensitivity)
         self.horizontalLayout_6.setSpacing(16)
@@ -187,7 +188,7 @@ class Ui_settings_window(object):
         self.rb_low_input = QRadioButton(self.gb_input_sensitivity)
         self.rb_low_input.setObjectName(u"rb_low_input")
         font4 = QFont()
-        font4.setFamilies([u"Vitesco"])
+        font4.setFamilies([u"Roboto"])
         font4.setPointSize(12)
         font4.setBold(False)
         font4.setItalic(False)
@@ -215,7 +216,7 @@ class Ui_settings_window(object):
 "    border-radius: 16px;	\n"
 "	border-style: solid;\n"
 "    border-width: 2px;\n"
-"	border-color:  rgb(80, 118, 70);\n"
+"	border-color:  rgb(64, 130, 100);\n"
 "}")
         self.horizontalLayout_7 = QHBoxLayout(self.gb_other_sensitivity)
         self.horizontalLayout_7.setSpacing(16)
@@ -257,7 +258,7 @@ class Ui_settings_window(object):
         self.lb_title.setFont(font5)
         self.lb_title.setStyleSheet(u"QLabel\n"
 "{\n"
-"	color: rgb(190, 190, 190);\n"
+"	color: rgb(226, 220, 220);\n"
 "}")
         self.lb_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -279,21 +280,20 @@ class Ui_settings_window(object):
         self.pb_save.setMaximumSize(QSize(128, 16777215))
         self.pb_save.setFont(font2)
         self.pb_save.setStyleSheet(u"QPushButton {\n"
-"	background-color: rgb(19, 165, 87);\n"
-"	color: rgb(39, 39, 39);\n"
+"	background-color: rgb(64, 130, 100);\n"
+"	color: rgb(226, 220, 220);\n"
 "    }\n"
 "    QPushButton:hover {\n"
-"	\n"
-"	background-color: rgb(21, 181, 93);\n"
+"	background-color: rgb(51, 104, 79);\n"
 "    }\n"
 "\n"
 "    QPushButton:pressed {\n"
 "	\n"
-"	background-color: rgb(40, 149, 77);\n"
+"	background-color: rgb(36, 72, 55);\n"
 "    }\n"
 "QPushButton:disabled{\n"
 "	\n"
-"	background-color: rgba(20, 120, 65, 100);\n"
+"	background-color: rgba(64, 130, 100, 150);\n"
 "    }")
 
         self.gridLayout.addWidget(self.pb_save, 12, 1, 1, 1, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)

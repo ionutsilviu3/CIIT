@@ -36,8 +36,8 @@ class Ui_OverviewWidget(object):
 "	padding-right: 16px;\n"
 "	padding-top: 8 px;\n"
 "	padding-bottom: 8 px;\n"
-"	color: rgb(190, 190, 190);\n"
-"	background-color: rgb(55, 79, 91);\n"
+"	color:rgb(226, 220, 220);\n"
+"	background-color:#384C53;\n"
 "    }")
         self.verticalLayout = QVBoxLayout(OverviewWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -49,11 +49,16 @@ class Ui_OverviewWidget(object):
 
         self.pb_info = QPushButton(OverviewWidget)
         self.pb_info.setObjectName(u"pb_info")
+        font = QFont()
+        font.setFamilies([u"Roboto"])
+        font.setPointSize(10)
+        self.pb_info.setFont(font)
 
         self.horizontalLayout.addWidget(self.pb_info)
 
         self.pb_settings = QPushButton(OverviewWidget)
         self.pb_settings.setObjectName(u"pb_settings")
+        self.pb_settings.setFont(font)
 
         self.horizontalLayout.addWidget(self.pb_settings)
 
@@ -62,28 +67,28 @@ class Ui_OverviewWidget(object):
 
         self.lb_title = QLabel(OverviewWidget)
         self.lb_title.setObjectName(u"lb_title")
-        font = QFont()
-        font.setFamilies([u"Vitesco"])
-        font.setPointSize(24)
-        font.setBold(True)
-        self.lb_title.setFont(font)
+        font1 = QFont()
+        font1.setFamilies([u"Vitesco"])
+        font1.setPointSize(24)
+        font1.setBold(True)
+        self.lb_title.setFont(font1)
         self.lb_title.setStyleSheet(u"QLabel#lb_title\n"
 "{\n"
-"color: rgb(190, 190, 190);\n"
+"color: rgb(226, 220, 220);\n"
 "}")
 
         self.verticalLayout.addWidget(self.lb_title, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
 
         self.lb_station = QLabel(OverviewWidget)
         self.lb_station.setObjectName(u"lb_station")
-        font1 = QFont()
-        font1.setFamilies([u"Vitesco"])
-        font1.setPointSize(18)
-        font1.setBold(True)
-        self.lb_station.setFont(font1)
+        font2 = QFont()
+        font2.setFamilies([u"Vitesco"])
+        font2.setPointSize(18)
+        font2.setBold(True)
+        self.lb_station.setFont(font2)
         self.lb_station.setStyleSheet(u"QLabel#lb_station\n"
 "{\n"
-"color: rgb(190, 190, 190);\n"
+"color: rgb(226, 220, 220);\n"
 "}")
 
         self.verticalLayout.addWidget(self.lb_station, 0, Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignBottom)
@@ -101,14 +106,14 @@ class Ui_OverviewWidget(object):
         self.sa_radio_buttons.setMaximumSize(QSize(200, 16777215))
         self.sa_radio_buttons.setStyleSheet(u"QWidget#sa_contents_buttons {\n"
 "    background-color: rgb(34, 48, 56);\n"
-"    border: 2px solid rgb(80, 118, 70);\n"
+"    border: 2px solid rgb(64, 130, 100);\n"
 "    border-radius: 18px; /* Set the border radius for rounded corners */\n"
 "    padding: 5px; /* Add some padding to ensure the contents do not touch the borders */\n"
 "    margin: 0; /* Remove any default margin */\n"
 "}\n"
 "\n"
 "QRadioButton {\n"
-"	font: 24pt Vitesco;\n"
+"	font: 24pt Roboto;\n"
 "	color: rgb(190, 190, 190);\n"
 "    spacing: 12px;\n"
 "}\n"
@@ -121,7 +126,7 @@ class Ui_OverviewWidget(object):
 "}\n"
 "\n"
 "QRadioButton::indicator:checked {\n"
-"   background-color: rgb(80, 118, 70);;\n"
+"   background-color: rgb(64, 130, 100);\n"
 "}\n"
 "\n"
 "QScrollArea {\n"
@@ -183,43 +188,56 @@ class Ui_OverviewWidget(object):
         sizePolicy1.setHeightForWidth(self.tw_params.sizePolicy().hasHeightForWidth())
         self.tw_params.setSizePolicy(sizePolicy1)
         self.tw_params.setMinimumSize(QSize(0, 408))
-        font2 = QFont()
-        font2.setFamilies([u"Vitesco"])
-        font2.setPointSize(12)
-        font2.setBold(False)
-        font2.setItalic(False)
-        self.tw_params.setFont(font2)
+        font3 = QFont()
+        font3.setFamilies([u"Roboto"])
+        font3.setPointSize(12)
+        font3.setBold(False)
+        font3.setItalic(False)
+        self.tw_params.setFont(font3)
         self.tw_params.setStyleSheet(u"QTableWidget {\n"
-"    gridline-color: #606060;\n"
-"    background-color: #404040;\n"
 "    background-color: rgb(34, 48, 56);\n"
 "    border: none;\n"
-"	font: 12pt \"Vitesco\";\n"
+"    font: 12pt \"Roboto\";\n"
 "}\n"
 "\n"
 "QTableWidget::item {\n"
-"    padding: 5px;\n"
-"	color: white;\n"
-"}\n"
-"\n"
-"QTableWidget::item:selected {\n"
-"    background-color: #808080;\n"
+"    padding: 12px;\n"
 "}\n"
 "\n"
 "QHeaderView::section {\n"
-"    background-color: #303030;\n"
-"    color: #E0E0E0;\n"
+"    background-color: #384C53;\n"
+"    color: rgb(226, 220, 220);\n"
 "    padding: 5px;\n"
-"    border: 1px solid #606060;\n"
-"	font: 12pt \"Vitesco\";\n"
+"    border: none;\n"
+"    font: 12pt \"Roboto\";\n"
+"}\n"
+"\n"
+"/* Add borders only between vertical header items */\n"
+"QHeaderView::section:horizontal {\n"
+"    border-right: 1px solid rgb(34, 48, 56);\n"
+"}\n"
+"\n"
+"QHeaderView::section:vertical {\n"
+"	border-bottom: 1px solid rgb(34, 48, 56);\n"
 "}\n"
 "\n"
 "QTableCornerButton::section {\n"
-"    background-color: #303030;\n"
+"    background-color: #384C53;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QTableCornerButton::section {\n"
+"    background-color: #384C53;\n"
+"}\n"
+"\n"
+"QTableCornerButton::section {\n"
+"    border-right: 1px solid rgb(34, 48, 56) !important;\n"
+"    border-bottom: 1px solid rgb(34, 48, 56) !important;\n"
 "}\n"
 "\n"
 "QScrollBar:vertical {\n"
-"    background-color: rgba(0, 0, 0, 0);\n"
+"    background-color: rgba(0, 0, 0"
+                        ", 0);\n"
 "    width: 20px;\n"
 "    margin: 10px 10px 10px 0px;  /* top right bottom left */\n"
 "    border-radius: 15px;\n"
@@ -232,8 +250,7 @@ class Ui_OverviewWidget(object):
 "\n"
 "QScrollBar::handle:vertical, QScrollBar::handle:horizontal {\n"
 "    background-color: rgb(44, 62, 72);\n"
-"    "
-                        "border-radius: 5px;\n"
+"    border-radius: 5px;\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:hover, QScrollBar::handle:horizontal:hover {\n"
@@ -254,7 +271,8 @@ class Ui_OverviewWidget(object):
 "QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {\n"
 "    background-color: rgba(0, 0, 0, 0);\n"
 "    width: 10px;\n"
-"    subcontrol-position: left;\n"
+"    subcontrol-positio"
+                        "n: left;\n"
 "    subcontrol-origin: margin;\n"
 "}\n"
 "\n"
@@ -263,6 +281,12 @@ class Ui_OverviewWidget(object):
 "    background-color: rgba(0, 0, 0, 0);\n"
 "}")
         self.tw_params.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tw_params.setAlternatingRowColors(False)
+        self.tw_params.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.tw_params.setShowGrid(True)
+        self.tw_params.setGridStyle(Qt.PenStyle.SolidLine)
+        self.tw_params.setCornerButtonEnabled(True)
+        self.tw_params.horizontalHeader().setProperty("showSortIndicator", False)
 
         self.horizontalLayout_2.addWidget(self.tw_params)
 
@@ -271,23 +295,23 @@ class Ui_OverviewWidget(object):
 
         self.pb_advanced_overview = QPushButton(OverviewWidget)
         self.pb_advanced_overview.setObjectName(u"pb_advanced_overview")
-        font3 = QFont()
-        font3.setFamilies([u"Roboto"])
-        font3.setPointSize(10)
-        font3.setBold(True)
-        font3.setItalic(False)
-        font3.setUnderline(False)
-        font3.setStrikeOut(False)
-        font3.setKerning(True)
-        self.pb_advanced_overview.setFont(font3)
+        font4 = QFont()
+        font4.setFamilies([u"Roboto"])
+        font4.setPointSize(10)
+        font4.setBold(True)
+        font4.setItalic(False)
+        font4.setUnderline(False)
+        font4.setStrikeOut(False)
+        font4.setKerning(True)
+        self.pb_advanced_overview.setFont(font4)
         self.pb_advanced_overview.setStyleSheet(u"QPushButton {\n"
 "	border-radius: 12px;\n"
 "	padding-left: 16px;\n"
 "	padding-right: 16px;\n"
 "	padding-top: 8 px;\n"
 "	padding-bottom: 8 px;\n"
-"	color: white;\n"
-"	background-color: rgb(215,0,75)\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(64, 130, 100);\n"
 "    }")
 
         self.verticalLayout.addWidget(self.pb_advanced_overview, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignBottom)

@@ -11,7 +11,7 @@ class OverviewWindow(QWidget, Ui_OverviewWidget):
     radio_button_clicked_signal = QtCore.Signal()
     go_to_advanced_overview_signal = QtCore.Signal()
     go_to_settings_signal = QtCore.Signal()
-    
+    go_to_info_signal = QtCore.Signal()
     def __init__(self, app):
         super().__init__()
         self.setupUi(self)
@@ -23,6 +23,7 @@ class OverviewWindow(QWidget, Ui_OverviewWidget):
         self.tw_params.setCornerButtonEnabled(False)
         self.pb_advanced_overview.clicked.connect(self.go_to_advanced_overview_signal)
         self.pb_settings.clicked.connect(self.go_to_settings_signal)
+        self.pb_info.clicked.connect(self.go_to_info_signal)
 
     def get_selected_location(self):
         radio_button = self.sender()
@@ -92,8 +93,11 @@ class OverviewWindow(QWidget, Ui_OverviewWidget):
                     if lower_limit is not None and upper_limit is not None:
                         # Check if the value is close to the limit
                         if self.is_close_to_limit(value, lower_limit, upper_limit, limit_sensitivity):
-                            item.setBackground(QColor(100, 100, 0))  # Highlight in yellow
+                            item.setBackground(QColor(249, 248, 113))  # Highlight in yellow
                             item.setForeground(QColor(0, 0, 0))
+                        else:
+                            item.setBackground(QColor(34, 48, 56))
+                            item.setForeground(QColor(226, 220, 220))
                 else:
                     item.setText(str(value))
 

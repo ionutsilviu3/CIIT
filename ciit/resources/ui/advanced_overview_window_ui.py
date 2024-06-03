@@ -35,8 +35,8 @@ class Ui_AdvancedOverviewWidget(object):
 "	padding-right: 16px;\n"
 "	padding-top: 8 px;\n"
 "	padding-bottom: 8 px;\n"
-"	color: rgb(190, 190, 190);\n"
-"	background-color: rgb(55, 79, 91);\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(56, 76, 83);\n"
 "    }\n"
 "")
         self.verticalLayout = QVBoxLayout(AdvancedOverviewWidget)
@@ -49,11 +49,18 @@ class Ui_AdvancedOverviewWidget(object):
 
         self.pb_info = QPushButton(AdvancedOverviewWidget)
         self.pb_info.setObjectName(u"pb_info")
+        font = QFont()
+        font.setFamilies([u"Roboto"])
+        font.setPointSize(10)
+        self.pb_info.setFont(font)
+        self.pb_info.setStyleSheet(u"background-color: #384C53")
 
         self.horizontalLayout.addWidget(self.pb_info)
 
         self.pb_settings = QPushButton(AdvancedOverviewWidget)
         self.pb_settings.setObjectName(u"pb_settings")
+        self.pb_settings.setFont(font)
+        self.pb_settings.setStyleSheet(u"background-color: rgb(56, 76, 83);")
 
         self.horizontalLayout.addWidget(self.pb_settings)
 
@@ -62,14 +69,14 @@ class Ui_AdvancedOverviewWidget(object):
 
         self.lb_title = QLabel(AdvancedOverviewWidget)
         self.lb_title.setObjectName(u"lb_title")
-        font = QFont()
-        font.setFamilies([u"Vitesco"])
-        font.setPointSize(24)
-        font.setBold(True)
-        self.lb_title.setFont(font)
+        font1 = QFont()
+        font1.setFamilies([u"Vitesco"])
+        font1.setPointSize(24)
+        font1.setBold(True)
+        self.lb_title.setFont(font1)
         self.lb_title.setStyleSheet(u"QLabel#lb_title\n"
 "{\n"
-"color: rgb(190, 190, 190);\n"
+"color: rgb(226, 220, 220);\n"
 "}")
 
         self.verticalLayout.addWidget(self.lb_title, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
@@ -78,25 +85,30 @@ class Ui_AdvancedOverviewWidget(object):
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.lb_station = QLabel(AdvancedOverviewWidget)
         self.lb_station.setObjectName(u"lb_station")
-        font1 = QFont()
-        font1.setFamilies([u"Vitesco"])
-        font1.setPointSize(18)
-        font1.setBold(True)
-        self.lb_station.setFont(font1)
+        font2 = QFont()
+        font2.setFamilies([u"Vitesco"])
+        font2.setPointSize(18)
+        font2.setBold(True)
+        self.lb_station.setFont(font2)
         self.lb_station.setStyleSheet(u"QLabel#lb_station\n"
 "{\n"
-"color: rgb(190, 190, 190);\n"
+"color: rgb(226, 220, 220);\n"
 "}")
 
         self.horizontalLayout_4.addWidget(self.lb_station)
 
         self.lb_message = QLabel(AdvancedOverviewWidget)
         self.lb_message.setObjectName(u"lb_message")
-        font2 = QFont()
-        font2.setFamilies([u"Roboto"])
-        font2.setPointSize(10)
-        self.lb_message.setFont(font2)
-        self.lb_message.setStyleSheet(u"color: rgb(190, 190, 190);")
+        font3 = QFont()
+        font3.setFamilies([u"Roboto"])
+        font3.setPointSize(12)
+        font3.setBold(False)
+        font3.setItalic(False)
+        self.lb_message.setFont(font3)
+        self.lb_message.setStyleSheet(u"QLabel {\n"
+"    color: rgb(226, 220, 220);\n"
+"    font: 12pt \"Roboto\";\n"
+"}")
 
         self.horizontalLayout_4.addWidget(self.lb_message)
 
@@ -121,7 +133,7 @@ class Ui_AdvancedOverviewWidget(object):
         self.sa_radio_buttons.setMaximumSize(QSize(200, 16777215))
         self.sa_radio_buttons.setStyleSheet(u"QWidget#sa_contents_buttons {\n"
 "    background-color: rgb(34, 48, 56);\n"
-"    border: 2px solid rgb(80, 118, 70);\n"
+"    border: 2px solid rgb(64, 130, 100);\n"
 "    border-radius: 18px; /* Set the border radius for rounded corners */\n"
 "    padding: 5px; /* Add some padding to ensure the contents do not touch the borders */\n"
 "    margin: 0; /* Remove any default margin */\n"
@@ -133,7 +145,7 @@ class Ui_AdvancedOverviewWidget(object):
 "}\n"
 "\n"
 "QRadioButton {\n"
-"	font: 24pt Vitesco;\n"
+"	font: 24pt Roboto;\n"
 "	color: rgb(190, 190, 190);\n"
 "    spacing: 12px;\n"
 "}\n"
@@ -146,7 +158,7 @@ class Ui_AdvancedOverviewWidget(object):
 "}\n"
 "\n"
 "QRadioButton::indicator:checked {\n"
-"   background-color: rgb(80, 118, 70);;\n"
+"   background-color: rgb(64, 130, 100);\n"
 "}\n"
 "\n"
 "QScrollBar:vertical {\n"
@@ -188,6 +200,9 @@ class Ui_AdvancedOverviewWidget(object):
         self.sa_contents_buttons = QWidget()
         self.sa_contents_buttons.setObjectName(u"sa_contents_buttons")
         self.sa_contents_buttons.setGeometry(QRect(0, 0, 200, 404))
+        self.sa_contents_buttons.setStyleSheet(u"QWidget > QRadioButton{\n"
+"padding-left: 12px;\n"
+"}")
         self.sa_radio_buttons.setWidget(self.sa_contents_buttons)
 
         self.horizontalLayout_2.addWidget(self.sa_radio_buttons)
@@ -280,7 +295,7 @@ class Ui_AdvancedOverviewWidget(object):
         self.sa_plots.setWidgetResizable(True)
         self.sa_contents_plots = QWidget()
         self.sa_contents_plots.setObjectName(u"sa_contents_plots")
-        self.sa_contents_plots.setGeometry(QRect(0, 0, 734, 358))
+        self.sa_contents_plots.setGeometry(QRect(0, 0, 734, 359))
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
@@ -309,19 +324,19 @@ class Ui_AdvancedOverviewWidget(object):
 
         self.pb_overview = QPushButton(AdvancedOverviewWidget)
         self.pb_overview.setObjectName(u"pb_overview")
-        font3 = QFont()
-        font3.setFamilies([u"Vitesco"])
-        font3.setPointSize(10)
-        font3.setBold(True)
-        self.pb_overview.setFont(font3)
+        font4 = QFont()
+        font4.setFamilies([u"Vitesco"])
+        font4.setPointSize(10)
+        font4.setBold(True)
+        self.pb_overview.setFont(font4)
         self.pb_overview.setStyleSheet(u"QPushButton {\n"
 "	border-radius: 12px;\n"
 "	padding-left: 16px;\n"
 "	padding-right: 16px;\n"
 "	padding-top: 8 px;\n"
 "	padding-bottom: 8 px;\n"
-"	color: white;\n"
-"	background-color: rgb(215,0,75)\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(64, 130, 100);\n"
 "    }")
 
         self.horizontalLayout_3.addWidget(self.pb_overview, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
@@ -329,16 +344,16 @@ class Ui_AdvancedOverviewWidget(object):
         self.pb_export = QPushButton(AdvancedOverviewWidget)
         self.pb_export.setObjectName(u"pb_export")
         self.pb_export.setEnabled(False)
-        font4 = QFont()
-        font4.setBold(True)
-        self.pb_export.setFont(font4)
+        font5 = QFont()
+        font5.setBold(True)
+        self.pb_export.setFont(font5)
         self.pb_export.setStyleSheet(u"QPushButton:Enabled{\n"
-"	background-color: rgb(53, 78, 40);\n"
-"	color: rgba(255,255,255, 200);\n"
+"	background-color: rgb(64, 130, 100);\n"
+"	color: rgb(226, 220, 220);\n"
 "}\n"
 "QPushButton:Disabled{\n"
-"	background-color: rgba(53, 78, 40, 100);\n"
-"	color: rgba(255,255,255, 100);\n"
+"	background-color: rgba(46, 93, 71,150);\n"
+"	color: rgba(226, 220, 220, 150);\n"
 "}")
 
         self.horizontalLayout_3.addWidget(self.pb_export, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignVCenter)

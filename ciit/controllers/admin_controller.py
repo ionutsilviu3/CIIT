@@ -51,6 +51,6 @@ class AdminController:
         user_role = self.model.get_role(self.model.current_user_id)
         user_role = int(user_role['id'][0])
         users = self.model.get_subordinate_users(user_role)
-        print(users)
         self.view.set_users(users)
+        self.view.update_chart()
         

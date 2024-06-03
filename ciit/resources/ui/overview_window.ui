@@ -30,8 +30,8 @@ QPushButton {
 	padding-right: 16px;
 	padding-top: 8 px;
 	padding-bottom: 8 px;
-	color: rgb(190, 190, 190);
-	background-color: rgb(55, 79, 91);
+	color:rgb(226, 220, 220);
+	background-color:#384C53;
     }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -52,6 +52,12 @@ QPushButton {
      </item>
      <item>
       <widget class="QPushButton" name="pb_info">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Info</string>
        </property>
@@ -59,6 +65,12 @@ QPushButton {
      </item>
      <item>
       <widget class="QPushButton" name="pb_settings">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Settings</string>
        </property>
@@ -78,7 +90,7 @@ QPushButton {
      <property name="styleSheet">
       <string notr="true">QLabel#lb_title
 {
-color: rgb(190, 190, 190);
+color: rgb(226, 220, 220);
 }</string>
      </property>
      <property name="text">
@@ -98,7 +110,7 @@ color: rgb(190, 190, 190);
      <property name="styleSheet">
       <string notr="true">QLabel#lb_station
 {
-color: rgb(190, 190, 190);
+color: rgb(226, 220, 220);
 }</string>
      </property>
      <property name="text">
@@ -131,14 +143,14 @@ color: rgb(190, 190, 190);
        <property name="styleSheet">
         <string notr="true">QWidget#sa_contents_buttons {
     background-color: rgb(34, 48, 56);
-    border: 2px solid rgb(80, 118, 70);
+    border: 2px solid rgb(64, 130, 100);
     border-radius: 18px; /* Set the border radius for rounded corners */
     padding: 5px; /* Add some padding to ensure the contents do not touch the borders */
     margin: 0; /* Remove any default margin */
 }
 
 QRadioButton {
-	font: 24pt Vitesco;
+	font: 24pt Roboto;
 	color: rgb(190, 190, 190);
     spacing: 12px;
 }
@@ -151,7 +163,7 @@ QRadioButton::indicator {
 }
 
 QRadioButton::indicator:checked {
-   background-color: rgb(80, 118, 70);;
+   background-color: rgb(64, 130, 100);
 }
 
 QScrollArea {
@@ -230,7 +242,7 @@ padding-left: 12px;
        </property>
        <property name="font">
         <font>
-         <family>Vitesco</family>
+         <family>Roboto</family>
          <pointsize>12</pointsize>
          <italic>false</italic>
          <bold>false</bold>
@@ -238,32 +250,44 @@ padding-left: 12px;
        </property>
        <property name="styleSheet">
         <string notr="true">QTableWidget {
-    gridline-color: #606060;
-    background-color: #404040;
     background-color: rgb(34, 48, 56);
     border: none;
-	font: 12pt &quot;Vitesco&quot;;
+    font: 12pt &quot;Roboto&quot;;
 }
 
 QTableWidget::item {
-    padding: 5px;
-	color: white;
-}
-
-QTableWidget::item:selected {
-    background-color: #808080;
+    padding: 12px;
 }
 
 QHeaderView::section {
-    background-color: #303030;
-    color: #E0E0E0;
+    background-color: #384C53;
+    color: rgb(226, 220, 220);
     padding: 5px;
-    border: 1px solid #606060;
-	font: 12pt &quot;Vitesco&quot;;
+    border: none;
+    font: 12pt &quot;Roboto&quot;;
+}
+
+/* Add borders only between vertical header items */
+QHeaderView::section:horizontal {
+    border-right: 1px solid rgb(34, 48, 56);
+}
+
+QHeaderView::section:vertical {
+	border-bottom: 1px solid rgb(34, 48, 56);
 }
 
 QTableCornerButton::section {
-    background-color: #303030;
+    background-color: #384C53;
+    border: none;
+}
+
+QTableCornerButton::section {
+    background-color: #384C53;
+}
+
+QTableCornerButton::section {
+    border-right: 1px solid rgb(34, 48, 56) !important;
+    border-bottom: 1px solid rgb(34, 48, 56) !important;
 }
 
 QScrollBar:vertical {
@@ -313,6 +337,24 @@ QScrollBar::sub-page:vertical, QScrollBar::sub-page:horizontal {
        <property name="editTriggers">
         <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
        </property>
+       <property name="alternatingRowColors">
+        <bool>false</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SelectionMode::NoSelection</enum>
+       </property>
+       <property name="showGrid">
+        <bool>true</bool>
+       </property>
+       <property name="gridStyle">
+        <enum>Qt::PenStyle::SolidLine</enum>
+       </property>
+       <property name="cornerButtonEnabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+        <bool>false</bool>
+       </attribute>
       </widget>
      </item>
     </layout>
@@ -337,8 +379,8 @@ QScrollBar::sub-page:vertical, QScrollBar::sub-page:horizontal {
 	padding-right: 16px;
 	padding-top: 8 px;
 	padding-bottom: 8 px;
-	color: white;
-	background-color: rgb(215,0,75)
+	color: rgb(226, 220, 220);
+	background-color: rgb(64, 130, 100);
     }</string>
      </property>
      <property name="text">

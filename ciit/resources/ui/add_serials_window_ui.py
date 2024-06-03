@@ -16,9 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QGridLayout,
-    QHBoxLayout, QLabel, QLineEdit, QListWidget,
-    QListWidgetItem, QPushButton, QSizePolicy, QVBoxLayout,
-    QWidget)
+    QHBoxLayout, QLabel, QLayout, QLineEdit,
+    QListWidget, QListWidgetItem, QPushButton, QSizePolicy,
+    QVBoxLayout, QWidget)
 
 class Ui_add_serials_window(object):
     def setupUi(self, add_serials_window):
@@ -83,7 +83,7 @@ class Ui_add_serials_window(object):
         font1.setPointSize(12)
         self.le_serials.setFont(font1)
         self.le_serials.setStyleSheet(u"color: black;\n"
-"background-color: #A1ACB1;\n"
+"background-color: #9EAEAE;\n"
 "border-radius: 12px;\n"
 "padding: 8px 32px;\n"
 "")
@@ -109,19 +109,21 @@ class Ui_add_serials_window(object):
         self.pb_import.setFont(font2)
         self.pb_import.setStyleSheet(u"QPushButton {\n"
 "	\n"
-"	background-color: rgb(37, 132, 46);\n"
+"	background-color: rgb(64, 130, 100);\n"
 "    }\n"
 "QPushButton:disabled {\n"
-"	background-color: rgba(170, 35, 0, 150);\n"
+"	background-color: rgba(64, 130, 100, 150);\n"
 "    }\n"
 "    QPushButton:hover {\n"
 "	\n"
-"	background-color: rgb(30, 107, 36);\n"
+"	\n"
+"	background-color: rgb(53, 108, 83);\n"
 "    }\n"
 "\n"
 "    QPushButton:pressed {\n"
 "	\n"
-"	background-color: rgb(27, 97, 33);\n"
+"	\n"
+"	background-color: rgb(40, 80, 61);\n"
 "    }")
 
         self.hl_bottom.addWidget(self.pb_import)
@@ -138,8 +140,7 @@ class Ui_add_serials_window(object):
         self.pb_continue.setMaximumSize(QSize(128, 16777215))
         self.pb_continue.setFont(font)
         self.pb_continue.setStyleSheet(u"QPushButton {\n"
-"	\n"
-"	background-color: rgb(37, 132, 46);\n"
+"	background-color: rgb(64, 130, 100);\n"
 "    }\n"
 "\n"
 "    QPushButton:disabled {\n"
@@ -148,12 +149,14 @@ class Ui_add_serials_window(object):
 "    }\n"
 "    QPushButton:hover {\n"
 "	\n"
-"	background-color: rgb(103, 211, 112);\n"
+"	\n"
+"	background-color: rgb(53, 108, 83);\n"
 "    }\n"
 "\n"
 "    QPushButton:pressed {\n"
 "	\n"
-"	background-color: rgb(40, 149, 77);\n"
+"	\n"
+"	background-color: rgb(40, 80, 61);\n"
 "    }")
 
         self.hl_bottom.addWidget(self.pb_continue)
@@ -162,7 +165,7 @@ class Ui_add_serials_window(object):
         self.vl_bottom.addLayout(self.hl_bottom)
 
 
-        self.gridLayout.addLayout(self.vl_bottom, 10, 1, 1, 1)
+        self.gridLayout.addLayout(self.vl_bottom, 11, 1, 1, 1)
 
         self.lb_title = QLabel(add_serials_window)
         self.lb_title.setObjectName(u"lb_title")
@@ -175,12 +178,11 @@ class Ui_add_serials_window(object):
         self.lb_title.setFont(font3)
         self.lb_title.setStyleSheet(u"QLabel\n"
 "{\n"
-"	\n"
-"	color: rgb(190, 190, 190);\n"
+"	color: rgb(226, 220, 220);\n"
 "}")
         self.lb_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.gridLayout.addWidget(self.lb_title, 0, 0, 1, 3, Qt.AlignmentFlag.AlignHCenter)
+        self.gridLayout.addWidget(self.lb_title, 1, 0, 1, 3, Qt.AlignmentFlag.AlignHCenter)
 
         self.vl_center = QVBoxLayout()
         self.vl_center.setSpacing(16)
@@ -200,12 +202,12 @@ class Ui_add_serials_window(object):
         font4.setPointSize(14)
         font4.setStrikeOut(False)
         self.lw_serials.setFont(font4)
-        self.lw_serials.setStyleSheet(u"QListWidget\n"
-"{\n"
-"    background-color: #344955; \n"
+        self.lw_serials.setStyleSheet(u"QListWidget {\n"
+"    background-color: #384C53;\n"
 "    border-radius: 30px;\n"
 "    outline: 0px;\n"
 "    color: rgb(230, 230, 230);\n"
+"    padding-right: 20px; /* Add padding to accommodate the scrollbar */\n"
 "}\n"
 "\n"
 "QListWidget::item {\n"
@@ -223,43 +225,39 @@ class Ui_add_serials_window(object):
 "}\n"
 "\n"
 "QScrollBar:vertical {\n"
-"    background-color: rgba(0, 0, 0, 0);\n"
-"    width: 20px;\n"
-"    margin: 10px 10px 10px 0px;  /* top right bottom left */\n"
-"	border-radius: 15px;\n"
+"	background-color: #344955;\n"
+"	width: 10px;\n"
+"    margin-top: 1px;\n"
+"	margin-bottom: 1px;\n"
+"	border-radius: 10px;\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical {\n"
-"	background-color: rgb(44, 62, 72);\n"
+"    background-color: rgb(44, 62, 72);\n"
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:hover {\n"
-"   \n"
-"	background-color: rgb(42, 59, 68);\n"
+"    background-color: rgb(42, 59, 68);\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:pressed {\n"
-"   background-color: rgb(34, 48, 56)\n"
+"    background-color: rgb(34, 48, 56);\n"
 "}\n"
 "\n"
 "QScrollBar::add-line:vertical,\n"
 "QScrollBar::sub-line:vertical {\n"
-"    background-color: rgba(0, 0, 0, 0);\n"
-""
-                        "    height: 10px;\n"
+" "
+                        "   background-color: rgba(0, 0, 0, 0);\n"
+"    height: 10px;\n"
 "    subcontrol-position: top;\n"
 "    subcontrol-origin: margin;\n"
 "}\n"
 "\n"
 "QScrollBar::add-page:vertical,\n"
 "QScrollBar::sub-page:vertical {\n"
-"    \n"
-"	background-color: rgba(0, 0, 0, 0);\n"
+"    background-color: rgba(0, 0, 0, 0);\n"
 "}\n"
-"\n"
-"\n"
-"\n"
 "")
         self.lw_serials.setFrameShape(QFrame.Shape.StyledPanel)
         self.lw_serials.setFrameShadow(QFrame.Shadow.Raised)
@@ -281,44 +279,46 @@ class Ui_add_serials_window(object):
         self.pb_delete.setMaximumSize(QSize(256, 16777215))
         self.pb_delete.setFont(font1)
         self.pb_delete.setStyleSheet(u"QPushButton {\n"
-"color: white;\n"
-"	background-color: rgb(215,0,75)\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(138, 29, 0)\n"
 "    }\n"
 "QPushButton:disabled {\n"
-"	background-color: rgba(170, 35, 0, 150);\n"
+"	background-color: rgba(109, 22, 0, 200);\n"
 "    }\n"
 "    QPushButton:hover {\n"
-"	background-color: rgb(193, 35, 0);\n"
+"	background-color: rgb(120, 24, 0);\n"
 "    }\n"
 "\n"
 "    QPushButton:pressed {\n"
-"	background-color: rgb(129, 24, 0);\n"
+"	background-color: rgb(94, 19, 0);\n"
 "    }")
 
         self.hl_center.addWidget(self.pb_delete, 0, Qt.AlignmentFlag.AlignTop)
 
         self.pb_clear = QPushButton(add_serials_window)
         self.pb_clear.setObjectName(u"pb_clear")
-        self.pb_clear.setEnabled(False)
+        self.pb_clear.setEnabled(True)
         sizePolicy3.setHeightForWidth(self.pb_clear.sizePolicy().hasHeightForWidth())
         self.pb_clear.setSizePolicy(sizePolicy3)
         self.pb_clear.setMaximumSize(QSize(192, 16777215))
         self.pb_clear.setFont(font1)
         self.pb_clear.setStyleSheet(u"QPushButton {\n"
-"	background-color: rgb(161, 172, 177);\n"
+"	background-color: rgb(158, 174, 174);\n"
 "	color: rgb(75,75,70)\n"
 "    }\n"
 "QPushButton:disabled {\n"
-"	background-color: rgba(161, 172, 177, 50);\n"
+"	background-color: rgba(158, 174, 174, 100);\n"
 "	color: rgb(43, 43, 43);\n"
 "    }\n"
 "\n"
 "QPushButton:hover {\n"
-"	background-color: rgb(145, 155, 159);\n"
+"	\n"
+"	background-color: rgb(138, 152, 152);\n"
 "    }\n"
 "\n"
 "QPushButton:pressed {\n"
-"	background-color: rgb(115, 123, 126);\n"
+"	\n"
+"	background-color: rgb(115, 126, 126);\n"
 "    }")
 
         self.hl_center.addWidget(self.pb_clear, 0, Qt.AlignmentFlag.AlignTop)
@@ -327,7 +327,28 @@ class Ui_add_serials_window(object):
         self.vl_center.addLayout(self.hl_center)
 
 
-        self.gridLayout.addLayout(self.vl_center, 1, 1, 1, 1)
+        self.gridLayout.addLayout(self.vl_center, 2, 1, 1, 1)
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
+        self.pb_info = QPushButton(add_serials_window)
+        self.pb_info.setObjectName(u"pb_info")
+        self.pb_info.setStyleSheet(u"QPushButton {\n"
+"	border-radius: 12px;\n"
+"	padding-left: 16px;\n"
+"	padding-right: 16px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: #384C53\n"
+"    }\n"
+"")
+
+        self.horizontalLayout.addWidget(self.pb_info, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTop)
+
+
+        self.gridLayout.addLayout(self.horizontalLayout, 0, 2, 1, 1)
 
         QWidget.setTabOrder(self.lw_serials, self.le_serials)
         QWidget.setTabOrder(self.le_serials, self.pb_delete)
@@ -348,5 +369,6 @@ class Ui_add_serials_window(object):
         self.lb_title.setText(QCoreApplication.translate("add_serials_window", u"Add serials", None))
         self.pb_delete.setText(QCoreApplication.translate("add_serials_window", u"Delete selected", None))
         self.pb_clear.setText(QCoreApplication.translate("add_serials_window", u"Clear list", None))
+        self.pb_info.setText(QCoreApplication.translate("add_serials_window", u"Info", None))
     # retranslateUi
 

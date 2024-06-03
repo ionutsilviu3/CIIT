@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'admin_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.0
+## Created by: Qt User Interface Compiler version 6.7.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -80,12 +80,20 @@ class Ui_admin_overview(object):
 
         self.pb_modify_role = QPushButton(admin_overview)
         self.pb_modify_role.setObjectName(u"pb_modify_role")
+        self.pb_modify_role.setEnabled(False)
         font2 = QFont()
         font2.setFamilies([u"Roboto"])
         font2.setPointSize(12)
         self.pb_modify_role.setFont(font2)
-        self.pb_modify_role.setStyleSheet(u"background-color: rgb(161, 172, 177);\n"
-"color: rgb(255, 0, 0);")
+        self.pb_modify_role.setStyleSheet(u"QPushButton{\n"
+"background-color: rgb(158, 174, 174);\n"
+"color: rgb(138, 29, 0);\n"
+"}\n"
+"\n"
+"QPushButton:disabled{\n"
+"background-color: rgba(158, 174, 174, 0);\n"
+"color: rgba(138, 29, 0, 0);\n"
+"}")
 
         self.vl_center.addWidget(self.pb_modify_role, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
@@ -100,24 +108,32 @@ class Ui_admin_overview(object):
         self.pb_delete.setMaximumSize(QSize(256, 16777215))
         self.pb_delete.setFont(font2)
         self.pb_delete.setStyleSheet(u"QPushButton {\n"
-"color: white;\n"
-"	background-color: rgb(215,0,75)\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(138, 29, 0)\n"
 "    }\n"
 "QPushButton:disabled {\n"
-"	background-color: rgba(170, 35, 0, 150);\n"
+"	background-color: rgba(109, 22, 0, 200);\n"
 "    }\n"
 "    QPushButton:hover {\n"
-"	background-color: rgb(193, 35, 0);\n"
+"	background-color: rgb(120, 24, 0);\n"
 "    }\n"
 "\n"
 "    QPushButton:pressed {\n"
-"	background-color: rgb(129, 24, 0);\n"
+"	background-color: rgb(94, 19, 0);\n"
 "    }")
 
         self.vl_center.addWidget(self.pb_delete, 0, Qt.AlignmentFlag.AlignHCenter)
 
         self.lb_message = QLabel(admin_overview)
         self.lb_message.setObjectName(u"lb_message")
+        font3 = QFont()
+        font3.setFamilies([u"Roboto"])
+        font3.setPointSize(10)
+        self.lb_message.setFont(font3)
+        self.lb_message.setStyleSheet(u"QLabel\n"
+"{\n"
+"	color: rgb(226, 220, 220);\n"
+"}")
 
         self.vl_center.addWidget(self.lb_message, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
@@ -132,10 +148,13 @@ class Ui_admin_overview(object):
         self.le_users.setMaximumSize(QSize(512, 34))
         self.le_users.setSizeIncrement(QSize(0, 0))
         self.le_users.setFont(font2)
-        self.le_users.setStyleSheet(u"color: black;\n"
-"background-color: #A1ACB1;\n"
+        self.le_users.setStyleSheet(u"QLineEdit\n"
+"{\n"
+"color: rgb(26, 39, 39);\n"
+"background-color: rgb(158, 174, 174);\n"
 "border-radius: 12px;\n"
-"padding: 8px 32px;\n"
+"padding: 8px 32px\n"
+"}\n"
 "")
         self.le_users.setInputMask(u"")
         self.le_users.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -147,20 +166,22 @@ class Ui_admin_overview(object):
         self.hl_center.setObjectName(u"hl_center")
         self.pb_add = QPushButton(admin_overview)
         self.pb_add.setObjectName(u"pb_add")
+        self.pb_add.setEnabled(False)
         sizePolicy1.setHeightForWidth(self.pb_add.sizePolicy().hasHeightForWidth())
         self.pb_add.setSizePolicy(sizePolicy1)
-        font3 = QFont()
-        font3.setFamilies([u"Roboto"])
-        font3.setPointSize(12)
-        font3.setBold(False)
-        font3.setKerning(True)
-        self.pb_add.setFont(font3)
+        font4 = QFont()
+        font4.setFamilies([u"Roboto"])
+        font4.setPointSize(12)
+        font4.setBold(False)
+        font4.setKerning(True)
+        self.pb_add.setFont(font4)
         self.pb_add.setStyleSheet(u"QPushButton {\n"
-"	\n"
-"	background-color: rgb(37, 132, 46);\n"
+"	background-color: rgb(64, 130, 100);\n"
+"	color: rgb(226, 220, 220)\n"
 "    }\n"
 "QPushButton:disabled {\n"
-"	background-color: rgba(170, 35, 0, 150);\n"
+"	background-color: rgba(46, 94, 72, 200);\n"
+"	color: rgba(226, 220, 220, 100);\n"
 "    }\n"
 "    QPushButton:hover {\n"
 "	\n"
@@ -180,13 +201,27 @@ class Ui_admin_overview(object):
 
         self.gridLayout.addLayout(self.vl_center, 1, 1, 1, 1)
 
-        self.pb_main_app = QPushButton(admin_overview)
-        self.pb_main_app.setObjectName(u"pb_main_app")
-
-        self.gridLayout.addWidget(self.pb_main_app, 1, 3, 1, 1, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignBottom)
-
         self.vl_chart = QVBoxLayout()
         self.vl_chart.setObjectName(u"vl_chart")
+        self.pb_main_app = QPushButton(admin_overview)
+        self.pb_main_app.setObjectName(u"pb_main_app")
+        font5 = QFont()
+        font5.setFamilies([u"Roboto"])
+        font5.setPointSize(10)
+        font5.setBold(True)
+        self.pb_main_app.setFont(font5)
+        self.pb_main_app.setStyleSheet(u"QPushButton {\n"
+"	border-radius: 12px;\n"
+"	padding-left: 16px;\n"
+"	padding-right: 16px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(64, 130, 100);\n"
+"    }")
+
+        self.vl_chart.addWidget(self.pb_main_app, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignBottom)
+
 
         self.gridLayout.addLayout(self.vl_chart, 1, 2, 1, 1)
 
@@ -201,7 +236,7 @@ class Ui_admin_overview(object):
         self.lb_title.setText(QCoreApplication.translate("admin_overview", u"Admin", None))
         self.pb_modify_role.setText(QCoreApplication.translate("admin_overview", u"Remove manager role", None))
         self.pb_delete.setText(QCoreApplication.translate("admin_overview", u"Delete User", None))
-        self.lb_message.setText(QCoreApplication.translate("admin_overview", u"User added!", None))
+        self.lb_message.setText("")
         self.le_users.setText("")
         self.le_users.setPlaceholderText(QCoreApplication.translate("admin_overview", u"Add user by email", None))
         self.pb_add.setText(QCoreApplication.translate("admin_overview", u"Add user", None))
