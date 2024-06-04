@@ -98,14 +98,17 @@ class UserModel:
         # Return the hashed password as a string
         return hashed_password.decode()
     
-    def validate_email(self, email) -> str:
-        
+    def is_email_in_valid_format(self, email):
         pattern = r'^([!#-\'*+/-9=?A-Z^-~-]+(\.[!#-\'*+/-9=?A-Z^-~-]+)*|"([]!#-[^-~ \t]|(\\\\[\\t -~]))+")@([!#-\'*+/-9=?A-Z^-~-]+(\.[!#-\'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])$'
-        
+        if re.match(pattern, email) is None:
+            return False
+        return True
+    
+    def validate_email(self, email) -> str:
         if email is None:
             return "The email can not be empty!"
 
-        if re.match(pattern, email) is None:
+        if self.is_email_in_valid_format(email) == False:
             return "The email is not in a valid format."
 
         if self.get_user_by_email(email) is not None:

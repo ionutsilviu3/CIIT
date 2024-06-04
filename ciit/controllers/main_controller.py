@@ -98,7 +98,7 @@ class MainController:
         
         self.login_controller.view.go_to_admin_signal.connect(
             self.switch_to_admin)
-        
+        self.admin_controller.view.go_to_main_app_signal.connect(lambda: self.switch_page(Page.ADD_SERIALS))
         self.login_controller.view.go_to_manager_signal.connect(
             self.switch_to_manager)
         

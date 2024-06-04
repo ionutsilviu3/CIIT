@@ -9,6 +9,7 @@ from resources.ui.admin_window_ui import Ui_admin_overview
 class AdminWindow(QWidget, Ui_admin_overview):
 
     validate_signal = QtCore.Signal()
+    go_to_main_app_signal = QtCore.Signal()
     # emit the email of the user to delete
     delete_user_signal = QtCore.Signal(str)
     user_selected_signal = QtCore.Signal(str, str)  # emit email and role
@@ -31,6 +32,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
         self.le_users.textEdited.connect(self.disable_error_message_slot)
         self.pb_add.clicked.connect(self.validate_signal)
         self.pb_modify_role.clicked.connect(self.on_modify_role_clicked)
+        self.pb_main_app.clicked.connect(self.go_to_main_app_signal)
 
         # Initially disable the delete and modify buttons
         self.pb_delete.setEnabled(False)
@@ -80,6 +82,8 @@ class AdminWindow(QWidget, Ui_admin_overview):
             self.pb_modify_role.setText("Remove manager role")
         elif user_role == "Engineer":
             self.pb_modify_role.setText("Turn into manager")
+        else:
+            self.pb_modify_role.setEnabled(False)
         self.pb_modify_role.setEnabled(True)
 
     def add_new_user(self, email):
@@ -90,6 +94,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
         self.tw_users.setItem(row_idx, 0, email_item)
         self.tw_users.setItem(row_idx, 1, role_item)
         self.update_chart()
+        self.pb_add.setEnabled(False)
 
     def delete_user(self, email):
         for row_idx in range(self.tw_users.rowCount()):
@@ -129,6 +134,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
 
     def disable_error_message_slot(self):
         self.handle_error_message(False)
+        self.pb_add.setEnabled(True)
 
     def enable_delete_button(self):
         self.pb_delete.setEnabled(True)
@@ -139,6 +145,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
 
         self.lb_message.setText(custom_message)
         self.lb_message.setVisible(state)
+        self.pb_add.setEnabled(False)
 
         if state:
             self.le_users.clear()
@@ -174,6 +181,8 @@ class AdminWindow(QWidget, Ui_admin_overview):
             percentage = (count / total_count) * 100
             slice.setLabel(f"{role} {percentage:.1f}%")
             slice.setLabelVisible(True)
+            slice.setLabelFont(QFont("Roboto", 10))
+            slice.setLabelBrush(QColor(226, 220, 220))
             slice.hovered.connect(self.on_slice_hovered)
             series.append(slice)
 

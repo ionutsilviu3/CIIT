@@ -15,9 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QHeaderView,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QGridLayout, QHBoxLayout,
+    QHeaderView, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QTableWidget, QTableWidgetItem, QVBoxLayout,
+    QWidget)
 
 class Ui_admin_overview(object):
     def setupUi(self, admin_overview):
@@ -74,7 +75,32 @@ class Ui_admin_overview(object):
         self.tw_users.setVerticalHeaderItem(0, __qtablewidgetitem)
         self.tw_users.setObjectName(u"tw_users")
         self.tw_users.setMaximumSize(QSize(512, 16777215))
-        self.tw_users.setStyleSheet(u"")
+        self.tw_users.setStyleSheet(u"QTableWidget {\n"
+"    background-color: rgb(34, 48, 56);\n"
+"    border: none;\n"
+"    font: 12pt \"Roboto\";\n"
+"}\n"
+"\n"
+"QTableWidget::item {\n"
+"    padding: 12px;\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"    background-color: #384C53;\n"
+"    color: rgb(226, 220, 220);\n"
+"    padding: 5px;\n"
+"    border: none;\n"
+"    font: 12pt \"Roboto\";\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"	border-left: 1px solid rgb(34, 48, 56);\n"
+"}\n"
+"")
+        self.tw_users.setAlternatingRowColors(True)
+        self.tw_users.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tw_users.setSortingEnabled(True)
+        self.tw_users.setCornerButtonEnabled(False)
 
         self.vl_center.addWidget(self.tw_users, 0, Qt.AlignmentFlag.AlignHCenter)
 

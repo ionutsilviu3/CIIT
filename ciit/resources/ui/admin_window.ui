@@ -108,7 +108,40 @@ padding-bottom: 8 px;
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">QTableWidget {
+    background-color: rgb(34, 48, 56);
+    border: none;
+    font: 12pt &quot;Roboto&quot;;
+}
+
+QTableWidget::item {
+    padding: 12px;
+}
+
+QHeaderView::section {
+    background-color: #384C53;
+    color: rgb(226, 220, 220);
+    padding: 5px;
+    border: none;
+    font: 12pt &quot;Roboto&quot;;
+}
+
+QHeaderView::section {
+	border-left: 1px solid rgb(34, 48, 56);
+}
+</string>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="cornerButtonEnabled">
+        <bool>false</bool>
        </property>
        <row>
         <property name="text">
