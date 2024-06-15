@@ -512,6 +512,12 @@ QPushButton:pressed {
      </property>
      <item alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop">
       <widget class="QPushButton" name="pb_info">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
 	border-radius: 12px;

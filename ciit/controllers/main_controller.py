@@ -13,6 +13,7 @@ from models.query_master import QueryMaster
 from controllers.settings_controller import SettingsController
 from controllers.login_controller import LoginController
 from controllers.admin_controller import AdminController
+from controllers.manager_controller import ManagerController
 from controllers.add_serials_controller import AddSerialsController
 from controllers.overview_controller import OverviewController
 from controllers.advanced_overview_controller import AdvancedOverviewController
@@ -26,8 +27,9 @@ class Page(Enum):
     OVERVIEW = 2
     ADVANCED_OVERVIEW = 3
     ADMIN = 4
-    SETTINGS = 5
-    INFO = 6
+    MANAGER = 5
+    SETTINGS = 6
+    INFO = 7
 
 class MainController:
     def __init__(self):
@@ -59,6 +61,7 @@ class MainController:
 
         self.login_controller = LoginController(self.app, self.user_model)
         self.admin_controller = AdminController(self.app, self.user_model)
+        self.manager_controller = ManagerController(self.app, self.user_model)
         self.add_serials_controller = AddSerialsController(
             self.app, self.serial_model
         )
@@ -76,6 +79,7 @@ class MainController:
         self.stacked_widget.addWidget(self.overview_controller.view)
         self.stacked_widget.addWidget(self.advanced_overview_controller.view)
         self.stacked_widget.addWidget(self.admin_controller.view)
+        self.stacked_widget.addWidget(self.manager_controller.view)
         self.stacked_widget.addWidget(self.settings_controller.view)
         self.stacked_widget.addWidget(self.info_view)
         # Mapping of pages
@@ -85,6 +89,7 @@ class MainController:
             Page.OVERVIEW: self.overview_controller.view,
             Page.ADVANCED_OVERVIEW: self.advanced_overview_controller.view,
             Page.ADMIN: self.admin_controller.view,
+            Page.MANAGER: self.manager_controller.view,
             Page.SETTINGS: self.settings_controller.view,
             Page.INFO: self.info_view
         }
@@ -98,7 +103,10 @@ class MainController:
         
         self.login_controller.view.go_to_admin_signal.connect(
             self.switch_to_admin)
+        self.login_controller.view.go_to_manager_signal.connect(
+            self.switch_to_manager)
         self.admin_controller.view.go_to_main_app_signal.connect(lambda: self.switch_page(Page.ADD_SERIALS))
+        self.manager_controller.view.go_to_main_app_signal.connect(lambda: self.switch_page(Page.ADD_SERIALS))
         self.login_controller.view.go_to_manager_signal.connect(
             self.switch_to_manager)
         
@@ -168,8 +176,7 @@ class MainController:
     def switch_to_admin(self):
         self.admin_controller.show_users()
         self.switch_page(Page.ADMIN)
+        
     def switch_to_manager(self):
-        pass
-    
-    def switch_to_info(self):
-        pass
+        self.manager_controller.show_users()
+        self.switch_page(Page.MANAGER)

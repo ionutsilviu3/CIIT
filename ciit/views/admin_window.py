@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QTableWidgetItem, QTableWidget, QVBoxLayout, QApplication
+from PySide6.QtWidgets import QWidget, QTableWidgetItem, QTableWidget, QVBoxLayout, QApplication, QHeaderView
 from PySide6 import QtCore
 from PySide6.QtCharts import QChart, QChartView, QPieSeries, QPieSlice
 from PySide6.QtGui import QPainter, QFont, QColor
@@ -10,20 +10,26 @@ class AdminWindow(QWidget, Ui_admin_overview):
 
     validate_signal = QtCore.Signal()
     go_to_main_app_signal = QtCore.Signal()
-    # emit the email of the user to delete
     delete_user_signal = QtCore.Signal(str)
-    user_selected_signal = QtCore.Signal(str, str)  # emit email and role
+    user_selected_signal = QtCore.Signal(str, str)
+    modify_role_signal = QtCore.Signal(str, str)  # Adding this signal for role modification
+
     def __init__(self, app):
         super().__init__()
         self.setupUi(self)
         self.app = app
 
+        self.tw_users.setMinimumWidth(300)
         self.tw_users.setColumnCount(2)
         self.tw_users.setAlternatingRowColors(True)
         self.tw_users.setHorizontalHeaderLabels(['Email', 'Role'])
         self.tw_users.horizontalHeader().setSectionsClickable(False)
         self.tw_users.setSelectionBehavior(QTableWidget.SelectRows)
         self.tw_users.verticalHeader().hide()
+        self.tw_users.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        
+        # Setting the layout to stretch
+        self.tw_users.horizontalHeader().setStretchLastSection(True)
 
         self.le_users.returnPressed.connect(self.validate_signal)
         self.pb_delete.clicked.connect(self.on_delete_user_clicked)
@@ -34,11 +40,9 @@ class AdminWindow(QWidget, Ui_admin_overview):
         self.pb_modify_role.clicked.connect(self.on_modify_role_clicked)
         self.pb_main_app.clicked.connect(self.go_to_main_app_signal)
 
-        # Initially disable the delete and modify buttons
         self.pb_delete.setEnabled(False)
         self.pb_modify_role.setEnabled(False)
 
-        # Set up the pie chart
         self.chart = QChart()
         self.chart.setTitle("User Roles Distribution")
         self.chart.setTitleFont(QFont("Roboto", 14, QFont.Bold))
@@ -54,13 +58,14 @@ class AdminWindow(QWidget, Ui_admin_overview):
         return self.le_users.text()
 
     def set_users(self, users):
-        self.tw_users.setRowCount(0)  # Clear existing rows
+        self.tw_users.setRowCount(0)
         for row_idx, (email, role) in users.iterrows():
             self.tw_users.insertRow(row_idx)
             email_item = QTableWidgetItem(email)
             role_item = QTableWidgetItem(role)
             self.tw_users.setItem(row_idx, 0, email_item)
             self.tw_users.setItem(row_idx, 1, role_item)
+        self.tw_users.resizeColumnsToContents()  # Resize columns to fit content
 
     def on_user_clicked(self, item):
         row = item.row()
@@ -76,6 +81,17 @@ class AdminWindow(QWidget, Ui_admin_overview):
         if not selected_items:
             self.pb_delete.setEnabled(False)
             self.pb_modify_role.setEnabled(False)
+        else:
+            current_row = self.tw_users.currentRow()
+            role_item = self.tw_users.item(current_row, 1)
+            if role_item:
+                current_role = role_item.text()
+                if current_role != "Unregistred":
+                    self.pb_delete.setEnabled(True)
+                    self.pb_modify_role.setEnabled(True)
+                else:
+                    self.pb_delete.setEnabled(False)
+                    self.pb_modify_role.setEnabled(False)
 
     def enable_modify_role_button(self, user_role):
         if user_role == "Manager":
@@ -95,6 +111,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
         self.tw_users.setItem(row_idx, 1, role_item)
         self.update_chart()
         self.pb_add.setEnabled(False)
+        self.tw_users.resizeColumnsToContents()  # Resize columns to fit content
 
     def delete_user(self, email):
         for row_idx in range(self.tw_users.rowCount()):
@@ -130,7 +147,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
                 current_role = role_item.text()
                 new_role = "Engineer" if current_role == "Manager" else "Manager"
                 self.modify_user_role(email, new_role)
-                # Directly call controller method if needed to update model
+                self.modify_role_signal.emit(email, new_role)
 
     def disable_error_message_slot(self):
         self.handle_error_message(False)

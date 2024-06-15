@@ -334,6 +334,10 @@ class Ui_add_serials_window(object):
         self.horizontalLayout.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
         self.pb_info = QPushButton(add_serials_window)
         self.pb_info.setObjectName(u"pb_info")
+        font5 = QFont()
+        font5.setFamilies([u"Roboto"])
+        font5.setPointSize(10)
+        self.pb_info.setFont(font5)
         self.pb_info.setStyleSheet(u"QPushButton {\n"
 "	border-radius: 12px;\n"
 "	padding-left: 16px;\n"
