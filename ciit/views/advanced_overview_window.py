@@ -132,7 +132,7 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
         fig.write_html(file_path)
 
         view = QWebEngineView()
-        view.setFixedSize(800, 600)
+        view.setFixedSize(700, 450)
         view.load(QUrl.fromLocalFile(file_path))
 
         self.vb_plots.addWidget(view)

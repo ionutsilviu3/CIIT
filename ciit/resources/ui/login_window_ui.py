@@ -62,13 +62,36 @@ class Ui_Parent(object):
         self.verticalLayout_3.setContentsMargins(26, 26, 26, 26)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(8, 8, 8, 8)
-        self.lb_login_title = QLabel(self.Form)
-        self.lb_login_title.setObjectName(u"lb_login_title")
+        self.pb_info = QPushButton(self.Form)
+        self.pb_info.setObjectName(u"pb_info")
         font3 = QFont()
         font3.setFamilies([u"Roboto"])
-        font3.setPointSize(26)
+        font3.setPointSize(10)
         font3.setBold(True)
-        self.lb_login_title.setFont(font3)
+        self.pb_info.setFont(font3)
+        self.pb_info.setStyleSheet(u"QPushButton {\n"
+"	border-radius: 16px;\n"
+"	padding-left: 8px;\n"
+"	padding-right: 8px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(56, 76, 83);\n"
+"    }")
+        icon = QIcon()
+        icon.addFile(u":/Icons/info.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.pb_info.setIcon(icon)
+        self.pb_info.setIconSize(QSize(24, 24))
+
+        self.verticalLayout_3.addWidget(self.pb_info, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTop)
+
+        self.lb_login_title = QLabel(self.Form)
+        self.lb_login_title.setObjectName(u"lb_login_title")
+        font4 = QFont()
+        font4.setFamilies([u"Roboto"])
+        font4.setPointSize(26)
+        font4.setBold(True)
+        self.lb_login_title.setFont(font4)
         self.lb_login_title.setStyleSheet(u"color: rgb(226, 220, 220);")
         self.lb_login_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -110,7 +133,7 @@ class Ui_Parent(object):
         self.lb_user.setSizePolicy(sizePolicy1)
         self.lb_user.setMinimumSize(QSize(16, 16))
         self.lb_user.setFont(font2)
-        self.lb_user.setPixmap(QPixmap(u":/Main/icons/user.svg"))
+        self.lb_user.setPixmap(QPixmap(u":/Icons/mail.svg"))
         self.lb_user.setScaledContents(False)
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.lb_user)
@@ -121,10 +144,10 @@ class Ui_Parent(object):
         self.le_user.setSizePolicy(sizePolicy1)
         self.le_user.setMinimumSize(QSize(256, 48))
         self.le_user.setMaximumSize(QSize(256, 16777215))
-        font4 = QFont()
-        font4.setFamilies([u"Roboto"])
-        font4.setPointSize(12)
-        self.le_user.setFont(font4)
+        font5 = QFont()
+        font5.setFamilies([u"Roboto"])
+        font5.setPointSize(12)
+        self.le_user.setFont(font5)
         self.le_user.setToolTipDuration(-1)
         self.le_user.setStyleSheet(u"color: rgb(255, 255, 255);")
         self.le_user.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -133,7 +156,7 @@ class Ui_Parent(object):
 
         self.lb_password = QLabel(self.widget)
         self.lb_password.setObjectName(u"lb_password")
-        self.lb_password.setPixmap(QPixmap(u":/Main/icons/lock.svg"))
+        self.lb_password.setPixmap(QPixmap(u":/Icons/lock.svg"))
 
         self.formLayout.setWidget(3, QFormLayout.LabelRole, self.lb_password)
 
@@ -143,7 +166,7 @@ class Ui_Parent(object):
         self.le_password.setSizePolicy(sizePolicy1)
         self.le_password.setMinimumSize(QSize(256, 48))
         self.le_password.setMaximumSize(QSize(192, 16777215))
-        self.le_password.setFont(font4)
+        self.le_password.setFont(font5)
         self.le_password.setToolTipDuration(-1)
         self.le_password.setEchoMode(QLineEdit.EchoMode.Password)
         self.le_password.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -157,11 +180,11 @@ class Ui_Parent(object):
         sizePolicy1.setHeightForWidth(self.lb_warning_icon.sizePolicy().hasHeightForWidth())
         self.lb_warning_icon.setSizePolicy(sizePolicy1)
         self.lb_warning_icon.setMinimumSize(QSize(32, 32))
-        font5 = QFont()
-        font5.setFamilies([u"Roboto"])
-        font5.setPointSize(16)
-        font5.setBold(False)
-        self.lb_warning_icon.setFont(font5)
+        font6 = QFont()
+        font6.setFamilies([u"Roboto"])
+        font6.setPointSize(16)
+        font6.setBold(False)
+        self.lb_warning_icon.setFont(font6)
         self.lb_warning_icon.setStyleSheet(u"QLabel#lb_warning_icon:disabled\n"
 "{\n"
 "	border-image: none;\n"
@@ -169,7 +192,8 @@ class Ui_Parent(object):
 "\n"
 "QLabel#lb_warning_icon:enabled\n"
 "{\n"
-"	border-image: url(:/Main/icons/alert-circle.svg);\n"
+"	\n"
+"	border-image: url(:/Icons/alert-circle.svg);\n"
 "}\n"
 "\n"
 "")
@@ -184,11 +208,11 @@ class Ui_Parent(object):
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.lb_warning_message.sizePolicy().hasHeightForWidth())
         self.lb_warning_message.setSizePolicy(sizePolicy2)
-        font6 = QFont()
-        font6.setFamilies([u"Roboto"])
-        font6.setPointSize(12)
-        font6.setBold(True)
-        self.lb_warning_message.setFont(font6)
+        font7 = QFont()
+        font7.setFamilies([u"Roboto"])
+        font7.setPointSize(12)
+        font7.setBold(True)
+        self.lb_warning_message.setFont(font7)
         self.lb_warning_message.setStyleSheet(u"QLabel\n"
 "{\n"
 "color: rgb(173, 101, 85);\n"
@@ -211,14 +235,14 @@ class Ui_Parent(object):
         sizePolicy1.setHeightForWidth(self.pb_log_in.sizePolicy().hasHeightForWidth())
         self.pb_log_in.setSizePolicy(sizePolicy1)
         self.pb_log_in.setMinimumSize(QSize(0, 0))
-        font7 = QFont()
-        font7.setFamilies([u"Roboto"])
-        font7.setPointSize(16)
-        font7.setBold(True)
-        font7.setItalic(False)
-        font7.setUnderline(False)
-        font7.setKerning(True)
-        self.pb_log_in.setFont(font7)
+        font8 = QFont()
+        font8.setFamilies([u"Roboto"])
+        font8.setPointSize(16)
+        font8.setBold(True)
+        font8.setItalic(False)
+        font8.setUnderline(False)
+        font8.setKerning(True)
+        self.pb_log_in.setFont(font8)
 #if QT_CONFIG(tooltip)
         self.pb_log_in.setToolTip(u"")
 #endif // QT_CONFIG(tooltip)
@@ -259,6 +283,7 @@ class Ui_Parent(object):
     def retranslateUi(self, Parent):
         Parent.setWindowTitle(QCoreApplication.translate("Parent", u"Login", None))
         self.lb_background.setText("")
+        self.pb_info.setText(QCoreApplication.translate("Parent", u"Info", None))
         self.lb_login_title.setText(QCoreApplication.translate("Parent", u"Log in", None))
         self.lb_user.setText("")
 #if QT_CONFIG(tooltip)

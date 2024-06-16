@@ -523,26 +523,37 @@ QPushButton:disabled{
     </widget>
    </item>
    <item row="0" column="0" alignment="Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop">
-    <widget class="QPushButton" name="pb_back">
+<widget class="QPushButton" name="pb_back">
      <property name="font">
       <font>
        <family>Roboto</family>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
-border-radius: 12px;
-background-color: rgb(53, 76, 88);
-color: rgb(190, 190, 190);
-padding-left: 16px;
-padding-right: 16px;
-padding-top: 8 px;
-padding-bottom: 8 px;
-}</string>
+	border-radius: 16px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color:rgb(226, 220, 220);
+	background-color: rgb(56, 76, 83);
+    }</string>
      </property>
      <property name="text">
-      <string>Go back</string>
+      <string>Go Back</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../icons/icons.qrc">
+       <normaloff>:/Icons/arrow-left.svg</normaloff>:/Icons/arrow-left.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
      </property>
     </widget>
    </item>

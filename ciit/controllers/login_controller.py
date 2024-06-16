@@ -16,11 +16,12 @@ class LoginController:
             if user_role == "Admin":
                 self.view.go_to_admin_signal.emit()
             elif user_role == "Manager":
-                self.view.go_to_manager_signal.emit()  
+                self.view.go_to_manager_signal.emit()
             elif user_role == "Engineer":
                 self.view.go_to_add_serials_signal.emit()
-            elif user_role == "Unregistred":
-                self.model.modify_user_role(self.model.current_user_id,"Engineer")
+            elif user_role == "Unregistered":
+                self.model.modify_user_role(
+                    self.model.current_user_id, "Engineer")
                 self.view.go_to_add_serials_signal.emit()
         else:
             self.view.switch_error(True)

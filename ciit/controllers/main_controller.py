@@ -2,6 +2,7 @@ import sys
 import os
 from enum import Enum
 from dotenv import find_dotenv, load_dotenv
+from PySide6.QtWidgets import QApplication, QStackedWidget
 
 from models.settings_model import SettingsModel
 from models.user_model import UserModel
@@ -19,7 +20,7 @@ from controllers.overview_controller import OverviewController
 from controllers.advanced_overview_controller import AdvancedOverviewController
 
 from views.info_window import InfoWindow
-from PySide6.QtWidgets import QApplication, QStackedWidget
+from views.contacts_window import ContactsWindow
 
 class Page(Enum):
     LOGIN = 0
@@ -30,6 +31,7 @@ class Page(Enum):
     MANAGER = 5
     SETTINGS = 6
     INFO = 7
+    CONTACTS = 8
 
 class MainController:
     def __init__(self):
@@ -73,7 +75,7 @@ class MainController:
             self.app, self.part_model
         )
         self.info_view = InfoWindow(self.app)
-        
+        self.contacts_view = ContactsWindow(self.app)
         self.stacked_widget.addWidget(self.login_controller.view)
         self.stacked_widget.addWidget(self.add_serials_controller.view)
         self.stacked_widget.addWidget(self.overview_controller.view)
@@ -82,6 +84,7 @@ class MainController:
         self.stacked_widget.addWidget(self.manager_controller.view)
         self.stacked_widget.addWidget(self.settings_controller.view)
         self.stacked_widget.addWidget(self.info_view)
+        self.stacked_widget.addWidget(self.contacts_view)
         # Mapping of pages
         self.page_mapping = {
             Page.LOGIN: self.login_controller.view,
@@ -91,7 +94,8 @@ class MainController:
             Page.ADMIN: self.admin_controller.view,
             Page.MANAGER: self.manager_controller.view,
             Page.SETTINGS: self.settings_controller.view,
-            Page.INFO: self.info_view
+            Page.INFO: self.info_view,
+            Page.CONTACTS: self.contacts_view
         }
 
         # Initialize navigation history stack
@@ -100,7 +104,8 @@ class MainController:
         # Connect the signals
         self.login_controller.view.go_to_add_serials_signal.connect(
             lambda: self.switch_page(Page.ADD_SERIALS))
-        
+        self.login_controller.view.go_to_info_signal.connect(
+            lambda: self.switch_page(Page.INFO))
         self.login_controller.view.go_to_admin_signal.connect(
             self.switch_to_admin)
         self.login_controller.view.go_to_manager_signal.connect(
@@ -132,7 +137,9 @@ class MainController:
         self.advanced_overview_controller.view.go_to_info_signal.connect(
             lambda: self.switch_page(Page.INFO))
         self.settings_controller.view.go_to_previous_signal.connect(lambda: self.go_back())
+        self.info_view.go_to_contacts_signal.connect(lambda: self.switch_page(Page.CONTACTS))
         self.info_view.go_to_previous_signal.connect(lambda: self.go_back())
+        self.contacts_view.go_to_previous_signal.connect(lambda: self.go_back())
         # Show the login window first
         self.switch_page(Page.LOGIN)
         self.stacked_widget.show()

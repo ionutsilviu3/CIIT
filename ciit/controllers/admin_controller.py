@@ -1,5 +1,6 @@
 from views.admin_window import AdminWindow
 
+
 class AdminController:
     def __init__(self, app, model):
         self.model = model
@@ -29,7 +30,7 @@ class AdminController:
         self.view.modify_user_role(email, new_role)
 
     def user_selected(self, email, role):
-        if role != "Unregistred":
+        if role != "Unregistered":
             self.view.enable_modify_role_button(role)
         self.view.enable_delete_button()
 

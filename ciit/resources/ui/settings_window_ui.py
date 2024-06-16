@@ -300,16 +300,24 @@ class Ui_settings_window(object):
 
         self.pb_back = QPushButton(settings_window)
         self.pb_back.setObjectName(u"pb_back")
-        self.pb_back.setFont(font2)
+        font6 = QFont()
+        font6.setFamilies([u"Roboto"])
+        font6.setPointSize(10)
+        font6.setBold(True)
+        self.pb_back.setFont(font6)
         self.pb_back.setStyleSheet(u"QPushButton {\n"
-"border-radius: 12px;\n"
-"background-color: rgb(53, 76, 88);\n"
-"color: rgb(190, 190, 190);\n"
-"padding-left: 16px;\n"
-"padding-right: 16px;\n"
-"padding-top: 8 px;\n"
-"padding-bottom: 8 px;\n"
-"}")
+"	border-radius: 16px;\n"
+"	padding-left: 8px;\n"
+"	padding-right: 8px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color:rgb(226, 220, 220);\n"
+"	background-color: rgb(56, 76, 83);\n"
+"    }")
+        icon = QIcon()
+        icon.addFile(u":/Icons/arrow-left.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.pb_back.setIcon(icon)
+        self.pb_back.setIconSize(QSize(24, 24))
 
         self.gridLayout.addWidget(self.pb_back, 0, 0, 1, 1, Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
 
@@ -348,6 +356,6 @@ class Ui_settings_window(object):
         self.rb_high_other.setText(QCoreApplication.translate("settings_window", u"High", None))
         self.lb_title.setText(QCoreApplication.translate("settings_window", u"Settings", None))
         self.pb_save.setText(QCoreApplication.translate("settings_window", u"Save", None))
-        self.pb_back.setText(QCoreApplication.translate("settings_window", u"Go back", None))
+        self.pb_back.setText(QCoreApplication.translate("settings_window", u"Go Back", None))
     # retranslateUi
 

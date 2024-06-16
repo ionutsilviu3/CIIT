@@ -5,6 +5,7 @@ from PySide6.QtGui import QPainter, QFont, QColor
 from PySide6.QtCore import Qt
 from views.admin_window import AdminWindow
 
+
 class ManagerWindow(AdminWindow):
     def __init__(self, app):
         super().__init__(app)
@@ -20,7 +21,7 @@ class ManagerWindow(AdminWindow):
             role_item = self.tw_users.item(current_row, 1)
             if role_item:
                 current_role = role_item.text()
-                if current_role != "Unregistred":
+                if current_role != "Unregistered":
                     self.pb_delete.setEnabled(True)
                 else:
                     self.pb_delete.setEnabled(False)

@@ -83,7 +83,14 @@ class Ui_admin_overview(object):
 "\n"
 "QTableWidget::item {\n"
 "    padding: 12px;\n"
+"    color: rgb(226, 220, 220);\n"
 "}\n"
+"\n"
+"QTableWidget::item:selected {\n"
+"	padding: 12px;\n"
+"    background-color: rgb(64, 130, 100);\n"
+"}\n"
+"\n"
 "\n"
 "QHeaderView::section {\n"
 "    background-color: #384C53;\n"
@@ -97,7 +104,9 @@ class Ui_admin_overview(object):
 "	border-left: 1px solid rgb(34, 48, 56);\n"
 "}\n"
 "")
-        self.tw_users.setAlternatingRowColors(True)
+        self.tw_users.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tw_users.setAlternatingRowColors(False)
+        self.tw_users.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.tw_users.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.tw_users.setSortingEnabled(True)
         self.tw_users.setCornerButtonEnabled(False)

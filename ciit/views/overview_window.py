@@ -53,7 +53,7 @@ class OverviewWindow(QWidget, Ui_OverviewWidget):
         
         # Combine with an absolute threshold to handle small ranges
         proximity_threshold = max(proximity_threshold_relative, absolute_sensitivity)
-
+        
         # Check if the value is close to the limits
         return (lower_limit <= value_float <= lower_limit + proximity_threshold) or \
             (upper_limit - proximity_threshold <= value_float <= upper_limit)

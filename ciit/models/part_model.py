@@ -11,6 +11,7 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 from openpyxl.utils import get_column_letter
 from openpyxl.utils import column_index_from_string
 
+
 class PartModel:
 
     def __init__(self, client, query_master, observer_model):
@@ -27,19 +28,19 @@ class PartModel:
         self.observer_model = observer_model
         self.observer_model.attach(self)
         self.is_cache_invalid = False
- 
+
     def get_limit_threshold(self):
         return self.limit_threshold
- 
+
     def get_plot_timeframe(self):
         return self.plot_timeframe
- 
+
     def get_outlier_sensitivity_levels_input(self):
         return self.outlier_sensitivity_levels_input
- 
+
     def get_outlier_sensitivity_levels_other(self):
         return self.outlier_sensitivity_levels_other
- 
+
     def update(self, model):
         sensitivity_levels_input = {
             "low": 1.75,
@@ -259,14 +260,14 @@ class PartModel:
                     _, last_end = timeframes[-1]
                     diff = datetime_obj - last_end
                     if diff <= timedelta(hours=self.plot_timeframe * 2):
-                        
+
                         timeframes[-1] = (
                             timeframes[-1][0],
                             datetime_obj +
                             timedelta(hours=self.plot_timeframe * 2),
                         )
                     else:
-                        
+
                         start = datetime_obj - \
                             timedelta(hours=self.plot_timeframe)
                         end = datetime_obj + \
@@ -276,39 +277,21 @@ class PartModel:
             # Convert the timeframes to strings
             self.timeframes = [
                 (start.strftime("%Y-%m-%d %H:%M:%S"),
-                end.strftime("%Y-%m-%d %H:%M:%S"))
+                 end.strftime("%Y-%m-%d %H:%M:%S"))
                 for start, end in tf
             ]
 
         # Returning timeframes
         return self.timeframes
-    
+
     def calculate_mahalanobis_distances(self, blue_points, red_outlier_points):
         """Calculate Mahalanobis distances between blue points and red outlier points."""
         cov_matrix = np.cov(blue_points, rowvar=False)
         inv_cov_matrix = np.linalg.inv(cov_matrix)
         distances = np.array([mahalanobis(blue_point, red_outlier, inv_cov_matrix)
-                            for blue_point in blue_points for red_outlier in red_outlier_points])
+                              for blue_point in blue_points for red_outlier in red_outlier_points])
         return distances.reshape(len(blue_points), len(red_outlier_points))
-    
-    def export_data_to_excel(self, writer, data, sheet_name, table_name):
-        if not data.empty:
-            data.to_excel(writer, sheet_name=sheet_name, index=False)
-            worksheet = writer.sheets[sheet_name]
-            table = Table(displayName=table_name, ref=worksheet.dimensions)
-            style = TableStyleInfo(name="TableStyleMedium9", showFirstColumn=False, 
-                                showLastColumn=False, showRowStripes=True, showColumnStripes=True)
-            table.tableStyleInfo = style
-            worksheet.add_table(table)
-            
-            # Autofit table columns
-            dimensions = worksheet.calculate_dimension()
-            for column in worksheet.columns:
-                column_letter = column[0].column_letter
-                max_length = max(len(str(cell.value)) for cell in column)
-                adjusted_width = (max_length + 2)
-                worksheet.column_dimensions[column_letter].width = adjusted_width
-                
+
     def calculate_outliers(self, input_parts, other_parts):
         """
         Calculate outliers between input parts and other parts.
@@ -325,16 +308,21 @@ class PartModel:
 
         for parameter in parameters:
             # Filter parts for the current parameter
-            other_parts_param = other_parts[other_parts["name"] == parameter].copy()
-            input_parts_param = input_parts[input_parts["name"] == parameter].copy()
+            other_parts_param = other_parts[other_parts["name"] == parameter].copy(
+            )
+            input_parts_param = input_parts[input_parts["name"] == parameter].copy(
+            )
 
             if other_parts_param.empty or input_parts_param.empty:
                 continue
 
             # Set limits for the current parameter
-            parameter_limits = input_parts_param.iloc[0][["lower_limit", "upper_limit"]]
-            other_parts_param.loc[:, "lower_limit"] = parameter_limits["lower_limit"]
-            other_parts_param.loc[:, "upper_limit"] = parameter_limits["upper_limit"]
+            parameter_limits = input_parts_param.iloc[0][[
+                "lower_limit", "upper_limit"]]
+            other_parts_param.loc[:,
+                                  "lower_limit"] = parameter_limits["lower_limit"]
+            other_parts_param.loc[:,
+                                  "upper_limit"] = parameter_limits["upper_limit"]
 
             # Calculate mean and standard deviation of the other parts
             blue_value_mean = other_parts_param['value'].mean()
@@ -342,13 +330,16 @@ class PartModel:
 
             # Identify outliers in the input parts
             red_outliers = (input_parts_param['value'] < blue_value_mean - self.outlier_sensitivity_levels_input * blue_value_std) | \
-                        (input_parts_param['value'] > blue_value_mean + self.outlier_sensitivity_levels_input * blue_value_std)
-            red_outlier_points = input_parts_param[red_outliers][['created_at_numeric', 'value']].to_numpy()
+                (input_parts_param['value'] > blue_value_mean +
+                 self.outlier_sensitivity_levels_input * blue_value_std)
+            red_outlier_points = input_parts_param[red_outliers][[
+                'created_at_numeric', 'value']].to_numpy()
 
             # Identify outliers in the other parts
             if red_outlier_points.size > 0:
                 blue_outliers = (other_parts_param['value'] < blue_value_mean - self.outlier_sensitivity_levels_other * blue_value_std) | \
-                                (other_parts_param['value'] > blue_value_mean + self.outlier_sensitivity_levels_other * blue_value_std)
+                                (other_parts_param['value'] > blue_value_mean +
+                                 self.outlier_sensitivity_levels_other * blue_value_std)
             else:
                 blue_outliers = np.zeros(len(other_parts_param), dtype=bool)
 
@@ -365,3 +356,21 @@ class PartModel:
         # Combine all data into a single DataFrame
         combined_all_data = pd.concat(all_data)
         return combined_all_data
+
+    def export_data_to_excel(self, writer, data, sheet_name, table_name):
+        if not data.empty:
+            data.to_excel(writer, sheet_name=sheet_name, index=False)
+            worksheet = writer.sheets[sheet_name]
+            table = Table(displayName=table_name, ref=worksheet.dimensions)
+            style = TableStyleInfo(name="TableStyleMedium9", showFirstColumn=False,
+                                   showLastColumn=False, showRowStripes=True, showColumnStripes=True)
+            table.tableStyleInfo = style
+            worksheet.add_table(table)
+
+            # Autofit table columns
+            dimensions = worksheet.calculate_dimension()
+            for column in worksheet.columns:
+                column_letter = column[0].column_letter
+                max_length = max(len(str(cell.value)) for cell in column)
+                adjusted_width = (max_length + 2)
+                worksheet.column_dimensions[column_letter].width = adjusted_width

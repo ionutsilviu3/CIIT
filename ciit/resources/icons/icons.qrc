@@ -1,9 +1,26 @@
 <RCC>
   <qresource prefix="Images">
+    <file>contacts.png</file>
     <file>add_serials.png</file>
     <file>advanced.png</file>
     <file>background.jpg</file>
     <file>overview.png</file>
     <file>vertical_background.jpg</file>
+  </qresource>
+  <qresource prefix="Info">
+    <file>info1.png</file>
+  </qresource>
+  <qresource prefix="Icons">
+    <file>info.svg</file>
+    <file>arrow-left.svg</file>
+    <file>arrow-right-circle.svg</file>
+    <file>arrow-left-circle.svg</file>
+    <file>mail.svg</file>
+    <file>map-pin.svg</file>
+    <file>phone.svg</file>
+    <file>alert-circle.svg</file>
+    <file>lock.svg</file>
+    <file>log-in.svg</file>
+    <file>user.svg</file>
   </qresource>
 </RCC>

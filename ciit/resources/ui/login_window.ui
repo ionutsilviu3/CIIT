@@ -101,6 +101,41 @@ border-radius: 16px;
       <property name="bottomMargin">
        <number>8</number>
       </property>
+      <item alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop">
+       <widget class="QPushButton" name="pb_info">
+        <property name="font">
+         <font>
+          <family>Roboto</family>
+          <pointsize>10</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border-radius: 16px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(226, 220, 220);
+	background-color: rgb(56, 76, 83);
+    }</string>
+        </property>
+        <property name="text">
+         <string>Info</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../icons/icons.qrc">
+          <normaloff>:/Icons/info.svg</normaloff>:/Icons/info.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+      </item>
       <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
        <widget class="QLabel" name="lb_login_title">
         <property name="font">
@@ -198,7 +233,7 @@ border-radius: 16px;
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>:/Main/icons/user.svg</pixmap>
+            <pixmap resource="../icons/icons.qrc">:/Icons/mail.svg</pixmap>
            </property>
            <property name="scaledContents">
             <bool>false</bool>
@@ -263,7 +298,7 @@ border-radius: 16px;
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>:/Main/icons/lock.svg</pixmap>
+            <pixmap resource="../icons/icons.qrc">:/Icons/lock.svg</pixmap>
            </property>
           </widget>
          </item>
@@ -355,7 +390,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
 
 QLabel#lb_warning_icon:enabled
 {
-	border-image: url(:/Main/icons/alert-circle.svg);
+	
+	border-image: url(:/Icons/alert-circle.svg);
 }
 
 </string>

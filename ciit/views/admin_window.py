@@ -12,7 +12,8 @@ class AdminWindow(QWidget, Ui_admin_overview):
     go_to_main_app_signal = QtCore.Signal()
     delete_user_signal = QtCore.Signal(str)
     user_selected_signal = QtCore.Signal(str, str)
-    modify_role_signal = QtCore.Signal(str, str)  # Adding this signal for role modification
+    # Adding this signal for role modification
+    modify_role_signal = QtCore.Signal(str, str)
 
     def __init__(self, app):
         super().__init__()
@@ -21,13 +22,12 @@ class AdminWindow(QWidget, Ui_admin_overview):
 
         self.tw_users.setMinimumWidth(300)
         self.tw_users.setColumnCount(2)
-        self.tw_users.setAlternatingRowColors(True)
         self.tw_users.setHorizontalHeaderLabels(['Email', 'Role'])
         self.tw_users.horizontalHeader().setSectionsClickable(False)
         self.tw_users.setSelectionBehavior(QTableWidget.SelectRows)
         self.tw_users.verticalHeader().hide()
         self.tw_users.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
-        
+        self.tw_users.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         # Setting the layout to stretch
         self.tw_users.horizontalHeader().setStretchLastSection(True)
 
@@ -86,7 +86,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
             role_item = self.tw_users.item(current_row, 1)
             if role_item:
                 current_role = role_item.text()
-                if current_role != "Unregistred":
+                if current_role != "Unregistered":
                     self.pb_delete.setEnabled(True)
                     self.pb_modify_role.setEnabled(True)
                 else:
@@ -106,7 +106,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
         row_idx = self.tw_users.rowCount()
         self.tw_users.insertRow(row_idx)
         email_item = QTableWidgetItem(email)
-        role_item = QTableWidgetItem("Unregistred")
+        role_item = QTableWidgetItem("Unregistered")
         self.tw_users.setItem(row_idx, 0, email_item)
         self.tw_users.setItem(row_idx, 1, role_item)
         self.update_chart()
@@ -186,7 +186,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
         custom_colors = {
             "Manager": QColor("#00AAB0"),
             "Engineer": QColor("#00C598"),
-            "Unregistred": QColor("#DD733F")
+            "Unregistered": QColor("#DD733F")
         }
 
         total_count = sum(role_counts.values())
