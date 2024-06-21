@@ -6,7 +6,7 @@ class SettingsModel:
     def __init__(self):
         self.settings = {}
         self.DEFAULT_SETTINGS = {
-            "limit_sensitivity": 5,
+            "limit_sensitivity": 20,
             "timeframe": 1,
             "input_priority": "normal",
             "other_priority": "normal",

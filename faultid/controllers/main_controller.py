@@ -3,7 +3,7 @@ import os
 from enum import Enum
 from dotenv import find_dotenv, load_dotenv
 from PySide6.QtWidgets import QApplication, QStackedWidget
-
+from PySide6.QtGui import QIcon, QPixmap
 from models.settings_model import SettingsModel
 from models.user_model import UserModel
 from models.serial_model import SerialModel
@@ -58,6 +58,9 @@ class MainController:
         self.stacked_widget = QStackedWidget()
         self.stacked_widget.setWindowTitle("FaultID")
         self.stacked_widget.setStyleSheet("background-color: rgb(34, 48, 56);")
+        self.pixmap = QPixmap(":/FaultID_icon.ico")
+        self.icon = QIcon(self.pixmap)
+        self.stacked_widget.setWindowIcon(self.icon)
 
         # Create the controllers and add their views to the QStackedWidget
 

@@ -285,75 +285,95 @@ class PartModel:
         return self.timeframes
 
     def calculate_mahalanobis_distances(self, blue_points, red_outlier_points):
-        """Calculate Mahalanobis distances between blue points and red outlier points."""
+        """
+        Calculate Mahalanobis distances between blue points and red outlier points.
+        """
+        # Check if either array is empty
+        if blue_points.size == 0 or red_outlier_points.size == 0:
+            return np.array([]).reshape(0, 0)
+        
+        # Calculate the covariance matrix of blue points
         cov_matrix = np.cov(blue_points, rowvar=False)
+        
+        # Calculate the inverse of the covariance matrix
         inv_cov_matrix = np.linalg.inv(cov_matrix)
-        distances = np.array([mahalanobis(blue_point, red_outlier, inv_cov_matrix)
-                              for blue_point in blue_points for red_outlier in red_outlier_points])
+        
+        # Calculate Mahalanobis distances between each blue point and each red outlier point
+        distances = np.array([
+            mahalanobis(blue_point, red_outlier, inv_cov_matrix)
+            for blue_point in blue_points
+            for red_outlier in red_outlier_points
+        ])
+        
+        # Reshape the distances into a 2D array
         return distances.reshape(len(blue_points), len(red_outlier_points))
 
     def calculate_outliers(self, input_parts, other_parts):
         """
-        Calculate outliers between input parts and other parts.
-
-        Args:
-            input_parts (pd.DataFrame): DataFrame containing input parts data.
-            other_parts (pd.DataFrame): DataFrame containing other parts data.
-
-        Returns:
-            pd.DataFrame: Combined DataFrame with outliers information.
+        Calculate outliers in the input parts based on the other parts.
         """
+        # Get unique parameters from input parts
         parameters = input_parts["name"].unique()
         all_data = []
 
         for parameter in parameters:
-            # Filter parts for the current parameter
-            other_parts_param = other_parts[other_parts["name"] == parameter].copy(
-            )
-            input_parts_param = input_parts[input_parts["name"] == parameter].copy(
-            )
+            # Filter data for the current parameter
+            other_parts_param = other_parts[other_parts["name"] == parameter]
+            input_parts_param = input_parts[input_parts["name"] == parameter]
 
+            # Skip if either DataFrame is empty
             if other_parts_param.empty or input_parts_param.empty:
                 continue
 
-            # Set limits for the current parameter
-            parameter_limits = input_parts_param.iloc[0][[
-                "lower_limit", "upper_limit"]]
-            other_parts_param.loc[:,
-                                  "lower_limit"] = parameter_limits["lower_limit"]
-            other_parts_param.loc[:,
-                                  "upper_limit"] = parameter_limits["upper_limit"]
+            # Get parameter limits from input parts and assign them to other parts
+            parameter_limits = input_parts_param.iloc[0][["lower_limit", "upper_limit"]]
+            other_parts_param = other_parts_param.assign(**parameter_limits)
 
-            # Calculate mean and standard deviation of the other parts
+            # Convert relevant columns to numpy arrays
+            blue_points = other_parts_param[['created_at_numeric', 'value']].to_numpy()
+
+            # Calculate mean and standard deviation of the value in other parts
             blue_value_mean = other_parts_param['value'].mean()
             blue_value_std = other_parts_param['value'].std()
+            
+            # Identify red outliers in input parts
+            red_outliers = (
+                (input_parts_param['value'] < blue_value_mean - self.outlier_sensitivity_levels_input * blue_value_std) |
+                (input_parts_param['value'] > blue_value_mean + self.outlier_sensitivity_levels_input * blue_value_std)
+            )
+            red_outlier_points = input_parts_param[red_outliers][['created_at_numeric', 'value']].to_numpy()
 
-            # Identify outliers in the input parts
-            red_outliers = (input_parts_param['value'] < blue_value_mean - self.outlier_sensitivity_levels_input * blue_value_std) | \
-                (input_parts_param['value'] > blue_value_mean +
-                 self.outlier_sensitivity_levels_input * blue_value_std)
-            red_outlier_points = input_parts_param[red_outliers][[
-                'created_at_numeric', 'value']].to_numpy()
-
-            # Identify outliers in the other parts
             if red_outlier_points.size > 0:
-                blue_outliers = (other_parts_param['value'] < blue_value_mean - self.outlier_sensitivity_levels_other * blue_value_std) | \
-                                (other_parts_param['value'] > blue_value_mean +
-                                 self.outlier_sensitivity_levels_other * blue_value_std)
+                # Identify blue outliers in other parts
+                blue_outliers = (
+                    (other_parts_param['value'] < blue_value_mean - self.outlier_sensitivity_levels_other * blue_value_std) |
+                    (other_parts_param['value'] > blue_value_mean + self.outlier_sensitivity_levels_other * blue_value_std)
+                )
+
+                # Calculate Mahalanobis distances and find close blue points
+                distances = self.calculate_mahalanobis_distances(blue_points, red_outlier_points)
+                if distances.size > 0:
+                    min_distances = distances.min(axis=1)
+                    threshold_distance = np.percentile(min_distances, 9)
+                    close_blue_points = min_distances < threshold_distance
+                    other_parts_param.loc[close_blue_points, 'is_close'] = True
+                else:
+                    other_parts_param['is_close'] = False
             else:
                 blue_outliers = np.zeros(len(other_parts_param), dtype=bool)
+                other_parts_param['is_close'] = False
 
-            # Mark outliers and part types in the DataFrames
-            input_parts_param.loc[:, 'part_type'] = 'Input'
-            input_parts_param.loc[:, 'is_outlier'] = red_outliers
-            other_parts_param.loc[:, 'part_type'] = 'Other'
-            other_parts_param.loc[:, 'is_outlier'] = blue_outliers
+            # Assign labels and outlier status
+            input_parts_param['part_type'] = 'Input'
+            input_parts_param['is_outlier'] = red_outliers
+            other_parts_param['part_type'] = 'Other'
+            other_parts_param['is_outlier'] = blue_outliers
 
             # Combine input and other parts data
             combined_data = pd.concat([input_parts_param, other_parts_param])
             all_data.append(combined_data)
 
-        # Combine all data into a single DataFrame
+        # Combine all data for all parameters
         combined_all_data = pd.concat(all_data)
         return combined_all_data
 
