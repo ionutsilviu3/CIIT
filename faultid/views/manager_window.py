@@ -5,14 +5,21 @@ from PySide6.QtGui import QPainter, QFont, QColor
 from PySide6.QtCore import Qt
 from views.admin_window import AdminWindow
 
-
 class ManagerWindow(AdminWindow):
     def __init__(self, app):
         super().__init__(app)
-        self.pb_modify_role.hide()  # Hide the modify role button
+        
+        # Hide the modify role button specific to ManagerWindow
+        self.pb_modify_role.hide()
+        
+        # Set custom title for ManagerWindow
         self.lb_title.setText("Manager")
 
     def on_selection_changed(self):
+        """
+        Override method to manage selection changes in the table widget.
+        Disables delete button for "Unregistered" roles.
+        """
         selected_items = self.tw_users.selectedItems()
         if not selected_items:
             self.pb_delete.setEnabled(False)
@@ -27,4 +34,7 @@ class ManagerWindow(AdminWindow):
                     self.pb_delete.setEnabled(False)
 
     def on_modify_role_clicked(self):
-        pass  # Override to do nothing
+        """
+        Override method to do nothing on modify role button click.
+        """
+        pass  # No action needed for modify role button in ManagerWindow

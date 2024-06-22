@@ -27,8 +27,10 @@ class SQLClient:
         self.engine = None
         self.session = None
 
-    # Connection function
     def connect(self):
+        """
+        Establishes a connection to the database.
+        """
         try:
             connection_string = f"postgresql://{self.user}:{self.password}@{self.end_point}:{self.port}/{self.db}"
             self.engine = create_engine(connection_string)
@@ -39,8 +41,10 @@ class SQLClient:
         except Exception as e:
             print(f"Error connecting to the database: {e}")
 
-    # Disconnect function
     def disconnect(self):
+        """
+        Closes the connection to the database.
+        """
         try:
             if self.session:
                 self.session.close()
@@ -52,6 +56,14 @@ class SQLClient:
         
     #TODO remove, used for temp inserts
     def execute_query_t(self, df, update=False, batch_size=1000):
+        """
+        Executes queries on the database in batches.
+
+        Args:
+            df (DataFrame): The DataFrame containing the data to be used in queries.
+            update (bool): Flag to indicate whether to perform update or select operation.
+            batch_size (int): The size of each batch for update operations.
+        """
         try:
             if update:
                 # Update the database in batches
@@ -77,32 +89,43 @@ class SQLClient:
             print(f"SQL query execution error: {e}")
         return None
 
-
-
     def execute_query(self, query, params=None, fetch_results=True):
-            try:
-                with self.engine.connect() as connection:
-                    if fetch_results:
-                        df = pd.read_sql(text(query), self.engine, params=params)
-                        return df
-                    else:
-                        connection.execute(text(query), params)
-                        connection.commit()
-            except Exception as e:
-                print(f"SQL query execution error: {e}")
-            return None
+        """
+        Executes a SQL query on the database.
+
+        Args:
+            query (str): The SQL query to be executed.
+            params (dict): The parameters for the SQL query.
+            fetch_results (bool): Flag to indicate whether to fetch results or not.
+
+        Returns:
+            DataFrame: The results of the query if fetch_results is True, else None.
+        """
+        try:
+            with self.engine.connect() as connection:
+                if fetch_results:
+                    df = pd.read_sql(text(query), self.engine, params=params)
+                    return df
+                else:
+                    connection.execute(text(query), params)
+                    connection.commit()
+        except Exception as e:
+            print(f"SQL query execution error: {e}")
+        return None
 
     def execute_query_as_list(self, query):
+        """
+        Executes a SQL query and returns the results as a list.
+
+        Args:
+            query (str): The SQL query to be executed.
+
+        Returns:
+            DataFrame: The results of the query as a DataFrame.
+        """
         try:
             df = pd.read_sql(query, self.engine)
             return df.reset_index(drop=True)
         except Exception as e:
             print(f"SQL query execution error: {e}")
         return None
-
-
-
-
-
-
-

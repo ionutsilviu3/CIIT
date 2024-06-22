@@ -123,7 +123,7 @@ class Ui_info_window(object):
         font3.setBold(False)
         self.pb_previous_page.setFont(font3)
         self.pb_previous_page.setStyleSheet(u"QPushButton {\n"
-"background-color: rgb(34, 48, 56, 255);\n"
+"background-color: rgb(34, 48, 56);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(30, 43, 50);\n"
@@ -163,7 +163,7 @@ class Ui_info_window(object):
         self.pb_next_page.setObjectName(u"pb_next_page")
         self.pb_next_page.setFont(font3)
         self.pb_next_page.setStyleSheet(u"QPushButton {\n"
-"background-color: rgb(34, 48, 56, 255);\n"
+"background-color: rgb(34, 48, 56);\n"
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(30, 43, 50);\n"

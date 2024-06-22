@@ -11,6 +11,7 @@ from scipy.spatial import distance
 from resources.ui.advanced_overview_window_ui import Ui_AdvancedOverviewWidget
 
 class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
+    # Define signals for inter-object communication
     radio_button_clicked_signal = Signal()
     go_to_overview_signal = Signal()
     go_to_settings_signal = Signal()
@@ -19,23 +20,25 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
     
     def __init__(self, app):
         super().__init__()
-        self.setupUi(self)
-        self.app = app
-        self.vb_locations = QVBoxLayout()
-        self.vb_locations.setSpacing(16)
-        self.vb_plots.setSpacing(16)
-        self.sa_contents_buttons.setLayout(self.vb_locations)
-        self.sa_radio_buttons.setWidget(self.sa_contents_buttons)
+        self.setupUi(self)  # Set up the UI defined in Ui_AdvancedOverviewWidget
+        self.app = app  # Store the application instance
+        self.vb_locations = QVBoxLayout()  # Vertical layout for radio buttons
+        self.vb_locations.setSpacing(16)  # Set spacing between radio buttons
+        self.vb_plots.setSpacing(16)  # Set spacing between plot views
+        self.sa_contents_buttons.setLayout(self.vb_locations)  # Set layout for radio buttons container
+        self.sa_radio_buttons.setWidget(self.sa_contents_buttons)  # Set widget for scroll area
+        # Connect buttons to corresponding signals
         self.pb_overview.clicked.connect(self.go_to_overview_signal.emit)
         self.pb_settings.clicked.connect(self.go_to_settings_signal)
         self.pb_export.clicked.connect(self.export_data_signal)
         self.pb_info.clicked.connect(self.go_to_info_signal)
-        self.views = {}
-        self.selected_location = None
-        self.locations_radio_buttons = []
-
+        self.views = {}  # Dictionary to store views (not currently used)
+        self.selected_location = None  # Store currently selected location
+        self.locations_radio_buttons = []  # List to store radio buttons
+    
     @Slot()
     def get_selected_location(self):
+        """Returns the text of the selected radio button."""
         for radio_button in self.locations_radio_buttons:
             if radio_button.isChecked():
                 self.selected_location = radio_button.text()
@@ -43,6 +46,7 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
 
     @Slot()
     def update_radio_buttons(self, locations):
+        """Updates radio buttons based on the provided locations."""
         for loc in locations:
             radio_button = QRadioButton(loc)
             radio_button.clicked.connect(self.radio_button_clicked_signal)
@@ -50,16 +54,18 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
             self.locations_radio_buttons.append(radio_button)
     
     def clear_plots(self):
-        # Clear existing plots
+        """Clears existing plot views."""
         while self.vb_plots.count():
             item = self.vb_plots.takeAt(0)
             widget = item.widget()
             if widget is not None:
-                widget.deleteLater()
+                widget.deleteLater()  # Delete the widget and free up resources
     
     def create_plot(self, parameter, other_parts_param, input_parts_param, blue_outliers, parameter_limits):
-        fig = make_subplots(specs=[[{"secondary_y": True}]])
-
+        """Creates a scatter plot using Plotly and displays it in a QWebEngineView."""
+        fig = make_subplots(specs=[[{"secondary_y": True}]])  # Initialize subplot
+        
+        # Add trace for parts produced
         fig.add_trace(
             go.Scatter(
                 x=other_parts_param["created_at"],
@@ -71,7 +77,8 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
             ),
             secondary_y=False,
         )
-
+        
+        # Add trace for outlier parts produced if any exist
         if np.any(blue_outliers):
             fig.add_trace(
                 go.Scatter(
@@ -84,7 +91,8 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
                 ),
                 secondary_y=False,
             )
-
+        
+        # Add trace for input parts
         fig.add_trace(
             go.Scatter(
                 x=input_parts_param["created_at"],
@@ -96,7 +104,8 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
             ),
             secondary_y=False,
         )
-
+        
+        # Add horizontal lines for parameter limits
         fig.add_trace(
             go.Scatter(
                 x=[other_parts_param["created_at"].min(), other_parts_param["created_at"].max()],
@@ -119,7 +128,8 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
             ),
             secondary_y=False,
         )
-
+        
+        # Update layout of the plot
         fig.update_layout(
             title_text=f"Scatter Plot of {parameter} Value Over Time",
             xaxis_title="Time (days since start)",
@@ -127,17 +137,20 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
             legend_title="Legend",
             legend=dict(itemsizing='constant'),
         )
-
+        
+        # Write the plot to an HTML file
         file_path = os.path.join(os.getcwd(), f"temp_plot_{parameter}.html")
         fig.write_html(file_path)
-
-        view = QWebEngineView()
-        view.setFixedSize(700, 450)
-        view.load(QUrl.fromLocalFile(file_path))
-
-        self.vb_plots.addWidget(view)
         
+        # Display the plot in a QWebEngineView
+        view = QWebEngineView()
+        view.setFixedSize(700, 450)  # Set fixed size for the view
+        view.load(QUrl.fromLocalFile(file_path))  # Load HTML file into the view
+        
+        self.vb_plots.addWidget(view)  # Add the view widget to the layout
+    
     def get_export_path(self):
+        """Opens a file dialog to get the export path for Excel data."""
         options = QFileDialog.Options()
         # Remove DontUseNativeDialog option to use the native dialog
         # options |= QFileDialog.DontUseNativeDialog

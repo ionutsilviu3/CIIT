@@ -1,128 +1,90 @@
-from PySide6.QtWidgets import QWidget, QListWidgetItem
+from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog
 from PySide6 import QtCore
 from resources.ui.add_serials_window_ui import Ui_add_serials_window
-from PySide6.QtWidgets import QFileDialog
 from PySide6.QtCore import QStandardPaths
 
 
 class AddSerialWindow(QWidget, Ui_add_serials_window):
-
+    # Define signals for communication between components
     validate_signal = QtCore.Signal()
     delete_serials_signal = QtCore.Signal()
     clear_list_signal = QtCore.Signal()
     continue_signal = QtCore.Signal()
     import_signal = QtCore.Signal()
     go_to_info_signal = QtCore.Signal()
-    #
-    # Initializing the window for adding serials into the app
-    def __init__(self, app):
 
+    # Initialize the window for adding serials into the app
+    def __init__(self, app):
         super().__init__()
-        self.setupUi(self)
-        self.app = app
+        self.setupUi(self)  # Setup the UI defined in Ui_add_serials_window
+        self.app = app  # Store the application reference
         self.lw_serials.setItemAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
 
-        # When the user presses Return, clean the input, validate it and add it to the list
+        # Connect signals and slots
         self.le_serials.returnPressed.connect(self.validate_signal)
-
-        # When the user clicks the delete button, delete the selected serials
         self.pb_delete.clicked.connect(self.delete_serials_signal)
-
-        # When the user clicks the clear button, clear all serials from the list
         self.pb_clear.clicked.connect(self.clear_list_signal)
-
         self.lw_serials.itemClicked.connect(self.enable_delete_button)
-
         self.le_serials.textEdited.connect(self.disable_error_message_slot)
-
         self.pb_continue.clicked.connect(self.continue_signal)
-        
         self.pb_import.clicked.connect(self.import_signal)
-        
         self.pb_info.clicked.connect(self.go_to_info_signal)
 
+    # Get the input text from the line edit widget
     def get_input_from_user(self):
         return self.le_serials.text()
 
-    #
-    # Adding input from line edit to list view
+    # Add a serial to the list view
     def add_serial(self, serial):
- 
-        # Converting the text to an item, for styling purposes
-        item = QListWidgetItem(serial)
-        item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
- 
-        self.lw_serials.addItem(item)
+        item = QListWidgetItem(serial)  # Create a list item with the serial text
+        item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)  # Center-align the text
+        self.lw_serials.addItem(item)  # Add the item to the list widget
+        # Enable buttons and clear line edit
         self.switch_enabled_state(self.pb_clear, self.pb_continue, state_to_switch=True)
- 
-        # Clearing the line edit
-        self.le_serials.clear()
+        self.le_serials.clear()  # Clear the line edit after adding
 
-    #
-    # Delete selected serials from the list
+    # Delete selected serials from the list view
     def delete_serials(self):
-
-        items = self.lw_serials.selectedItems()
-
-        # Check if there are any selected items
-        if not items:
+        items = self.lw_serials.selectedItems()  # Get selected items
+        if not items:  # If no items are selected, return
             return
-
         for item in items:
-            self.lw_serials.takeItem(self.lw_serials.row(item))
+            self.lw_serials.takeItem(self.lw_serials.row(item))  # Remove item from list
+        # Disable buttons as appropriate
+        self.switch_enabled_state(self.pb_clear, self.pb_delete, self.pb_continue, state_to_switch=False)
+        return items  # Return the deleted items
 
-            self.switch_enabled_state(
-                self.pb_clear, self.pb_delete, self.pb_continue, state_to_switch=False
-            )
-
-        return items
-
-    #
-    # Clearing the serials list
+    # Clear all serials from the list view
     def clear_list(self):
-        self.lw_serials.clear()
-        self.switch_enabled_state(
-            self.pb_clear, self.pb_delete, self.pb_continue, state_to_switch=False
-        )
+        self.lw_serials.clear()  # Clear all items from the list
+        self.switch_enabled_state(self.pb_clear, self.pb_delete, self.pb_continue, state_to_switch=False)
 
-    #
-    # Intermediary function due to Qt arhitecture
+    # Slot to disable error message handling
     def disable_error_message_slot(self):
         self.handle_error_message(False)
 
-    #
-    # Intermediary function due to Qt arhitecture
+    # Slot to enable delete button when an item is clicked
     def enable_delete_button(self):
         self.switch_enabled_state(self.pb_delete, state_to_switch=True)
-        
+
+    # Get the path of an Excel file selected by the user
     def get_excel_file_path(self):
-        file_dialog = QFileDialog()
-        downloads_path = QStandardPaths.writableLocation(
-            QStandardPaths.DownloadLocation
-        )
-        file_dialog.setDirectory(downloads_path)
-        file_path, _ = file_dialog.getOpenFileName(
-            self, "Open Excel file", "", "Excel Files (*.xls *.xlsx)"
-        )
-        return file_path
+        file_dialog = QFileDialog()  # Create file dialog instance
+        downloads_path = QStandardPaths.writableLocation(QStandardPaths.DownloadLocation)  # Get downloads path
+        file_dialog.setDirectory(downloads_path)  # Set initial directory for file dialog
+        file_path, _ = file_dialog.getOpenFileName(self, "Open Excel file", "", "Excel Files (*.xls *.xlsx)")  # Get file path
+        return file_path  # Return the selected file path
 
-    #
-    # Handling the error message of invalid serial inputs
+    # Handle error messages for invalid serial inputs
     def handle_error_message(self, state: bool, custom_message: str = None):
-
-        # Checking if there is a custom message that we want to set the label to, otherwise let the default text be
         if custom_message is None:
             custom_message = "The serial entered is not valid! Please try another!"
-
-        self.lb_error.setText(custom_message)
-
-        self.switch_enabled_state(self.lb_error, state_to_switch=state)
-
+        self.lb_error.setText(custom_message)  # Set error message text
+        self.switch_enabled_state(self.lb_error, state_to_switch=state)  # Enable/disable error label
         if state:
-            self.le_serials.clear()
+            self.le_serials.clear()  # Clear line edit on error state
 
-    #
-    # Switch the state of a widget (or more) to a desired state, ex. if False, check first if the widget is not disabled alredy, and disabble it
+    # Toggle enabled state of widgets based on state_to_switch parameter
     def switch_enabled_state(self, *widgets, state_to_switch: bool):
         for widget in widgets:
             if widget.isEnabled() is not state_to_switch:
