@@ -207,13 +207,20 @@ class Ui_AdvancedOverviewWidget(object):
 
         self.horizontalLayout_2.addWidget(self.sa_radio_buttons)
 
+        self.placeholder_plots = QLabel(AdvancedOverviewWidget)
+        self.placeholder_plots.setObjectName(u"placeholder_plots")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.placeholder_plots.sizePolicy().hasHeightForWidth())
+        self.placeholder_plots.setSizePolicy(sizePolicy1)
+        self.placeholder_plots.setMinimumSize(QSize(32, 10))
+        self.placeholder_plots.setMaximumSize(QSize(200, 10))
+
+        self.horizontalLayout_2.addWidget(self.placeholder_plots)
+
         self.sa_plots = QScrollArea(AdvancedOverviewWidget)
         self.sa_plots.setObjectName(u"sa_plots")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        sizePolicy1.setHorizontalStretch(2)
-        sizePolicy1.setVerticalStretch(1)
-        sizePolicy1.setHeightForWidth(self.sa_plots.sizePolicy().hasHeightForWidth())
-        self.sa_plots.setSizePolicy(sizePolicy1)
         self.sa_plots.setStyleSheet(u"QWidget#sa_contents_plots {\n"
 "    background-color: rgb(34, 48, 56);\n"
 "}\n"
@@ -293,17 +300,14 @@ class Ui_AdvancedOverviewWidget(object):
 "}\n"
 "")
         self.sa_plots.setWidgetResizable(True)
+        self.sa_plots.setMinimumSize(QSize(760, 450))
+        self.sa_plots.setMaximumSize(QSize(1700, 700))
         self.sa_contents_plots = QWidget()
         self.sa_contents_plots.setObjectName(u"sa_contents_plots")
-        self.sa_contents_plots.setGeometry(QRect(0, 0, 734, 359))
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.sa_contents_plots.sizePolicy().hasHeightForWidth())
-        self.sa_contents_plots.setSizePolicy(sizePolicy2)
+        self.sa_contents_plots.setGeometry(QRect(0, 0, 728, 359))
         self.sa_contents_plots.setStyleSheet(u"QLabel\n"
 "{\n"
-"	color: rgb(190, 190, 190);\n"
+"    color: rgb(190, 190, 190);\n"
 "}")
         self.vb_plots = QVBoxLayout(self.sa_contents_plots)
         self.vb_plots.setObjectName(u"vb_plots")
@@ -375,6 +379,7 @@ class Ui_AdvancedOverviewWidget(object):
         self.lb_station.setText(QCoreApplication.translate("AdvancedOverviewWidget", u"Station", None))
         self.lb_message.setText("")
         self.placeholder_2.setText("")
+        self.placeholder_plots.setText("")
         self.placeholder.setText("")
         self.pb_overview.setText(QCoreApplication.translate("AdvancedOverviewWidget", u"Go to Overview", None))
         self.pb_export.setText(QCoreApplication.translate("AdvancedOverviewWidget", u"Export data", None))

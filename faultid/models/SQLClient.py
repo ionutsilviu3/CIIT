@@ -26,6 +26,9 @@ class SQLClient:
         self.password = password
         self.engine = None
         self.session = None
+        
+    def __del__(self):
+        self.disconnect()
 
     def connect(self):
         """
@@ -48,46 +51,15 @@ class SQLClient:
         try:
             if self.session:
                 self.session.close()
+            else:
+                print("No session to close.")
+
             if self.engine:
                 self.engine.dispose()
-            print("Disconnected from the database.")
+            else:
+                print("No engine to dispose.")
         except Exception as e:
             print(f"Error disconnecting from the database: {e}")
-        
-    #TODO remove, used for temp inserts
-    def execute_query_t(self, df, update=False, batch_size=1000):
-        """
-        Executes queries on the database in batches.
-
-        Args:
-            df (DataFrame): The DataFrame containing the data to be used in queries.
-            update (bool): Flag to indicate whether to perform update or select operation.
-            batch_size (int): The size of each batch for update operations.
-        """
-        try:
-            if update:
-                # Update the database in batches
-                with self.engine.connect() as connection:
-                    with connection.begin():
-                        total_records = len(df)
-                        for chunk_start in range(0, total_records, batch_size):
-                            chunk_end = min(chunk_start + batch_size, total_records)
-                            chunk_df = df.iloc[chunk_start:chunk_end]
-                            # Construct the UPDATE query
-                            update_query = "UPDATE results SET event_id = :event_id WHERE id = :id"
-                            # Execute the UPDATE query for the current chunk
-                            for index, row in chunk_df.iterrows():
-                                connection.execute(text(update_query), {"event_id": row['event_id'], "id": row['id']})
-                            print(f"Updated {chunk_end} records out of {total_records}")
-                print("Database table updated successfully!")
-            else:
-                # Execute the SELECT query
-                query = "SELECT * FROM results"
-                result_df = pd.read_sql(query, self.engine)
-                return result_df
-        except Exception as e:
-            print(f"SQL query execution error: {e}")
-        return None
 
     def execute_query(self, query, params=None, fetch_results=True):
         """

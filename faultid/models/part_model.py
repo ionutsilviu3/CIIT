@@ -1,16 +1,9 @@
-from concurrent.futures import Future
-from datetime import datetime, timedelta
+from datetime import  timedelta
 import threading
 import numpy as np
 import pandas as pd
-from models.serial_model import SerialModel  
 from scipy.spatial.distance import mahalanobis
-from openpyxl import Workbook
-from openpyxl.utils.dataframe import dataframe_to_rows
 from openpyxl.worksheet.table import Table, TableStyleInfo
-from openpyxl.utils import get_column_letter
-from openpyxl.utils import column_index_from_string
-
 
 class PartModel:
     def __init__(self, client, query_master, observer_model):
@@ -27,7 +20,7 @@ class PartModel:
         self.observer_model = observer_model
         self.observer_model.attach(self)
         self.is_cache_invalid = False
-
+    
     def get_limit_threshold(self):
         return self.limit_threshold
 
@@ -360,8 +353,8 @@ class PartModel:
         all_data = []
 
         for parameter in parameters:
-            other_parts_param = other_parts[other_parts["name"] == parameter]
-            input_parts_param = input_parts[input_parts["name"] == parameter]
+            other_parts_param = other_parts[other_parts["name"] == parameter].copy()  # Ensure a copy to avoid modifying original DataFrame
+            input_parts_param = input_parts[input_parts["name"] == parameter].copy()  # Ensure a copy to avoid modifying original DataFrame
 
             if other_parts_param.empty or input_parts_param.empty:
                 continue
@@ -393,15 +386,15 @@ class PartModel:
                     close_blue_points = min_distances < threshold_distance
                     other_parts_param.loc[close_blue_points, 'is_close'] = True
                 else:
-                    other_parts_param['is_close'] = False
+                    other_parts_param.loc[:, 'is_close'] = False
             else:
                 blue_outliers = np.zeros(len(other_parts_param), dtype=bool)
-                other_parts_param['is_close'] = False
+                other_parts_param.loc[:, 'is_close'] = False
 
-            input_parts_param['part_type'] = 'Input'
-            input_parts_param['is_outlier'] = red_outliers
-            other_parts_param['part_type'] = 'Other'
-            other_parts_param['is_outlier'] = blue_outliers
+            input_parts_param.loc[:, 'part_type'] = 'Input'
+            input_parts_param.loc[:, 'is_outlier'] = red_outliers
+            other_parts_param.loc[:, 'part_type'] = 'Other'
+            other_parts_param.loc[:, 'is_outlier'] = blue_outliers
 
             combined_data = pd.concat([input_parts_param, other_parts_param])
             all_data.append(combined_data)

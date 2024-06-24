@@ -1,6 +1,6 @@
 {
     "limit_sensitivity": 19,
-    "timeframe": 2,
+    "timeframe": 8,
     "input_priority": "normal",
     "other_priority": "normal"
 }

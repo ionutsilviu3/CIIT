@@ -106,7 +106,12 @@ class AdvancedOverviewController:
         self.view.clear_plots()  # Clear existing plots
         parameters = data["name"].unique()  # Get unique parameter names
 
-        for parameter in parameters:
+        # Sort parameters by number of outliers
+        parameters_sorted = sorted(parameters, key=lambda param: (
+            (data[data["name"] == param]["part_type"] == "Other") & 
+            (data[data["name"] == param]["is_outlier"] == True)).sum(), reverse=True)
+
+        for parameter in parameters_sorted:
             data_param = data[data["name"] == parameter]
             input_parts_param = data_param[data_param['part_type'] == 'Input']
             other_parts_param = data_param[data_param['part_type'] == 'Other']
@@ -115,6 +120,7 @@ class AdvancedOverviewController:
 
             # Create plot using view method
             self.view.create_plot(parameter, other_parts_param, input_parts_param, blue_outliers, parameter_limits)
+
 
     def export_data(self):
         """Export processed data to Excel."""

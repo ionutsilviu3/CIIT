@@ -266,13 +266,32 @@ padding-left: 12px;
       </widget>
      </item>
      <item>
-      <widget class="QScrollArea" name="sa_plots">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>2</horstretch>
-         <verstretch>1</verstretch>
+      <widget class="QLabel" name="placeholder_plots">
+    <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
+    </property>
+    <property name="minimumSize">
+        <size>
+            <width>32</width>
+            <height>10</height>
+        </size>
+    </property>
+    <property name="maximumSize">
+        <size>
+            <width>200</width>
+            <height>10</height>
+        </size>
+    </property>
+    <property name="text">
+        <string/>
+    </property>
+</widget>
+     </item>
+     <item>
+      <widget class="QScrollArea" name="sa_plots">
        <property name="styleSheet">
         <string notr="true">QWidget#sa_contents_plots {
     background-color: rgb(34, 48, 56);
@@ -355,25 +374,31 @@ QScrollBar::sub-page:horizontal {
        <property name="widgetResizable">
         <bool>true</bool>
        </property>
+           <property name="minimumSize">
+        <size>
+            <width>760</width>
+            <height>450</height>
+        </size>
+    </property>
+    <property name="maximumSize">
+        <size>
+            <width>1700</width>
+            <height>700</height>
+        </size>
+    </property>
        <widget class="QWidget" name="sa_contents_plots">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>734</width>
+          <width>728</width>
           <height>359</height>
          </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
         </property>
         <property name="styleSheet">
          <string notr="true">QLabel
 {
-	color: rgb(190, 190, 190);
+    color: rgb(190, 190, 190);
 }</string>
         </property>
         <layout class="QVBoxLayout" name="vb_plots">

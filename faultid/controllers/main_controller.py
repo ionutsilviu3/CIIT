@@ -1,9 +1,12 @@
+import glob
+from pathlib import Path
 import sys
 import os
 from enum import Enum
 from dotenv import find_dotenv, load_dotenv
 from PySide6.QtWidgets import QApplication, QStackedWidget
 from PySide6.QtGui import QIcon, QPixmap
+
 from models.settings_model import SettingsModel
 from models.user_model import UserModel
 from models.serial_model import SerialModel
@@ -40,6 +43,7 @@ class MainController:
         # Load environment variables from .env file
         dotenv_path = find_dotenv()
         load_dotenv(dotenv_path)
+
 
         # Initialize SQL client with environment variables
         self.client = SQLClient(
@@ -118,20 +122,7 @@ class MainController:
         # Start the Qt event loop
         self.app.exec()
 
-    def __del__(self):
-        """
-        Disconnects from the SQL client when the object is destroyed.
-        """
-        self.client.disconnect()
-        self.cleanup_html_files()
-
-    def cleanup_html_files(self):
-        """
-        Removes all HTML files in the current directory.
-        """
-        html_files = [f for f in os.listdir() if f.endswith('.html')]
-        for file in html_files:
-            os.remove(file)
+    
 
     def switch_page(self, page: Page):
         """

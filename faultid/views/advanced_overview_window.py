@@ -1,12 +1,11 @@
 import os
+from pathlib import Path
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QUrl, Slot, Signal, QDir
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QRadioButton, QFileDialog
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QRadioButton, QFileDialog, QSizePolicy
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-import pandas as pd
 import numpy as np
-from scipy.spatial import distance
 
 from resources.ui.advanced_overview_window_ui import Ui_AdvancedOverviewWidget
 
@@ -35,7 +34,27 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
         self.views = {}  # Dictionary to store views (not currently used)
         self.selected_location = None  # Store currently selected location
         self.locations_radio_buttons = []  # List to store radio buttons
-    
+        self.cleanup_html_files()
+        
+    def cleanup_html_files(self):
+        """
+        Removes all HTML files in the temp directory.
+        """
+        try:
+            project_directory = Path(__file__).resolve().parents[1]
+            temp_folder_path = project_directory / 'temp'
+            
+            # Ensure temp folder exists before attempting to clean up
+            if temp_folder_path.exists() and temp_folder_path.is_dir():
+                html_files = temp_folder_path.glob("*.html")
+                for file in html_files:
+                    file.unlink()
+            else:
+                print("Temp directory does not exist or is not accessible.")
+                    
+        except Exception as e:
+            print(f"Error while cleaning up HTML files: {e}")
+        
     @Slot()
     def get_selected_location(self):
         """Returns the text of the selected radio button."""
@@ -138,16 +157,33 @@ class AdvancedOverviewWindow(QWidget, Ui_AdvancedOverviewWidget):
             legend=dict(itemsizing='constant'),
         )
         
-        # Write the plot to an HTML file
-        file_path = os.path.join(os.getcwd(), f"temp_plot_{parameter}.html")
+        # Write the plot to an HTML file in the temp folder
+        file_name = f"temp_plot_{parameter}.html"
+        temp_folder_path = os.path.join(os.getcwd(), 'faultid', 'temp')
+
+        if not os.path.exists(temp_folder_path):
+            os.makedirs(temp_folder_path)
+
+        file_path = os.path.join(temp_folder_path, file_name)
+
+        # Save the plot to the new path
         fig.write_html(file_path)
         
         # Display the plot in a QWebEngineView
         view = QWebEngineView()
-        view.setFixedSize(700, 450)  # Set fixed size for the view
+        
         view.load(QUrl.fromLocalFile(file_path))  # Load HTML file into the view
         
-        self.vb_plots.addWidget(view)  # Add the view widget to the layout
+        # Set minimum size constraints
+        view.setMinimumSize(700, 450)
+        view.setMaximumWidth(1200)
+        
+        # Set size policy to allow expansion
+        size_policy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        view.setSizePolicy(size_policy)
+        
+        # Add the view widget to the layout with a fixed height
+        self.vb_plots.addWidget(view)
     
     def get_export_path(self):
         """Opens a file dialog to get the export path for Excel data."""
