@@ -473,7 +473,7 @@ QRadioButton#rb_high_input::indicator:checked,
    <item row="12" column="1" alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
     <widget class="QPushButton" name="pb_save">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -514,7 +514,7 @@ QRadioButton#rb_high_input::indicator:checked,
     }
 QPushButton:disabled{
 	
-	background-color: rgba(64, 130, 100, 150);
+	background-color: rgba(64, 130, 100, 100);
     }</string>
      </property>
      <property name="text">
@@ -523,7 +523,7 @@ QPushButton:disabled{
     </widget>
    </item>
    <item row="0" column="0" alignment="Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop">
-<widget class="QPushButton" name="pb_back">
+    <widget class="QPushButton" name="pb_back">
      <property name="font">
       <font>
        <family>Roboto</family>
@@ -533,14 +533,23 @@ QPushButton:disabled{
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
-	border-radius: 16px;
+	border-radius: 12px;
 	padding-left: 8px;
-	padding-right: 8px;
+	padding-right: 16px;
 	padding-top: 8 px;
 	padding-bottom: 8 px;
-	color:rgb(226, 220, 220);
+	color: rgb(226, 220, 220);
 	background-color: rgb(56, 76, 83);
-    }</string>
+    }
+
+QPushButton:hover {
+	background-color: rgb(50, 68, 74);
+}
+
+QPushButton:pressed {
+	
+	background-color: rgb(45, 61, 66);
+}</string>
      </property>
      <property name="text">
       <string>Go Back</string>
@@ -571,7 +580,9 @@ QPushButton:disabled{
   <tabstop>rb_normal_other</tabstop>
   <tabstop>rb_high_other</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../icons/icons.qrc"/>
+ </resources>
  <connections/>
  <designerdata>
   <property name="gridDeltaX">

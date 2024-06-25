@@ -73,8 +73,8 @@ padding-bottom: 8 px;
      </property>
      <property name="font">
       <font>
-       <family>Vitesco</family>
-       <pointsize>32</pointsize>
+       <family>Roboto</family>
+       <pointsize>26</pointsize>
        <bold>true</bold>
        <strikeout>false</strikeout>
       </font>
@@ -374,17 +374,37 @@ QPushButton:disabled {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-	border-radius: 12px;
-	padding-left: 16px;
+	border-radius: 16px;
+	padding-left: 8px;
 	padding-right: 16px;
 	padding-top: 8 px;
 	padding-bottom: 8 px;
 	color: rgb(226, 220, 220);
 	background-color: rgb(64, 130, 100);
-    }</string>
+    }
+
+QPushButton:hover
+{
+	background-color: rgb(50, 102, 78);
+}
+
+QPushButton:pressed
+{
+	background-color: rgb(42, 85, 65);
+}</string>
        </property>
        <property name="text">
         <string>Go to main app</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons/icons.qrc">
+         <normaloff>:/Icons/arrow-right.svg</normaloff>:/Icons/arrow-right.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -392,7 +412,9 @@ QPushButton:disabled {
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../icons/icons.qrc"/>
+ </resources>
  <connections/>
  <designerdata>
   <property name="gridDeltaX">

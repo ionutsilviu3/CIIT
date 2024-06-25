@@ -19,6 +19,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QGridLayout, QHB
     QHeaderView, QLabel, QLineEdit, QPushButton,
     QSizePolicy, QTableWidget, QTableWidgetItem, QVBoxLayout,
     QWidget)
+import icons_rc
 
 class Ui_admin_overview(object):
     def setupUi(self, admin_overview):
@@ -51,8 +52,8 @@ class Ui_admin_overview(object):
         self.lb_title.setObjectName(u"lb_title")
         self.lb_title.setMaximumSize(QSize(16777215, 16777215))
         font1 = QFont()
-        font1.setFamilies([u"Vitesco"])
-        font1.setPointSize(32)
+        font1.setFamilies([u"Roboto"])
+        font1.setPointSize(26)
         font1.setBold(True)
         font1.setStrikeOut(False)
         self.lb_title.setFont(font1)
@@ -246,14 +247,28 @@ class Ui_admin_overview(object):
         font5.setBold(True)
         self.pb_main_app.setFont(font5)
         self.pb_main_app.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 12px;\n"
-"	padding-left: 16px;\n"
+"	border-radius: 16px;\n"
+"	padding-left: 8px;\n"
 "	padding-right: 16px;\n"
 "	padding-top: 8 px;\n"
 "	padding-bottom: 8 px;\n"
 "	color: rgb(226, 220, 220);\n"
 "	background-color: rgb(64, 130, 100);\n"
-"    }")
+"    }\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"	background-color: rgb(50, 102, 78);\n"
+"}\n"
+"\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: rgb(42, 85, 65);\n"
+"}")
+        icon = QIcon()
+        icon.addFile(u":/Icons/arrow-right.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.pb_main_app.setIcon(icon)
+        self.pb_main_app.setIconSize(QSize(24, 24))
 
         self.vl_chart.addWidget(self.pb_main_app, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignBottom)
 

@@ -70,14 +70,23 @@ class Ui_Parent(object):
         font3.setBold(True)
         self.pb_info.setFont(font3)
         self.pb_info.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 16px;\n"
-"	padding-left: 8px;\n"
-"	padding-right: 8px;\n"
+"	border-radius: 12px;\n"
+"	padding-left: 16px;\n"
+"	padding-right: 16px;\n"
 "	padding-top: 8 px;\n"
 "	padding-bottom: 8 px;\n"
 "	color: rgb(226, 220, 220);\n"
 "	background-color: rgb(56, 76, 83);\n"
-"    }")
+"    }\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(50, 68, 74);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	\n"
+"	background-color: rgb(45, 61, 66);\n"
+"}")
         icon = QIcon()
         icon.addFile(u":/Icons/info.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.pb_info.setIcon(icon)
@@ -203,11 +212,13 @@ class Ui_Parent(object):
         self.lb_warning_message = QLabel(self.widget)
         self.lb_warning_message.setObjectName(u"lb_warning_message")
         self.lb_warning_message.setEnabled(False)
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy2.setHorizontalStretch(5)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
+        sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.lb_warning_message.sizePolicy().hasHeightForWidth())
         self.lb_warning_message.setSizePolicy(sizePolicy2)
+        self.lb_warning_message.setMinimumSize(QSize(256, 40))
+        self.lb_warning_message.setMaximumSize(QSize(256, 40))
         font7 = QFont()
         font7.setFamilies([u"Roboto"])
         font7.setPointSize(12)
@@ -215,7 +226,7 @@ class Ui_Parent(object):
         self.lb_warning_message.setFont(font7)
         self.lb_warning_message.setStyleSheet(u"QLabel\n"
 "{\n"
-"color: rgb(173, 101, 85);\n"
+"color: rgb(138, 29, 0);\n"
 "}\n"
 "QLabel:disabled\n"
 "{\n"
@@ -224,6 +235,7 @@ class Ui_Parent(object):
         self.lb_warning_message.setFrameShape(QFrame.Shape.NoFrame)
         self.lb_warning_message.setFrameShadow(QFrame.Shadow.Plain)
         self.lb_warning_message.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self.lb_warning_message.setWordWrap(True)
 
         self.formLayout.setWidget(5, QFormLayout.FieldRole, self.lb_warning_message)
 
@@ -251,6 +263,7 @@ class Ui_Parent(object):
 "{\n"
 "background-color: rgb(64, 130, 100);\n"
 "color: rgb(226, 220, 220);\n"
+"border-radius: 20px;\n"
 "padding-left: 24px;\n"
 "padding-right: 24px;\n"
 "padding-top: 16px;\n"
@@ -266,6 +279,10 @@ class Ui_Parent(object):
 "{\n"
 "	background-color: rgb(42, 85, 65);\n"
 "}")
+        icon1 = QIcon()
+        icon1.addFile(u":/Icons/log-in.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.pb_log_in.setIcon(icon1)
+        self.pb_log_in.setIconSize(QSize(24, 24))
 
         self.verticalLayout_3.addWidget(self.pb_log_in, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
 
@@ -283,7 +300,7 @@ class Ui_Parent(object):
     def retranslateUi(self, Parent):
         Parent.setWindowTitle(QCoreApplication.translate("Parent", u"Login", None))
         self.lb_background.setText("")
-        self.pb_info.setText(QCoreApplication.translate("Parent", u"Info", None))
+        self.pb_info.setText(QCoreApplication.translate("Parent", u" Info", None))
         self.lb_login_title.setText(QCoreApplication.translate("Parent", u"Log in", None))
         self.lb_user.setText("")
 #if QT_CONFIG(tooltip)
@@ -315,6 +332,6 @@ class Ui_Parent(object):
 #endif // QT_CONFIG(accessibility)
         self.lb_warning_icon.setText("")
         self.lb_warning_message.setText(QCoreApplication.translate("Parent", u"Credentials are not correct!", None))
-        self.pb_log_in.setText(QCoreApplication.translate("Parent", u"Log in", None))
+        self.pb_log_in.setText(QCoreApplication.translate("Parent", u" Log in", None))
     # retranslateUi
 

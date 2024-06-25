@@ -54,7 +54,10 @@ QWidget {
 }
 </string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>8</number>
+   </property>
    <property name="leftMargin">
     <number>8</number>
    </property>
@@ -67,45 +70,99 @@ QWidget {
    <property name="bottomMargin">
     <number>8</number>
    </property>
-   <property name="spacing">
-    <number>8</number>
-   </property>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="pb_contacts">
-     <property name="font">
-      <font>
-       <family>Roboto</family>
-       <pointsize>10</pointsize>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-	border-radius: 16px;
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item alignment="Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter">
+      <widget class="QPushButton" name="pb_back">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border-radius: 12px;
 	padding-left: 8px;
-	padding-right: 8px;
+	padding-right: 16px;
 	padding-top: 8 px;
 	padding-bottom: 8 px;
-	color:rgb(226, 220, 220);
+	color: rgb(226, 220, 220);
 	background-color: rgb(56, 76, 83);
-    }</string>
-     </property>
-     <property name="text">
-      <string>Contacts</string>
-     </property>
-     <property name="icon">
-      <iconset resource="../icons/icons.qrc">
-       <normaloff>:/Icons/user.svg</normaloff>:/Icons/user.svg</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>24</width>
-       <height>24</height>
-      </size>
-     </property>
-    </widget>
+    }
+
+QPushButton:hover {
+	background-color: rgb(50, 68, 74);
+}
+
+QPushButton:pressed {
+	
+	background-color: rgb(45, 61, 66);
+}</string>
+       </property>
+       <property name="text">
+        <string>Go Back</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons/icons.qrc">
+         <normaloff>:/Icons/arrow-left.svg</normaloff>:/Icons/arrow-left.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter">
+      <widget class="QPushButton" name="pb_contacts">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border-radius: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(226, 220, 220);
+	background-color: rgb(56, 76, 83);
+    }
+
+QPushButton:hover {
+	background-color: rgb(50, 68, 74);
+}
+
+QPushButton:pressed {
+	
+	background-color: rgb(45, 61, 66);
+}</string>
+       </property>
+       <property name="text">
+        <string> Contacts</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons/icons.qrc">
+         <normaloff>:/Icons/user.svg</normaloff>:/Icons/user.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="1" column="1" alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
+   <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
     <widget class="QLabel" name="lb_title">
      <property name="maximumSize">
       <size>
@@ -115,8 +172,8 @@ QWidget {
      </property>
      <property name="font">
       <font>
-       <family>Vitesco</family>
-       <pointsize>32</pointsize>
+       <family>Roboto</family>
+       <pointsize>26</pointsize>
        <bold>true</bold>
        <strikeout>false</strikeout>
       </font>
@@ -135,44 +192,28 @@ QWidget {
      </property>
     </widget>
    </item>
-   <item row="1" column="0" alignment="Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter">
-    <widget class="QPushButton" name="pb_back">
-     <property name="font">
-      <font>
-       <family>Roboto</family>
-       <pointsize>10</pointsize>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-	border-radius: 16px;
-	padding-left: 8px;
-	padding-right: 8px;
-	padding-top: 8 px;
-	padding-bottom: 8 px;
-	color:rgb(226, 220, 220);
-	background-color: rgb(56, 76, 83);
-    }</string>
-     </property>
-     <property name="text">
-      <string>Go Back</string>
-     </property>
-     <property name="icon">
-      <iconset resource="../icons/icons.qrc">
-       <normaloff>:/Icons/arrow-left.svg</normaloff>:/Icons/arrow-left.svg</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>24</width>
-       <height>24</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <widget class="QLabel" name="placeholder_left">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>180</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter">
       <widget class="QPushButton" name="pb_previous_page">
        <property name="font">
         <font>
@@ -209,6 +250,18 @@ background-color: rgb(24, 35, 40)
      </item>
      <item>
       <widget class="QStackedWidget" name="sw_pages">
+       <property name="minimumSize">
+        <size>
+         <width>600</width>
+         <height>400</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>1200</width>
+         <height>800</height>
+        </size>
+       </property>
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -217,8 +270,7 @@ background-color: rgb(24, 35, 40)
        </property>
        <widget class="QWidget" name="page">
         <property name="styleSheet">
-         <string notr="true">image: url(:/Info/info1.png);
-</string>
+         <string notr="true">image: url(:/Info/info1.png);</string>
         </property>
        </widget>
        <widget class="QWidget" name="page_2">
@@ -234,7 +286,7 @@ background-color: rgb(24, 35, 40)
        </widget>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter">
       <widget class="QPushButton" name="pb_next_page">
        <property name="font">
         <font>
@@ -266,6 +318,25 @@ background-color: rgb(24, 35, 40)
          <width>48</width>
          <height>48</height>
         </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="placeholder_right">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>180</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>

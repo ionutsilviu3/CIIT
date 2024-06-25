@@ -19,6 +19,7 @@ from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QFormLayout, QGri
     QGroupBox, QHBoxLayout, QLabel, QPushButton,
     QRadioButton, QSizePolicy, QSpacerItem, QSpinBox,
     QVBoxLayout, QWidget)
+import resources.icons.icons_rc
 
 class Ui_settings_window(object):
     def setupUi(self, settings_window):
@@ -270,7 +271,7 @@ class Ui_settings_window(object):
 
         self.pb_save = QPushButton(settings_window)
         self.pb_save.setObjectName(u"pb_save")
-        self.pb_save.setEnabled(False)
+        self.pb_save.setEnabled(True)
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
@@ -293,7 +294,7 @@ class Ui_settings_window(object):
 "    }\n"
 "QPushButton:disabled{\n"
 "	\n"
-"	background-color: rgba(64, 130, 100, 150);\n"
+"	background-color: rgba(64, 130, 100, 100);\n"
 "    }")
 
         self.gridLayout.addWidget(self.pb_save, 12, 1, 1, 1, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
@@ -306,14 +307,23 @@ class Ui_settings_window(object):
         font6.setBold(True)
         self.pb_back.setFont(font6)
         self.pb_back.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 16px;\n"
+"	border-radius: 12px;\n"
 "	padding-left: 8px;\n"
-"	padding-right: 8px;\n"
+"	padding-right: 16px;\n"
 "	padding-top: 8 px;\n"
 "	padding-bottom: 8 px;\n"
-"	color:rgb(226, 220, 220);\n"
+"	color: rgb(226, 220, 220);\n"
 "	background-color: rgb(56, 76, 83);\n"
-"    }")
+"    }\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(50, 68, 74);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	\n"
+"	background-color: rgb(45, 61, 66);\n"
+"}")
         icon = QIcon()
         icon.addFile(u":/Icons/arrow-left.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.pb_back.setIcon(icon)

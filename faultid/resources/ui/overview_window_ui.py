@@ -19,6 +19,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHe
     QLabel, QPushButton, QScrollArea, QSizePolicy,
     QSpacerItem, QTableWidget, QTableWidgetItem, QVBoxLayout,
     QWidget)
+import resources.icons.icons_rc
 
 class Ui_OverviewWidget(object):
     def setupUi(self, OverviewWidget):
@@ -47,20 +48,65 @@ class Ui_OverviewWidget(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
-        self.pb_info = QPushButton(OverviewWidget)
-        self.pb_info.setObjectName(u"pb_info")
+        self.pb_settings = QPushButton(OverviewWidget)
+        self.pb_settings.setObjectName(u"pb_settings")
         font = QFont()
         font.setFamilies([u"Roboto"])
         font.setPointSize(10)
-        self.pb_info.setFont(font)
-
-        self.horizontalLayout.addWidget(self.pb_info)
-
-        self.pb_settings = QPushButton(OverviewWidget)
-        self.pb_settings.setObjectName(u"pb_settings")
+        font.setBold(True)
         self.pb_settings.setFont(font)
+        self.pb_settings.setStyleSheet(u"QPushButton {\n"
+"	border-radius: 12px;\n"
+"	padding-left: 16px;\n"
+"	padding-right: 16px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(56, 76, 83);\n"
+"    }\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(50, 68, 74);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	\n"
+"	background-color: rgb(45, 61, 66);\n"
+"}")
+        icon = QIcon()
+        icon.addFile(u":/Icons/settings.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.pb_settings.setIcon(icon)
+        self.pb_settings.setIconSize(QSize(24, 24))
 
         self.horizontalLayout.addWidget(self.pb_settings)
+
+        self.pb_info = QPushButton(OverviewWidget)
+        self.pb_info.setObjectName(u"pb_info")
+        self.pb_info.setFont(font)
+        self.pb_info.setStyleSheet(u"QPushButton {\n"
+"	border-radius: 12px;\n"
+"	padding-left: 16px;\n"
+"	padding-right: 16px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(56, 76, 83);\n"
+"    }\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(50, 68, 74);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	\n"
+"	background-color: rgb(45, 61, 66);\n"
+"}")
+        icon1 = QIcon()
+        icon1.addFile(u":/Icons/info.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.pb_info.setIcon(icon1)
+        self.pb_info.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout.addWidget(self.pb_info)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -68,8 +114,8 @@ class Ui_OverviewWidget(object):
         self.lb_title = QLabel(OverviewWidget)
         self.lb_title.setObjectName(u"lb_title")
         font1 = QFont()
-        font1.setFamilies([u"Vitesco"])
-        font1.setPointSize(24)
+        font1.setFamilies([u"Roboto"])
+        font1.setPointSize(26)
         font1.setBold(True)
         self.lb_title.setFont(font1)
         self.lb_title.setStyleSheet(u"QLabel#lb_title\n"
@@ -79,6 +125,8 @@ class Ui_OverviewWidget(object):
 
         self.verticalLayout.addWidget(self.lb_title, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
 
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.lb_station = QLabel(OverviewWidget)
         self.lb_station.setObjectName(u"lb_station")
         font2 = QFont()
@@ -91,7 +139,30 @@ class Ui_OverviewWidget(object):
 "color: rgb(226, 220, 220);\n"
 "}")
 
-        self.verticalLayout.addWidget(self.lb_station, 0, Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignBottom)
+        self.horizontalLayout_4.addWidget(self.lb_station)
+
+        self.lb_message = QLabel(OverviewWidget)
+        self.lb_message.setObjectName(u"lb_message")
+        font3 = QFont()
+        font3.setFamilies([u"Roboto"])
+        font3.setPointSize(12)
+        font3.setBold(False)
+        font3.setItalic(False)
+        self.lb_message.setFont(font3)
+        self.lb_message.setStyleSheet(u"QLabel {\n"
+"    color: rgb(226, 220, 220);\n"
+"    font: 12pt \"Roboto\";\n"
+"}")
+
+        self.horizontalLayout_4.addWidget(self.lb_message)
+
+        self.placeholder_2 = QLabel(OverviewWidget)
+        self.placeholder_2.setObjectName(u"placeholder_2")
+
+        self.horizontalLayout_4.addWidget(self.placeholder_2)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
 
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
@@ -102,7 +173,7 @@ class Ui_OverviewWidget(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sa_radio_buttons.sizePolicy().hasHeightForWidth())
         self.sa_radio_buttons.setSizePolicy(sizePolicy)
-        self.sa_radio_buttons.setMinimumSize(QSize(200, 408))
+        self.sa_radio_buttons.setMinimumSize(QSize(200, 300))
         self.sa_radio_buttons.setMaximumSize(QSize(200, 16777215))
         self.sa_radio_buttons.setStyleSheet(u"QWidget#sa_contents_buttons {\n"
 "    background-color: rgb(34, 48, 56);\n"
@@ -110,6 +181,11 @@ class Ui_OverviewWidget(object):
 "    border-radius: 18px; /* Set the border radius for rounded corners */\n"
 "    padding: 5px; /* Add some padding to ensure the contents do not touch the borders */\n"
 "    margin: 0; /* Remove any default margin */\n"
+"}\n"
+"\n"
+"QScrollArea {\n"
+"	background-color:rgba(0,0,0,0);\n"
+"	border: none;\n"
 "}\n"
 "\n"
 "QRadioButton {\n"
@@ -129,30 +205,26 @@ class Ui_OverviewWidget(object):
 "   background-color: rgb(64, 130, 100);\n"
 "}\n"
 "\n"
-"QScrollArea {\n"
-"    border: none; /* Remove any border from the scroll area itself */\n"
-"    background-color: rgba(0, 0, 0, 0); /* Ensure the scroll area has no background */\n"
-"}\n"
-"\n"
 "QScrollBar:vertical {\n"
-"    background-color: rgba(0, 0, 0, 0); /* Make scrollbar background transparent */\n"
-"    widt"
-                        "h: 20px;\n"
+"    background-color: rgba(0, 0, 0, 0);\n"
+"    width: 20px;\n"
 "    margin: 10px 10px 10px 0px;  /* top right bottom left */\n"
-"    border-radius: 15px;\n"
+"	border-radius: 15px;\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical {\n"
-"    background-color: rgb(44, 62, 72);\n"
+"	bac"
+                        "kground-color: rgb(44, 62, 72);\n"
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:hover {\n"
-"    background-color: rgb(42, 59, 68);\n"
+"   \n"
+"	background-color: rgb(42, 59, 68);\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:pressed {\n"
-"    background-color: rgb(34, 48, 56);\n"
+"   background-color: rgb(34, 48, 56)\n"
 "}\n"
 "\n"
 "QScrollBar::add-line:vertical,\n"
@@ -165,14 +237,13 @@ class Ui_OverviewWidget(object):
 "\n"
 "QScrollBar::add-page:vertical,\n"
 "QScrollBar::sub-page:vertical {\n"
-"    background-color: rgba(0, 0, 0, 0);\n"
-"}\n"
-"\n"
-"")
+"    \n"
+"	background-color: rgba(0, 0, 0, 0);\n"
+"}")
         self.sa_radio_buttons.setWidgetResizable(True)
         self.sa_contents_buttons = QWidget()
         self.sa_contents_buttons.setObjectName(u"sa_contents_buttons")
-        self.sa_contents_buttons.setGeometry(QRect(0, 0, 200, 408))
+        self.sa_contents_buttons.setGeometry(QRect(0, 0, 200, 339))
         self.sa_contents_buttons.setStyleSheet(u"QWidget > QRadioButton{\n"
 "padding-left: 12px;\n"
 "}")
@@ -180,19 +251,27 @@ class Ui_OverviewWidget(object):
 
         self.horizontalLayout_2.addWidget(self.sa_radio_buttons)
 
+        self.placeholder_params = QLabel(OverviewWidget)
+        self.placeholder_params.setObjectName(u"placeholder_params")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.placeholder_params.sizePolicy().hasHeightForWidth())
+        self.placeholder_params.setSizePolicy(sizePolicy1)
+        self.placeholder_params.setMinimumSize(QSize(16, 10))
+        self.placeholder_params.setMaximumSize(QSize(32, 10))
+
+        self.horizontalLayout_2.addWidget(self.placeholder_params)
+
         self.tw_params = QTableWidget(OverviewWidget)
         self.tw_params.setObjectName(u"tw_params")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        sizePolicy1.setHorizontalStretch(2)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.tw_params.sizePolicy().hasHeightForWidth())
-        self.tw_params.setSizePolicy(sizePolicy1)
-        self.tw_params.setMinimumSize(QSize(0, 408))
-        font3 = QFont()
-        font3.setFamilies([u"Roboto"])
-        font3.setPointSize(12)
-        font3.setBold(False)
-        font3.setItalic(False)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy2.setHorizontalStretch(2)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.tw_params.sizePolicy().hasHeightForWidth())
+        self.tw_params.setSizePolicy(sizePolicy2)
+        self.tw_params.setMinimumSize(QSize(760, 450))
+        self.tw_params.setMaximumSize(QSize(1700, 700))
         self.tw_params.setFont(font3)
         self.tw_params.setStyleSheet(u"QTableWidget {\n"
 "    background-color: rgb(34, 48, 56);\n"
@@ -293,6 +372,14 @@ class Ui_OverviewWidget(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.placeholder_left = QLabel(OverviewWidget)
+        self.placeholder_left.setObjectName(u"placeholder_left")
+        self.placeholder_left.setMinimumSize(QSize(10, 40))
+
+        self.horizontalLayout_3.addWidget(self.placeholder_left, 0, Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+
         self.pb_advanced_overview = QPushButton(OverviewWidget)
         self.pb_advanced_overview.setObjectName(u"pb_advanced_overview")
         font4 = QFont()
@@ -312,9 +399,27 @@ class Ui_OverviewWidget(object):
 "	padding-bottom: 8 px;\n"
 "	color: rgb(226, 220, 220);\n"
 "	background-color: rgb(64, 130, 100);\n"
-"    }")
+"    }\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"	background-color: rgb(50, 102, 78);\n"
+"}\n"
+"\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: rgb(42, 85, 65);\n"
+"}")
 
-        self.verticalLayout.addWidget(self.pb_advanced_overview, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignBottom)
+        self.horizontalLayout_3.addWidget(self.pb_advanced_overview, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
+
+        self.placeholder_right = QLabel(OverviewWidget)
+        self.placeholder_right.setObjectName(u"placeholder_right")
+
+        self.horizontalLayout_3.addWidget(self.placeholder_right, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignVCenter)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
 
 
         self.retranslateUi(OverviewWidget)
@@ -324,10 +429,15 @@ class Ui_OverviewWidget(object):
 
     def retranslateUi(self, OverviewWidget):
         OverviewWidget.setWindowTitle(QCoreApplication.translate("OverviewWidget", u"Form", None))
-        self.pb_info.setText(QCoreApplication.translate("OverviewWidget", u"Info", None))
-        self.pb_settings.setText(QCoreApplication.translate("OverviewWidget", u"Settings", None))
+        self.pb_settings.setText(QCoreApplication.translate("OverviewWidget", u" Settings", None))
+        self.pb_info.setText(QCoreApplication.translate("OverviewWidget", u" Info", None))
         self.lb_title.setText(QCoreApplication.translate("OverviewWidget", u"Overview", None))
         self.lb_station.setText(QCoreApplication.translate("OverviewWidget", u"Station", None))
+        self.lb_message.setText("")
+        self.placeholder_2.setText("")
+        self.placeholder_params.setText("")
+        self.placeholder_left.setText("")
         self.pb_advanced_overview.setText(QCoreApplication.translate("OverviewWidget", u"Go to Advanced Overview", None))
+        self.placeholder_right.setText("")
     # retranslateUi
 

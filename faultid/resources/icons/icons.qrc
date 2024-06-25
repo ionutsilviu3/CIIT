@@ -11,6 +11,11 @@
     <file>info1.png</file>
   </qresource>
   <qresource prefix="Icons">
+    <file>arrow-right.svg</file>
+    <file>download_disabled.svg</file>
+    <file>download.svg</file>
+    <file>upload.svg</file>
+    <file>settings.svg</file>
     <file>info.svg</file>
     <file>arrow-left.svg</file>
     <file>arrow-right-circle.svg</file>

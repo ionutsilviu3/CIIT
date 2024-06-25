@@ -1,3 +1,4 @@
+from enum import verify
 import re
 import bcrypt
 import numpy as np
@@ -25,26 +26,46 @@ class UserModel:
             user_credentials (dict): A dictionary containing 'email' and 'password'.
 
         Returns:
-            bool: True if the credentials are valid, False otherwise.
+            tuple: (bool, str or None). (True, None) if credentials are valid,
+                (False, error_message) if credentials are invalid.
         """
         email = user_credentials.get('email')
         password = user_credentials.get('password')
         user = self.get_user_by_email(email)
+        
         if user is not None:
             hashed_password = user['password'][0]
             if hashed_password is not None:
                 if self.verify_password(password, hashed_password):
                     self.current_user_id = int(user['id'][0])
-                    return True
+                    return True, None
             else:
+                result = self.verify_new_password(password)
+                if result is not None:
+                    return False, result
+                    
                 hashed_password = self.hash_password(password)
                 self.current_user_id = int(user['id'][0])
                 self.set_hashed_password(self.current_user_id, hashed_password)
                 new_role_id = self.get_role_id_by_name("Engineer")
                 self.modify_user_role(self.current_user_id, new_role_id)
-                return True
-        return False
+                return True, None
+        
+        return False, "Invalid credentials."
 
+
+
+    def verify_new_password(self, password):
+        
+        if len(password) < 8:
+            return "Password must be at least 8 characters long."
+        elif not any(char.isdigit() for char in password):
+            return "Password must contain at least one digit."
+        elif not any(char.isalpha() for char in password):
+            return "Password must contain at least one letter."
+        
+        return None
+    
     def get_user_by_email(self, email):
         """
         Retrieve a user by email.

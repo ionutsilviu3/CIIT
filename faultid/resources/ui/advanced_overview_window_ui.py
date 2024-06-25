@@ -18,6 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLayout,
     QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
     QVBoxLayout, QWidget)
+import resources.icons.icons_rc
 
 class Ui_AdvancedOverviewWidget(object):
     def setupUi(self, AdvancedOverviewWidget):
@@ -30,7 +31,7 @@ class Ui_AdvancedOverviewWidget(object):
 "}\n"
 "\n"
 "QPushButton {\n"
-"	border-radius: 12px;\n"
+"	border-radius: 14px;\n"
 "	padding-left: 16px;\n"
 "	padding-right: 16px;\n"
 "	padding-top: 8 px;\n"
@@ -42,27 +43,71 @@ class Ui_AdvancedOverviewWidget(object):
         self.verticalLayout = QVBoxLayout(AdvancedOverviewWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
-        self.pb_info = QPushButton(AdvancedOverviewWidget)
-        self.pb_info.setObjectName(u"pb_info")
+        self.pb_settings = QPushButton(AdvancedOverviewWidget)
+        self.pb_settings.setObjectName(u"pb_settings")
         font = QFont()
         font.setFamilies([u"Roboto"])
         font.setPointSize(10)
-        self.pb_info.setFont(font)
-        self.pb_info.setStyleSheet(u"background-color: #384C53")
-
-        self.horizontalLayout.addWidget(self.pb_info)
-
-        self.pb_settings = QPushButton(AdvancedOverviewWidget)
-        self.pb_settings.setObjectName(u"pb_settings")
+        font.setBold(True)
         self.pb_settings.setFont(font)
-        self.pb_settings.setStyleSheet(u"background-color: rgb(56, 76, 83);")
+        self.pb_settings.setStyleSheet(u"QPushButton {\n"
+"	border-radius: 12px;\n"
+"	padding-left: 16px;\n"
+"	padding-right: 16px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(56, 76, 83);\n"
+"    }\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(50, 68, 74);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	\n"
+"	background-color: rgb(45, 61, 66);\n"
+"}")
+        icon = QIcon()
+        icon.addFile(u":/Icons/settings.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.pb_settings.setIcon(icon)
+        self.pb_settings.setIconSize(QSize(24, 24))
 
         self.horizontalLayout.addWidget(self.pb_settings)
+
+        self.pb_info = QPushButton(AdvancedOverviewWidget)
+        self.pb_info.setObjectName(u"pb_info")
+        self.pb_info.setFont(font)
+        self.pb_info.setStyleSheet(u"QPushButton {\n"
+"	border-radius: 12px;\n"
+"	padding-left: 16px;\n"
+"	padding-right: 16px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(56, 76, 83);\n"
+"    }\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(50, 68, 74);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	\n"
+"	background-color: rgb(45, 61, 66);\n"
+"}")
+        icon1 = QIcon()
+        icon1.addFile(u":/Icons/info.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.pb_info.setIcon(icon1)
+        self.pb_info.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout.addWidget(self.pb_info)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -70,8 +115,8 @@ class Ui_AdvancedOverviewWidget(object):
         self.lb_title = QLabel(AdvancedOverviewWidget)
         self.lb_title.setObjectName(u"lb_title")
         font1 = QFont()
-        font1.setFamilies([u"Vitesco"])
-        font1.setPointSize(24)
+        font1.setFamilies([u"Roboto"])
+        font1.setPointSize(26)
         font1.setBold(True)
         self.lb_title.setFont(font1)
         self.lb_title.setStyleSheet(u"QLabel#lb_title\n"
@@ -129,7 +174,7 @@ class Ui_AdvancedOverviewWidget(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sa_radio_buttons.sizePolicy().hasHeightForWidth())
         self.sa_radio_buttons.setSizePolicy(sizePolicy)
-        self.sa_radio_buttons.setMinimumSize(QSize(200, 404))
+        self.sa_radio_buttons.setMinimumSize(QSize(200, 300))
         self.sa_radio_buttons.setMaximumSize(QSize(200, 16777215))
         self.sa_radio_buttons.setStyleSheet(u"QWidget#sa_contents_buttons {\n"
 "    background-color: rgb(34, 48, 56);\n"
@@ -199,7 +244,7 @@ class Ui_AdvancedOverviewWidget(object):
         self.sa_radio_buttons.setWidgetResizable(True)
         self.sa_contents_buttons = QWidget()
         self.sa_contents_buttons.setObjectName(u"sa_contents_buttons")
-        self.sa_contents_buttons.setGeometry(QRect(0, 0, 200, 404))
+        self.sa_contents_buttons.setGeometry(QRect(0, 0, 200, 339))
         self.sa_contents_buttons.setStyleSheet(u"QWidget > QRadioButton{\n"
 "padding-left: 12px;\n"
 "}")
@@ -221,6 +266,8 @@ class Ui_AdvancedOverviewWidget(object):
 
         self.sa_plots = QScrollArea(AdvancedOverviewWidget)
         self.sa_plots.setObjectName(u"sa_plots")
+        self.sa_plots.setMinimumSize(QSize(760, 450))
+        self.sa_plots.setMaximumSize(QSize(1700, 700))
         self.sa_plots.setStyleSheet(u"QWidget#sa_contents_plots {\n"
 "    background-color: rgb(34, 48, 56);\n"
 "}\n"
@@ -300,11 +347,9 @@ class Ui_AdvancedOverviewWidget(object):
 "}\n"
 "")
         self.sa_plots.setWidgetResizable(True)
-        self.sa_plots.setMinimumSize(QSize(760, 450))
-        self.sa_plots.setMaximumSize(QSize(1700, 700))
         self.sa_contents_plots = QWidget()
         self.sa_contents_plots.setObjectName(u"sa_contents_plots")
-        self.sa_contents_plots.setGeometry(QRect(0, 0, 728, 359))
+        self.sa_contents_plots.setGeometry(QRect(0, 0, 760, 450))
         self.sa_contents_plots.setStyleSheet(u"QLabel\n"
 "{\n"
 "    color: rgb(190, 190, 190);\n"
@@ -328,11 +373,7 @@ class Ui_AdvancedOverviewWidget(object):
 
         self.pb_overview = QPushButton(AdvancedOverviewWidget)
         self.pb_overview.setObjectName(u"pb_overview")
-        font4 = QFont()
-        font4.setFamilies([u"Vitesco"])
-        font4.setPointSize(10)
-        font4.setBold(True)
-        self.pb_overview.setFont(font4)
+        self.pb_overview.setFont(font)
         self.pb_overview.setStyleSheet(u"QPushButton {\n"
 "	border-radius: 12px;\n"
 "	padding-left: 16px;\n"
@@ -341,16 +382,24 @@ class Ui_AdvancedOverviewWidget(object):
 "	padding-bottom: 8 px;\n"
 "	color: rgb(226, 220, 220);\n"
 "	background-color: rgb(64, 130, 100);\n"
-"    }")
+"    }\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"	background-color: rgb(50, 102, 78);\n"
+"}\n"
+"\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: rgb(42, 85, 65);\n"
+"}")
 
         self.horizontalLayout_3.addWidget(self.pb_overview, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
         self.pb_export = QPushButton(AdvancedOverviewWidget)
         self.pb_export.setObjectName(u"pb_export")
         self.pb_export.setEnabled(False)
-        font5 = QFont()
-        font5.setBold(True)
-        self.pb_export.setFont(font5)
+        self.pb_export.setFont(font)
         self.pb_export.setStyleSheet(u"QPushButton:Enabled{\n"
 "	background-color: rgb(64, 130, 100);\n"
 "	color: rgb(226, 220, 220);\n"
@@ -358,7 +407,22 @@ class Ui_AdvancedOverviewWidget(object):
 "QPushButton:Disabled{\n"
 "	background-color: rgba(46, 93, 71,150);\n"
 "	color: rgba(226, 220, 220, 150);\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"	background-color: rgb(50, 102, 78);\n"
+"}\n"
+"\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: rgb(42, 85, 65);\n"
 "}")
+        icon2 = QIcon()
+        icon2.addFile(u":/Icons/download.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u":/Icons/download_disabled.svg", QSize(), QIcon.Disabled, QIcon.Off)
+        self.pb_export.setIcon(icon2)
+        self.pb_export.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_3.addWidget(self.pb_export, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignVCenter)
 
@@ -373,8 +437,8 @@ class Ui_AdvancedOverviewWidget(object):
 
     def retranslateUi(self, AdvancedOverviewWidget):
         AdvancedOverviewWidget.setWindowTitle(QCoreApplication.translate("AdvancedOverviewWidget", u"Form", None))
-        self.pb_info.setText(QCoreApplication.translate("AdvancedOverviewWidget", u"Info", None))
-        self.pb_settings.setText(QCoreApplication.translate("AdvancedOverviewWidget", u"Settings", None))
+        self.pb_settings.setText(QCoreApplication.translate("AdvancedOverviewWidget", u" Settings", None))
+        self.pb_info.setText(QCoreApplication.translate("AdvancedOverviewWidget", u" Info", None))
         self.lb_title.setText(QCoreApplication.translate("AdvancedOverviewWidget", u"Advanced Overview", None))
         self.lb_station.setText(QCoreApplication.translate("AdvancedOverviewWidget", u"Station", None))
         self.lb_message.setText("")
@@ -382,6 +446,6 @@ class Ui_AdvancedOverviewWidget(object):
         self.placeholder_plots.setText("")
         self.placeholder.setText("")
         self.pb_overview.setText(QCoreApplication.translate("AdvancedOverviewWidget", u"Go to Overview", None))
-        self.pb_export.setText(QCoreApplication.translate("AdvancedOverviewWidget", u"Export data", None))
+        self.pb_export.setText(QCoreApplication.translate("AdvancedOverviewWidget", u" Export data", None))
     # retranslateUi
 

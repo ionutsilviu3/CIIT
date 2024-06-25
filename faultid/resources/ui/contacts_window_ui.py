@@ -54,8 +54,8 @@ class Ui_contacts_window(object):
         self.verticalLayout.setSpacing(8)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(8, 8, 8, 8)
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.pb_back = QPushButton(contacts_window)
         self.pb_back.setObjectName(u"pb_back")
         font1 = QFont()
@@ -64,27 +64,39 @@ class Ui_contacts_window(object):
         font1.setBold(True)
         self.pb_back.setFont(font1)
         self.pb_back.setStyleSheet(u"QPushButton {\n"
-"	border-radius: 16px;\n"
+"	border-radius: 12px;\n"
 "	padding-left: 8px;\n"
-"	padding-right: 8px;\n"
+"	padding-right: 16px;\n"
 "	padding-top: 8 px;\n"
 "	padding-bottom: 8 px;\n"
-"	color:rgb(226, 220, 220);\n"
+"	color: rgb(226, 220, 220);\n"
 "	background-color: rgb(56, 76, 83);\n"
-"    }")
+"    }\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(50, 68, 74);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	\n"
+"	background-color: rgb(45, 61, 66);\n"
+"}")
         icon = QIcon()
         icon.addFile(u":/Icons/arrow-left.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.pb_back.setIcon(icon)
         self.pb_back.setIconSize(QSize(24, 24))
 
-        self.horizontalLayout.addWidget(self.pb_back, 0, Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+        self.horizontalLayout_4.addWidget(self.pb_back, 0, Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
 
         self.lb_title = QLabel(contacts_window)
         self.lb_title.setObjectName(u"lb_title")
         self.lb_title.setMaximumSize(QSize(16777215, 16777215))
         font2 = QFont()
-        font2.setFamilies([u"Vitesco"])
-        font2.setPointSize(32)
+        font2.setFamilies([u"Roboto"])
+        font2.setPointSize(26)
         font2.setBold(True)
         font2.setStrikeOut(False)
         self.lb_title.setFont(font2)
@@ -94,16 +106,10 @@ class Ui_contacts_window(object):
 "}")
         self.lb_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.horizontalLayout.addWidget(self.lb_title, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
+        self.verticalLayout.addWidget(self.lb_title, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
-        self.lb_placeholder = QLabel(contacts_window)
-        self.lb_placeholder.setObjectName(u"lb_placeholder")
-        self.lb_placeholder.setEnabled(True)
-        sizePolicy.setHeightForWidth(self.lb_placeholder.sizePolicy().hasHeightForWidth())
-        self.lb_placeholder.setSizePolicy(sizePolicy)
-
-        self.horizontalLayout.addWidget(self.lb_placeholder)
-
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
@@ -232,7 +238,6 @@ class Ui_contacts_window(object):
         contacts_window.setWindowTitle(QCoreApplication.translate("contacts_window", u"CIIT", None))
         self.pb_back.setText(QCoreApplication.translate("contacts_window", u"Go Back", None))
         self.lb_title.setText(QCoreApplication.translate("contacts_window", u"Contacts", None))
-        self.lb_placeholder.setText("")
         self.label.setText(QCoreApplication.translate("contacts_window", u"<html><head/><body><p><span style=\" color:#e2dcdc;\">Get in touch with us if you're feeling </span><span style=\" color:#408264;\">lost</span></p></body></html>", None))
         self.lb_email.setText(QCoreApplication.translate("contacts_window", u"boancionut@gmail.com", None))
         self.lb_image_phone.setText("")

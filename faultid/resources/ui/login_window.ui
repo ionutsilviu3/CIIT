@@ -112,17 +112,26 @@ border-radius: 16px;
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
-	border-radius: 16px;
-	padding-left: 8px;
-	padding-right: 8px;
+	border-radius: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
 	padding-top: 8 px;
 	padding-bottom: 8 px;
 	color: rgb(226, 220, 220);
 	background-color: rgb(56, 76, 83);
-    }</string>
+    }
+
+QPushButton:hover {
+	background-color: rgb(50, 68, 74);
+}
+
+QPushButton:pressed {
+	
+	background-color: rgb(45, 61, 66);
+}</string>
         </property>
         <property name="text">
-         <string>Info</string>
+         <string> Info</string>
         </property>
         <property name="icon">
          <iconset resource="../icons/icons.qrc">
@@ -407,10 +416,22 @@ QLabel#lb_warning_icon:enabled
             <bool>false</bool>
            </property>
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>5</horstretch>
+            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+             <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>256</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>256</width>
+             <height>40</height>
+            </size>
            </property>
            <property name="font">
             <font>
@@ -422,7 +443,7 @@ QLabel#lb_warning_icon:enabled
            <property name="styleSheet">
             <string notr="true">QLabel
 {
-color: rgb(173, 101, 85);
+color: rgb(138, 29, 0);
 }
 QLabel:disabled
 {
@@ -440,6 +461,9 @@ QLabel:disabled
            </property>
            <property name="alignment">
             <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -481,6 +505,7 @@ QLabel:disabled
 {
 background-color: rgb(64, 130, 100);
 color: rgb(226, 220, 220);
+border-radius: 20px;
 padding-left: 24px;
 padding-right: 24px;
 padding-top: 16px;
@@ -498,7 +523,17 @@ QPushButton:pressed
 }</string>
         </property>
         <property name="text">
-         <string>Log in</string>
+         <string> Log in</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../icons/icons.qrc">
+          <normaloff>:/Icons/log-in.svg</normaloff>:/Icons/log-in.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
         </property>
        </widget>
       </item>

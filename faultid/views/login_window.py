@@ -47,13 +47,18 @@ class LoginWindow(QWidget, Ui_Parent):
         self.switch_widget_state(
             self.lb_warning_icon, self.lb_warning_message, state_to_change=False)
 
-    def switch_error(self, state_to_change: bool):
+    def switch_error(self, state_to_change: bool, text: str):
         """
         Show or hide the credentials error message.
 
         Args:
             state_to_change (bool): The state to change the widgets to (True for show, False for hide).
+            text (string): The text displayed
         """
+        if text == None:
+            self.lb_warning_message.setText("Credentials are not correct!")
+        else:
+            self.lb_warning_message.setText(text)
         self.switch_widget_state(
             self.lb_warning_icon, self.lb_warning_message, state_to_change=state_to_change)
     
