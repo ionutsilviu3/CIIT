@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Boanc Ionut-Silviu</author>
+ <class>info_window</class>
+ <widget class="QWidget" name="info_window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>960</width>
+    <height>540</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>960</width>
+    <height>540</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Roboto</family>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>CIIT</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton {
+	border-radius: 16px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(190, 190, 190);
+	background-color: rgb(55, 79, 91);
+    }
+
+QWidget {
+ background-color: rgb(34, 48, 56);
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>8</number>
+   </property>
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item alignment="Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter">
+      <widget class="QPushButton" name="pb_back">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border-radius: 12px;
+	padding-left: 8px;
+	padding-right: 16px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(226, 220, 220);
+	background-color: rgb(56, 76, 83);
+    }
+
+QPushButton:hover {
+	background-color: rgb(50, 68, 74);
+}
+
+QPushButton:pressed {
+	
+	background-color: rgb(45, 61, 66);
+}</string>
+       </property>
+       <property name="text">
+        <string>Go Back</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons/icons.qrc">
+         <normaloff>:/Icons/arrow-left.svg</normaloff>:/Icons/arrow-left.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter">
+      <widget class="QPushButton" name="pb_contacts">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border-radius: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(226, 220, 220);
+	background-color: rgb(56, 76, 83);
+    }
+
+QPushButton:hover {
+	background-color: rgb(50, 68, 74);
+}
+
+QPushButton:pressed {
+	
+	background-color: rgb(45, 61, 66);
+}</string>
+       </property>
+       <property name="text">
+        <string> Contacts</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons/icons.qrc">
+         <normaloff>:/Icons/user.svg</normaloff>:/Icons/user.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
+    <widget class="QLabel" name="lb_title">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Roboto</family>
+       <pointsize>26</pointsize>
+       <bold>true</bold>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel
+{
+    color: rgb(226, 220, 220);
+}</string>
+     </property>
+     <property name="text">
+      <string>Info</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="placeholder_left">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>180</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter">
+      <widget class="QPushButton" name="pb_previous_page">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>24</pointsize>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+background-color: rgb(34, 48, 56);
+}
+QPushButton:hover {
+	background-color: rgb(30, 43, 50);
+}
+QPushButton:pressed {
+background-color: rgb(24, 35, 40)
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons/icons.qrc">
+         <normaloff>:/Icons/arrow-left-circle.svg</normaloff>:/Icons/arrow-left-circle.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QStackedWidget" name="sw_pages">
+       <property name="minimumSize">
+        <size>
+         <width>600</width>
+         <height>400</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>1200</width>
+         <height>800</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="page">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info1.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_2">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info2.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_3">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info3.png);</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2"/>
+       </widget>
+       <widget class="QWidget" name="page_4">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info4.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_5">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info5.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_6">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info6.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_7">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info7.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_8">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info8.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_9">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info9.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_10">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info10.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_11">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info11.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_12">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info12.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_13">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info13.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_14">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info14.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_15">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info15.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_16">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info16.png);</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter">
+      <widget class="QPushButton" name="pb_next_page">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>24</pointsize>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+background-color: rgb(34, 48, 56);
+}
+QPushButton:hover {
+	background-color: rgb(30, 43, 50);
+}
+QPushButton:pressed {
+background-color: rgb(24, 35, 40)
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons/icons.qrc">
+         <normaloff>:/Icons/arrow-right-circle.svg</normaloff>:/Icons/arrow-right-circle.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="placeholder_right">
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>180</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../icons/icons.qrc"/>
+ </resources>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>8</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>8</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>

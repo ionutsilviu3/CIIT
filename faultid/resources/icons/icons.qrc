@@ -1,0 +1,46 @@
+<RCC>
+  <qresource prefix="Images">
+    <file>contacts.png</file>
+    <file>add_serials.png</file>
+    <file>advanced.png</file>
+    <file>background.jpg</file>
+    <file>overview.png</file>
+    <file>vertical_background.jpg</file>
+  </qresource>
+  <qresource prefix="Info">
+    <file>info2.png</file>
+    <file>info1.png</file>
+    <file>info3.png</file>
+    <file>info4.png</file>
+    <file>info5.png</file>
+    <file>info6.png</file>
+    <file>info7.png</file>
+    <file>info8.png</file>
+    <file>info9.png</file>
+    <file>info10.png</file>
+    <file>info11.png</file>
+    <file>info12.png</file>
+    <file>info13.png</file>
+    <file>info14.png</file>
+    <file>info15.png</file>
+    <file>info16.png</file>
+  </qresource>
+  <qresource prefix="Icons">
+    <file>arrow-right.svg</file>
+    <file>download_disabled.svg</file>
+    <file>download.svg</file>
+    <file>upload.svg</file>
+    <file>settings.svg</file>
+    <file>info.svg</file>
+    <file>arrow-left.svg</file>
+    <file>arrow-right-circle.svg</file>
+    <file>arrow-left-circle.svg</file>
+    <file>mail.svg</file>
+    <file>map-pin.svg</file>
+    <file>phone.svg</file>
+    <file>alert-circle.svg</file>
+    <file>lock.svg</file>
+    <file>log-in.svg</file>
+    <file>user.svg</file>
+  </qresource>
+</RCC>

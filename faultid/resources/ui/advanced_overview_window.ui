@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdvancedOverviewWidget</class>
+ <widget class="QWidget" name="AdvancedOverviewWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>960</width>
+    <height>540</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>960</width>
+    <height>540</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#AdvancedOverviewWidget {
+	background-color: rgb(34, 48, 56);
+}
+
+QPushButton {
+	border-radius: 14px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(226, 220, 220);
+	background-color: rgb(56, 76, 83);
+    }
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pb_settings">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border-radius: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(226, 220, 220);
+	background-color: rgb(56, 76, 83);
+    }
+
+QPushButton:hover {
+	background-color: rgb(50, 68, 74);
+}
+
+QPushButton:pressed {
+	
+	background-color: rgb(45, 61, 66);
+}</string>
+       </property>
+       <property name="text">
+        <string> Settings</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons/icons.qrc">
+         <normaloff>:/Icons/settings.svg</normaloff>:/Icons/settings.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pb_info">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border-radius: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(226, 220, 220);
+	background-color: rgb(56, 76, 83);
+    }
+
+QPushButton:hover {
+	background-color: rgb(50, 68, 74);
+}
+
+QPushButton:pressed {
+	
+	background-color: rgb(45, 61, 66);
+}</string>
+       </property>
+       <property name="text">
+        <string> Info</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons/icons.qrc">
+         <normaloff>:/Icons/info.svg</normaloff>:/Icons/info.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop">
+    <widget class="QLabel" name="lb_title">
+     <property name="font">
+      <font>
+       <family>Roboto</family>
+       <pointsize>26</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel#lb_title
+{
+color: rgb(226, 220, 220);
+}</string>
+     </property>
+     <property name="text">
+      <string>Advanced Overview</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="lb_station">
+       <property name="font">
+        <font>
+         <family>Vitesco</family>
+         <pointsize>18</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel#lb_station
+{
+color: rgb(226, 220, 220);
+}</string>
+       </property>
+       <property name="text">
+        <string>Station</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lb_message">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>12</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    color: rgb(226, 220, 220);
+    font: 12pt &quot;Roboto&quot;;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="placeholder_2">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QScrollArea" name="sa_radio_buttons">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>300</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QWidget#sa_contents_buttons {
+    background-color: rgb(34, 48, 56);
+    border: 2px solid rgb(64, 130, 100);
+    border-radius: 18px; /* Set the border radius for rounded corners */
+    padding: 5px; /* Add some padding to ensure the contents do not touch the borders */
+    margin: 0; /* Remove any default margin */
+}
+
+QScrollArea {
+	background-color:rgba(0,0,0,0);
+	border: none;
+}
+
+QRadioButton {
+	font: 24pt Roboto;
+	color: rgb(190, 190, 190);
+    spacing: 12px;
+}
+
+QRadioButton::indicator {
+    width: 24px;
+    height: 24px;
+	background-color: rgb(190, 190, 190);
+	border-radius: 12px;
+}
+
+QRadioButton::indicator:checked {
+   background-color: rgb(64, 130, 100);
+}
+
+QScrollBar:vertical {
+    background-color: rgba(0, 0, 0, 0);
+    width: 20px;
+    margin: 10px 10px 10px 0px;  /* top right bottom left */
+	border-radius: 15px;
+}
+
+QScrollBar::handle:vertical {
+	background-color: rgb(44, 62, 72);
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+   
+	background-color: rgb(42, 59, 68);
+}
+
+QScrollBar::handle:vertical:pressed {
+   background-color: rgb(34, 48, 56)
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    background-color: rgba(0, 0, 0, 0);
+    height: 10px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="sa_contents_buttons">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>200</width>
+          <height>339</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget &gt; QRadioButton{
+padding-left: 12px;
+}</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="placeholder_plots">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>32</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>10</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QScrollArea" name="sa_plots">
+       <property name="minimumSize">
+        <size>
+         <width>760</width>
+         <height>450</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>1700</width>
+         <height>700</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QWidget#sa_contents_plots {
+    background-color: rgb(34, 48, 56);
+}
+
+QScrollArea {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+/* Vertical Scrollbar */
+QScrollBar:vertical {
+    background-color: rgba(0, 0, 0, 0);
+    width: 20px;
+    margin: 10px 10px 10px 0px;  /* top right bottom left */
+    border-radius: 15px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: rgb(44, 62, 72);
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: rgb(42, 59, 68);
+}
+
+QScrollBar::handle:vertical:pressed {
+    background-color: rgb(34, 48, 56);
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    background-color: rgba(0, 0, 0, 0);
+    height: 10px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* Horizontal Scrollbar */
+QScrollBar:horizontal {
+    background-color: rgba(0, 0, 0, 0);
+    height: 20px;
+    margin: 0px 10px 10px 10px;  /* top right bottom left */
+    border-radius: 15px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: rgb(44, 62, 72);
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: rgb(42, 59, 68);
+}
+
+QScrollBar::handle:horizontal:pressed {
+    background-color: rgb(34, 48, 56);
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    background-color: rgba(0, 0, 0, 0);
+    width: 10px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+    background-color: rgba(0, 0, 0, 0);
+}
+</string>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="sa_contents_plots">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>760</width>
+          <height>450</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel
+{
+    color: rgb(190, 190, 190);
+}</string>
+        </property>
+        <layout class="QVBoxLayout" name="vb_plots">
+         <property name="sizeConstraint">
+          <enum>QLayout::SizeConstraint::SetMinAndMaxSize</enum>
+         </property>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item alignment="Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter">
+      <widget class="QLabel" name="placeholder">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
+      <widget class="QPushButton" name="pb_overview">
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border-radius: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8 px;
+	padding-bottom: 8 px;
+	color: rgb(226, 220, 220);
+	background-color: rgb(64, 130, 100);
+    }
+
+QPushButton:hover
+{
+	background-color: rgb(50, 102, 78);
+}
+
+QPushButton:pressed
+{
+	background-color: rgb(42, 85, 65);
+}</string>
+       </property>
+       <property name="text">
+        <string>Go to Overview</string>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter">
+      <widget class="QPushButton" name="pb_export">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="font">
+        <font>
+         <family>Roboto</family>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton:Enabled{
+	background-color: rgb(64, 130, 100);
+	color: rgb(226, 220, 220);
+}
+QPushButton:Disabled{
+	background-color: rgba(46, 93, 71,150);
+	color: rgba(226, 220, 220, 150);
+}
+
+QPushButton:hover
+{
+	background-color: rgb(50, 102, 78);
+}
+
+QPushButton:pressed
+{
+	background-color: rgb(42, 85, 65);
+}</string>
+       </property>
+       <property name="text">
+        <string> Export data</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons/icons.qrc">
+         <normaloff>:/Icons/download.svg</normaloff>
+         <disabledoff>:/Icons/download_disabled.svg</disabledoff>:/Icons/download.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../icons/icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>
