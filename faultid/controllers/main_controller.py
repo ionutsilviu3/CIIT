@@ -39,7 +39,7 @@ class MainController:
     def __init__(self):
         # Initialize the Qt Application
         self.app = QApplication(sys.argv)
-
+        self.app.setWindowIcon(QIcon("app.ico"))
         # Load environment variables from .env file
         dotenv_path = find_dotenv()
         load_dotenv(dotenv_path)
@@ -66,11 +66,6 @@ class MainController:
         self.stacked_widget = QStackedWidget()
         self.stacked_widget.setWindowTitle("FaultID")
         self.stacked_widget.setStyleSheet("background-color: rgb(34, 48, 56);")
-
-        # Set the application icon
-        self.pixmap = QPixmap(":/FaultID_icon.ico")
-        self.icon = QIcon(self.pixmap)
-        self.stacked_widget.setWindowIcon(self.icon)
 
         # Initialize controllers and their respective views
         self.login_controller = LoginController(self.app, self.user_model)
@@ -118,7 +113,7 @@ class MainController:
         # Show the login page first
         self.switch_page(Page.LOGIN)
         self.stacked_widget.show()
-
+        
         # Start the Qt event loop
         self.app.exec()
 

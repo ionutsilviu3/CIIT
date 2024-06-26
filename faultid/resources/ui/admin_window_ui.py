@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QGridLayout, QHB
     QHeaderView, QLabel, QLineEdit, QPushButton,
     QSizePolicy, QTableWidget, QTableWidgetItem, QVBoxLayout,
     QWidget)
-import icons_rc
+import resources.icons.icons_rc
 
 class Ui_admin_overview(object):
     def setupUi(self, admin_overview):

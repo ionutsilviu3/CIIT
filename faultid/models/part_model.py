@@ -1,9 +1,10 @@
-from datetime import  timedelta
+from datetime import timedelta
 import threading
 import numpy as np
 import pandas as pd
 from scipy.spatial.distance import mahalanobis
 from openpyxl.worksheet.table import Table, TableStyleInfo
+
 
 class PartModel:
     def __init__(self, client, query_master, observer_model):
@@ -14,13 +15,13 @@ class PartModel:
         self.query_master = query_master
         self.thread_result = None
         self.plot_timeframe = 8
-        self.limit_threshold = 0.05
-        self.outlier_sensitivity_levels_input = 1.5
-        self.outlier_sensitivity_levels_other = 1.5
+        self.limit_threshold = 0.2
+        self.outlier_sensitivity_levels_input = 2
+        self.outlier_sensitivity_levels_other = 2
         self.observer_model = observer_model
         self.observer_model.attach(self)
         self.is_cache_invalid = False
-    
+
     def get_limit_threshold(self):
         return self.limit_threshold
 
@@ -38,14 +39,14 @@ class PartModel:
         Updates the part model with new settings from the observer model.
         """
         sensitivity_levels_input = {
-            "low": 1.75,
+            "low": 1.5,
             "normal": 2,
-            "high": 2.25,
+            "high": 2.5,
         }
         sensitivity_levels_other = {
-            "low": 1.75,
+            "low": 2.25,
             "normal": 2,
-            "high": 2.25,
+            "high": 1.2,
         }
         self.outlier_sensitivity_levels_input = (
             sensitivity_levels_input[model.settings["input_priority"]]
@@ -82,7 +83,8 @@ class PartModel:
                 self.locations.append(loc)
         except Exception as e:
             print(
-                f"ERROR: Something went wrong when trying to get the stations for the following serials: {serials}"
+                f"ERROR: Something went wrong when trying to get the stations for the following serials: {
+                    serials}"
             )
             print(e)
 
@@ -99,12 +101,14 @@ class PartModel:
         """
         try:
             formatted_serials = "','".join(serials)
-            query = self.query_master.get_parameters_query(formatted_serials, station)
+            query = self.query_master.get_parameters_query(
+                formatted_serials, station)
             parametrized_part = self.client.execute_query(query)
             return parametrized_part
         except Exception as e:
             print(
-                f"ERROR: Something went wrong when trying to get the parameters for the following serials produced at the {station} station: {serials}"
+                f"ERROR: Something went wrong when trying to get the parameters for the following serials produced at the {
+                    station} station: {serials}"
             )
             print(e)
             return None
@@ -137,7 +141,8 @@ class PartModel:
                 values=["value"],
                 dropna=False,
             )
-            parametrized_part.columns = parametrized_part.columns.get_level_values(1)
+            parametrized_part.columns = parametrized_part.columns.get_level_values(
+                1)
 
         return parametrized_part
 
@@ -194,7 +199,8 @@ class PartModel:
             self.thread_result = params
         except Exception as e:
             print(
-                f"ERROR: Something went wrong when trying to get the parts produced in the {self.timeframes[0]} - {self.timeframes[1]} timeframe for the {station} station."
+                f"ERROR: Something went wrong when trying to get the parts produced in the {
+                    self.timeframes[0]} - {self.timeframes[1]} timeframe for the {station} station."
             )
             print(e)
             self.thread_result = None
@@ -222,7 +228,8 @@ class PartModel:
             parts = parts[~parts['unit_serial_number'].isin(self.serials)]
         except Exception as e:
             print(
-                f"ERROR: Something went wrong when trying to get the parts produced in the given timeframes for the {station} station."
+                f"ERROR: Something went wrong when trying to get the parts produced in the given timeframes for the {
+                    station} station."
             )
             print(e)
         return parts
@@ -238,7 +245,8 @@ class PartModel:
         Returns:
             list: List of DataFrame chunks.
         """
-        num_chunks = len(df) // chunk_size + (1 if len(df) % chunk_size != 0 else 0)
+        num_chunks = len(df) // chunk_size + (1 if len(df) %
+                                              chunk_size != 0 else 0)
         chunks = np.array_split(df, num_chunks)
         return chunks
 
@@ -261,7 +269,8 @@ class PartModel:
         parameters = pd.DataFrame()
         for chunk in parts_chunks:
             parameters = pd.concat(
-                [parameters, self.get_parameters(chunk.values.tolist(), station)]
+                [parameters, self.get_parameters(
+                    chunk.values.tolist(), station)]
             )
         return parameters.drop_duplicates()
 
@@ -282,7 +291,8 @@ class PartModel:
                     parts_production_datetimes.append(datetime_obj)
             except Exception as e:
                 print(
-                    f"ERROR: Something went wrong when trying to get the datetime of the production of the following serials: {self.serials}."
+                    f"ERROR: Something went wrong when trying to get the datetime of the production of the following serials: {
+                        self.serials}."
                 )
                 print(e)
 
@@ -301,15 +311,19 @@ class PartModel:
                     if diff <= timedelta(hours=self.plot_timeframe * 2):
                         timeframes[-1] = (
                             timeframes[-1][0],
-                            datetime_obj + timedelta(hours=self.plot_timeframe * 2),
+                            datetime_obj +
+                            timedelta(hours=self.plot_timeframe * 2),
                         )
                     else:
-                        start = datetime_obj - timedelta(hours=self.plot_timeframe)
-                        end = datetime_obj + timedelta(hours=self.plot_timeframe)
+                        start = datetime_obj - \
+                            timedelta(hours=self.plot_timeframe)
+                        end = datetime_obj + \
+                            timedelta(hours=self.plot_timeframe)
                         timeframes.append((start, end))
             tf = timeframes
             self.timeframes = [
-                (start.strftime("%Y-%m-%d %H:%M:%S"), end.strftime("%Y-%m-%d %H:%M:%S"))
+                (start.strftime("%Y-%m-%d %H:%M:%S"),
+                 end.strftime("%Y-%m-%d %H:%M:%S"))
                 for start, end in tf
             ]
         return self.timeframes
@@ -353,33 +367,37 @@ class PartModel:
         all_data = []
 
         for parameter in parameters:
-            other_parts_param = other_parts[other_parts["name"] == parameter].copy()  # Ensure a copy to avoid modifying original DataFrame
-            input_parts_param = input_parts[input_parts["name"] == parameter].copy()  # Ensure a copy to avoid modifying original DataFrame
+            other_parts_param = other_parts[other_parts["name"] == parameter].copy(
+            )
+            input_parts_param = input_parts[input_parts["name"] == parameter].copy(
+            )
 
             if other_parts_param.empty or input_parts_param.empty:
                 continue
 
-            parameter_limits = input_parts_param.iloc[0][["lower_limit", "upper_limit"]]
+            parameter_limits = input_parts_param.iloc[0][[
+                "lower_limit", "upper_limit"]]
             other_parts_param = other_parts_param.assign(**parameter_limits)
 
-            blue_points = other_parts_param[['created_at_numeric', 'value']].to_numpy()
+            blue_points = other_parts_param[[
+                'created_at_numeric', 'value']].to_numpy()
 
             blue_value_mean = other_parts_param['value'].mean()
             blue_value_std = other_parts_param['value'].std()
 
-            red_outliers = (
-                (input_parts_param['value'] < blue_value_mean - self.outlier_sensitivity_levels_input * blue_value_std) |
-                (input_parts_param['value'] > blue_value_mean + self.outlier_sensitivity_levels_input * blue_value_std)
-            )
-            red_outlier_points = input_parts_param[red_outliers][['created_at_numeric', 'value']].to_numpy()
+            # Detecting only upper outliers for input parts
+            red_outliers = input_parts_param['value'] > blue_value_mean + \
+                self.outlier_sensitivity_levels_input * blue_value_std
+            red_outlier_points = input_parts_param[red_outliers][[
+                'created_at_numeric', 'value']].to_numpy()
 
             if red_outlier_points.size > 0:
-                blue_outliers = (
-                    (other_parts_param['value'] < blue_value_mean - self.outlier_sensitivity_levels_other * blue_value_std) |
-                    (other_parts_param['value'] > blue_value_mean + self.outlier_sensitivity_levels_other * blue_value_std)
-                )
+                # Detecting only upper outliers for other parts
+                blue_outliers = other_parts_param['value'] > blue_value_mean + \
+                    self.outlier_sensitivity_levels_other * blue_value_std
 
-                distances = self.calculate_mahalanobis_distances(blue_points, red_outlier_points)
+                distances = self.calculate_mahalanobis_distances(
+                    blue_points, red_outlier_points)
                 if distances.size > 0:
                     min_distances = distances.min(axis=1)
                     threshold_distance = np.percentile(min_distances, 9)

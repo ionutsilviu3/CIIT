@@ -275,14 +275,79 @@ background-color: rgb(24, 35, 40)
        </widget>
        <widget class="QWidget" name="page_2">
         <property name="styleSheet">
-         <string notr="true">image: url(:/Images/overview.png);</string>
+         <string notr="true">image: url(:/Info/info2.png);</string>
         </property>
        </widget>
        <widget class="QWidget" name="page_3">
         <property name="styleSheet">
-         <string notr="true">image: url(:/Images/advanced.png);</string>
+         <string notr="true">image: url(:/Info/info3.png);</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2"/>
+       </widget>
+       <widget class="QWidget" name="page_4">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info4.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_5">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info5.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_6">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info6.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_7">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info7.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_8">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info8.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_9">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info9.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_10">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info10.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_11">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info11.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_12">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info12.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_13">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info13.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_14">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info14.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_15">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info15.png);</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="page_16">
+        <property name="styleSheet">
+         <string notr="true">image: url(:/Info/info16.png);</string>
+        </property>
        </widget>
       </widget>
      </item>
