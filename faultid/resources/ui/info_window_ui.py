@@ -1,36 +1,33 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-# Form generated from reading UI file 'info_window.ui'
+## Form generated from reading UI file 'info_window.ui'
 ##
-# Created by: Qt User Interface Compiler version 6.7.1
+## Created by: Qt User Interface Compiler version 6.7.1
 ##
-# WARNING! All changes made in this file will be lost when recompiling UI file!
+## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-                            QMetaObject, QObject, QPoint, QRect,
-                            QSize, QTime, QUrl, Qt)
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-                           QFont, QFontDatabase, QGradient, QIcon,
-                           QImage, QKeySequence, QLinearGradient, QPainter,
-                           QPalette, QPixmap, QRadialGradient, QTransform)
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QPushButton,
-                               QSizePolicy, QStackedWidget, QVBoxLayout, QWidget)
+    QSizePolicy, QStackedWidget, QVBoxLayout, QWidget)
 import resources.icons.icons_rc
-
 
 class Ui_info_window(object):
     def setupUi(self, info_window):
         if not info_window.objectName():
             info_window.setObjectName(u"info_window")
         info_window.resize(960, 540)
-        sizePolicy = QSizePolicy(
-            QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            info_window.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(info_window.sizePolicy().hasHeightForWidth())
         info_window.setSizePolicy(sizePolicy)
         info_window.setMinimumSize(QSize(960, 540))
         info_window.setMaximumSize(QSize(16777215, 16777215))
@@ -39,19 +36,19 @@ class Ui_info_window(object):
         font.setPointSize(12)
         info_window.setFont(font)
         info_window.setStyleSheet(u"QPushButton {\n"
-                                  "	border-radius: 16px;\n"
-                                  "	padding-left: 8px;\n"
-                                  "	padding-right: 8px;\n"
-                                  "	padding-top: 8 px;\n"
-                                  "	padding-bottom: 8 px;\n"
-                                  "	color: rgb(190, 190, 190);\n"
-                                  "	background-color: rgb(55, 79, 91);\n"
-                                  "    }\n"
-                                  "\n"
-                                  "QWidget {\n"
-                                  " background-color: rgb(34, 48, 56);\n"
-                                  "}\n"
-                                  "")
+"	border-radius: 16px;\n"
+"	padding-left: 8px;\n"
+"	padding-right: 8px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color: rgb(190, 190, 190);\n"
+"	background-color: rgb(55, 79, 91);\n"
+"    }\n"
+"\n"
+"QWidget {\n"
+" background-color: rgb(34, 48, 56);\n"
+"}\n"
+"")
         self.verticalLayout = QVBoxLayout(info_window)
         self.verticalLayout.setSpacing(8)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -66,60 +63,58 @@ class Ui_info_window(object):
         font1.setBold(True)
         self.pb_back.setFont(font1)
         self.pb_back.setStyleSheet(u"QPushButton {\n"
-                                   "	border-radius: 12px;\n"
-                                   "	padding-left: 8px;\n"
-                                   "	padding-right: 16px;\n"
-                                   "	padding-top: 8 px;\n"
-                                   "	padding-bottom: 8 px;\n"
-                                   "	color: rgb(226, 220, 220);\n"
-                                   "	background-color: rgb(56, 76, 83);\n"
-                                   "    }\n"
-                                   "\n"
-                                   "QPushButton:hover {\n"
-                                   "	background-color: rgb(50, 68, 74);\n"
-                                   "}\n"
-                                   "\n"
-                                   "QPushButton:pressed {\n"
-                                   "	\n"
-                                   "	background-color: rgb(45, 61, 66);\n"
-                                   "}")
+"	border-radius: 12px;\n"
+"	padding-left: 8px;\n"
+"	padding-right: 16px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(56, 76, 83);\n"
+"    }\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(50, 68, 74);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	\n"
+"	background-color: rgb(45, 61, 66);\n"
+"}")
         icon = QIcon()
-        icon.addFile(u":/Icons/arrow-left.svg",
-                     QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/Icons/arrow-left.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.pb_back.setIcon(icon)
         self.pb_back.setIconSize(QSize(24, 24))
 
-        self.horizontalLayout_2.addWidget(
-            self.pb_back, 0, Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+        self.horizontalLayout_2.addWidget(self.pb_back, 0, Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
 
         self.pb_contacts = QPushButton(info_window)
         self.pb_contacts.setObjectName(u"pb_contacts")
         self.pb_contacts.setFont(font1)
         self.pb_contacts.setStyleSheet(u"QPushButton {\n"
-                                       "	border-radius: 12px;\n"
-                                       "	padding-left: 16px;\n"
-                                       "	padding-right: 16px;\n"
-                                       "	padding-top: 8 px;\n"
-                                       "	padding-bottom: 8 px;\n"
-                                       "	color: rgb(226, 220, 220);\n"
-                                       "	background-color: rgb(56, 76, 83);\n"
-                                       "    }\n"
-                                       "\n"
-                                       "QPushButton:hover {\n"
-                                       "	background-color: rgb(50, 68, 74);\n"
-                                       "}\n"
-                                       "\n"
-                                       "QPushButton:pressed {\n"
-                                       "	\n"
-                                       "	background-color: rgb(45, 61, 66);\n"
-                                       "}")
+"	border-radius: 12px;\n"
+"	padding-left: 16px;\n"
+"	padding-right: 16px;\n"
+"	padding-top: 8 px;\n"
+"	padding-bottom: 8 px;\n"
+"	color: rgb(226, 220, 220);\n"
+"	background-color: rgb(56, 76, 83);\n"
+"    }\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(50, 68, 74);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	\n"
+"	background-color: rgb(45, 61, 66);\n"
+"}")
         icon1 = QIcon()
         icon1.addFile(u":/Icons/user.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.pb_contacts.setIcon(icon1)
         self.pb_contacts.setIconSize(QSize(24, 24))
 
-        self.horizontalLayout_2.addWidget(
-            self.pb_contacts, 0, Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        self.horizontalLayout_2.addWidget(self.pb_contacts, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignVCenter)
+
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
@@ -133,13 +128,12 @@ class Ui_info_window(object):
         font2.setStrikeOut(False)
         self.lb_title.setFont(font2)
         self.lb_title.setStyleSheet(u"QLabel\n"
-                                    "{\n"
-                                    "    color: rgb(226, 220, 220);\n"
-                                    "}")
+"{\n"
+"    color: rgb(226, 220, 220);\n"
+"}")
         self.lb_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.verticalLayout.addWidget(
-            self.lb_title, 0, Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter)
+        self.verticalLayout.addWidget(self.lb_title, 0, Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignVCenter)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -158,22 +152,20 @@ class Ui_info_window(object):
         font3.setBold(False)
         self.pb_previous_page.setFont(font3)
         self.pb_previous_page.setStyleSheet(u"QPushButton {\n"
-                                            "background-color: rgb(34, 48, 56);\n"
-                                            "}\n"
-                                            "QPushButton:hover {\n"
-                                            "	background-color: rgb(30, 43, 50);\n"
-                                            "}\n"
-                                            "QPushButton:pressed {\n"
-                                            "background-color: rgb(24, 35, 40)\n"
-                                            "}")
+"background-color: rgb(34, 48, 56);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(30, 43, 50);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: rgb(24, 35, 40)\n"
+"}")
         icon2 = QIcon()
-        icon2.addFile(u":/Icons/arrow-left-circle.svg",
-                      QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u":/Icons/arrow-left-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.pb_previous_page.setIcon(icon2)
         self.pb_previous_page.setIconSize(QSize(48, 48))
 
-        self.horizontalLayout.addWidget(
-            self.pb_previous_page, 0, Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        self.horizontalLayout.addWidget(self.pb_previous_page, 0, Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignVCenter)
 
         self.sw_pages = QStackedWidget(info_window)
         self.sw_pages.setObjectName(u"sw_pages")
@@ -253,22 +245,20 @@ class Ui_info_window(object):
         self.pb_next_page.setObjectName(u"pb_next_page")
         self.pb_next_page.setFont(font3)
         self.pb_next_page.setStyleSheet(u"QPushButton {\n"
-                                        "background-color: rgb(34, 48, 56);\n"
-                                        "}\n"
-                                        "QPushButton:hover {\n"
-                                        "	background-color: rgb(30, 43, 50);\n"
-                                        "}\n"
-                                        "QPushButton:pressed {\n"
-                                        "background-color: rgb(24, 35, 40)\n"
-                                        "}")
+"background-color: rgb(34, 48, 56);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(30, 43, 50);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"background-color: rgb(24, 35, 40)\n"
+"}")
         icon3 = QIcon()
-        icon3.addFile(u":/Icons/arrow-right-circle.svg",
-                      QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u":/Icons/arrow-right-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.pb_next_page.setIcon(icon3)
         self.pb_next_page.setIconSize(QSize(48, 48))
 
-        self.horizontalLayout.addWidget(
-            self.pb_next_page, 0, Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+        self.horizontalLayout.addWidget(self.pb_next_page, 0, Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
 
         self.placeholder_right = QLabel(info_window)
         self.placeholder_right.setObjectName(u"placeholder_right")
@@ -277,26 +267,26 @@ class Ui_info_window(object):
 
         self.horizontalLayout.addWidget(self.placeholder_right)
 
+
         self.verticalLayout.addLayout(self.horizontalLayout)
+
 
         self.retranslateUi(info_window)
 
         self.sw_pages.setCurrentIndex(0)
 
+
         QMetaObject.connectSlotsByName(info_window)
     # setupUi
 
     def retranslateUi(self, info_window):
-        info_window.setWindowTitle(
-            QCoreApplication.translate("info_window", u"CIIT", None))
-        self.pb_back.setText(QCoreApplication.translate(
-            "info_window", u"Go Back", None))
-        self.pb_contacts.setText(QCoreApplication.translate(
-            "info_window", u" Contacts", None))
-        self.lb_title.setText(QCoreApplication.translate(
-            "info_window", u"Info", None))
+        info_window.setWindowTitle(QCoreApplication.translate("info_window", u"CIIT", None))
+        self.pb_back.setText(QCoreApplication.translate("info_window", u"Go Back", None))
+        self.pb_contacts.setText(QCoreApplication.translate("info_window", u" Contacts", None))
+        self.lb_title.setText(QCoreApplication.translate("info_window", u"Info", None))
         self.placeholder_left.setText("")
         self.pb_previous_page.setText("")
         self.pb_next_page.setText("")
         self.placeholder_right.setText("")
     # retranslateUi
+

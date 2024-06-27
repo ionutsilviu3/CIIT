@@ -174,6 +174,7 @@ class AdminWindow(QWidget, Ui_admin_overview):
             if email_item and email_item.text() == email:
                 self.tw_users.setItem(row_idx, 1, QTableWidgetItem(new_role))
                 break
+        self.enable_modify_role_button(new_role)
         self.update_chart()  # Update the chart after modifying a user's role
 
     def on_delete_user_clicked(self):
